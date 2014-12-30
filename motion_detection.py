@@ -30,10 +30,9 @@ class MyMotionDetector(object):
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
-            print('Motion detected!')
-	    gpio.output(40, gpio.HIGH)
-	    time.sleep(1)
-	    gpio.output(40, gpio.LOW)
+            print('Motion detected!'); gpio.output(40, gpio.HIGH)
+        else:
+            gpio.output(40, gpio.LOW)
         # Pretend we wrote all the bytes of s
         return len(s)
 
@@ -50,4 +49,5 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
+    gpio.output(40, gpio.LOW)
     gpio.cleanup()

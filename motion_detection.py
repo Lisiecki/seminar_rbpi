@@ -2,6 +2,8 @@ from __future__ import division
 
 import picamera
 import numpy as np
+import RPi.GPIO as gpio
+import time
 
 motion_dtype = np.dtype([
     ('x', 'i1'),
@@ -29,10 +31,15 @@ class MyMotionDetector(object):
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
             print('Motion detected!')
+	    gpio.output(40, gpio.HIGH)
+	    time.sleep(1)
+	    gpio.output(40, gpio.LOW)
         # Pretend we wrote all the bytes of s
         return len(s)
 
 with picamera.PiCamera() as camera:
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(40, gpio.OUT)
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(
@@ -43,3 +50,4 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
+    gpio.cleanup()

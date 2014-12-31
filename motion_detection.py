@@ -11,7 +11,10 @@ motion_dtype = np.dtype([
     ('sad', 'u2'),
     ])
 
+motion_detected_led = 40
+
 class MyMotionDetector(object):
+
     def __init__(self, camera):
         width, height = camera.resolution
         self.cols = (width + 15) // 16
@@ -30,15 +33,15 @@ class MyMotionDetector(object):
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
-            print('Motion detected!'); gpio.output(40, gpio.HIGH)
+            gpio.output(motion_detected_led, gpio.HIGH)
         else:
-            gpio.output(40, gpio.LOW)
+            gpio.output(motion_detected_led, gpio.LOW)
         # Pretend we wrote all the bytes of s
         return len(s)
 
 with picamera.PiCamera() as camera:
     gpio.setmode(gpio.BOARD)
-    gpio.setup(40, gpio.OUT)
+    gpio.setup(motion_detected_led, gpio.OUT)
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(
@@ -49,5 +52,5 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
-    gpio.output(40, gpio.LOW)
+    gpio.output(motion_detected_led, gpio.LOW)
     gpio.cleanup()

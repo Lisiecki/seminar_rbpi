@@ -1,9 +1,11 @@
 from __future__ import division
+#!/usr/bin/python3
 
 import picamera
 import numpy as np
 import RPi.GPIO as gpio
 import time
+import subprocess
 
 motion_dtype = np.dtype([
     ('x', 'i1'),
@@ -33,6 +35,7 @@ class MyMotionDetector(object):
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
+			returncode = subprocess.call(['sudo python3 pir.py'])
             gpio.output(motion_detected_led, gpio.HIGH)
         else:
             gpio.output(motion_detected_led, gpio.LOW)

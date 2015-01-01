@@ -5,8 +5,6 @@ import picamera
 import numpy as np
 import RPi.GPIO as gpio
 import time, sys
-import subprocess
-import pir
 
 motion_dtype = np.dtype([
     ('x', 'i1'),
@@ -15,10 +13,12 @@ motion_dtype = np.dtype([
     ])
 
 motion_detected_led = 40
-cmd = 'python3 pir.py'
-GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(7, GPIO.RISING)
-GPIO.add_event_callback(7, motion)
+
+
+def motion(pin):
+    print ("Bewegung erkannt")
+    return
+
 
 class MyMotionDetector(object):
 
@@ -27,10 +27,6 @@ class MyMotionDetector(object):
         self.cols = (width + 15) // 16
         self.cols += 1 # there's always an extra column
         self.rows = (height + 15) // 16
-
-    def motion(pin):
-        print ("Bewegung erkannt")
-        return
 
     def write(self, s):
         # Load the motion data from the string to a numpy array
@@ -44,16 +40,19 @@ class MyMotionDetector(object):
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
-            gpio.output(motion_detected_led, gpio.HIGH)
-            
-        else:
-            gpio.output(motion_detected_led, gpio.LOW)
+#            gpio.output(motion_detected_led, gpio.HIGH)
+            print('Hallöööö')           
+#        else:
+#            gpio.output(motion_detected_led, gpio.LOW)
         # Pretend we wrote all the bytes of s
         return len(s)
 
 with picamera.PiCamera() as camera:
     gpio.setmode(gpio.BOARD)
-    gpio.setup(motion_detected_led, gpio.OUT)
+#    gpio.setup(motion_detected_led, gpio.OUT)
+    gpio.setup(7, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+    gpio.add_event_detect(7, gpio.RISING)
+    gpio.add_event_callback(7, motion)
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(
@@ -64,5 +63,5 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
-    gpio.output(motion_detected_led, gpio.LOW)
+#    gpio.output(motion_detected_led, gpio.LOW)
     gpio.cleanup()

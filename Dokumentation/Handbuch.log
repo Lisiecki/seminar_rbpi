@@ -1,9 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.3)  2 JAN 2015 21:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.3)  2 JAN 2015 18:56
 entering extended mode
-**Verteilte*Überwachung.tex
-
-("C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Verteilte Ü
-berwachung.tex"
+**Handbuch.tex
+(C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Handbuch.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -397,8 +395,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-("C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Verteilte Ü
-berwachung.aux")
+(C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Handbuch.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
@@ -412,7 +409,7 @@ LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Try loading font information for U+msa on input line 13.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 13.
@@ -424,77 +421,39 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-("C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Verteilte Ü
-berwachung.toc")
+(C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Handbuch.toc)
 \tf@toc=\write3
- [2
+[2
 
 ]
 Chapter 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--22
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--35
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--35
-
- []
-
-
-Overfull \hbox (3.11717pt too wide) in paragraph at lines 27--35
-\OT1/cmr/m/n/12 Nach kurzer Recherche entschieden wir uns dafur, das Pro-jekt 
-in Raspberry-Freundlichem
- []
-
-[3
-
-] [4]
-Chapter 2.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
- [5
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
+ [3
 
 ]
-Chapter 3.
-[6
-
-]
-Chapter 4.
-[7
-
-]
-Chapter 5.
-[8
-
-]
-("C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Verteilte Ü
-berwachung.aux") ) 
+(C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Handbuch.aux)
+ ) 
 Here is how much of TeX's memory you used:
- 2676 strings out of 493921
- 38073 string characters out of 3147276
- 136819 words of memory out of 3000000
- 5966 multiletter control sequences out of 15000+200000
+ 2675 strings out of 493921
+ 37897 string characters out of 3147276
+ 134819 words of memory out of 3000000
+ 5965 multiletter control sequences out of 15000+200000
  11775 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,7n,51p,716b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on "Verteilte Überwachung.pdf" (8 pages, 75420 bytes).
+ 40i,7n,51p,327b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on Handbuch.pdf (3 pages, 61810 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
+ 32 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

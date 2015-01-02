@@ -1,14 +1,13 @@
 \contentsline {chapter}{\numberline {1}Einleitung}{3}
 \contentsline {section}{\numberline {1.1}Anforderungen / Lastenheft}{3}
 \contentsline {section}{\numberline {1.2}Bestehende L\IeC {\"o}sungen}{3}
-\contentsline {chapter}{\numberline {2}Technische Realisierung}{4}
-\contentsline {section}{\numberline {2.1}Ben\IeC {\"o}tigte Module}{4}
-\contentsline {section}{\numberline {2.2}Benutzte Open-Source Software}{4}
-\contentsline {chapter}{\numberline {3}Praktische Realisierung}{5}
-\contentsline {section}{\numberline {3.1}Kommunikation der Kameras}{5}
-\contentsline {chapter}{\numberline {4}Erkl\IeC {\"a}rung der Algorithmen}{6}
-\contentsline {section}{\numberline {4.1}Funktionsweise der Hard- und Software}{6}
-\contentsline {chapter}{\numberline {5}Realisierung als verteiltes System}{7}
-\contentsline {section}{\numberline {5.1}Anforderungen}{7}
-\contentsline {section}{\numberline {5.2}Praktische Realisierung}{7}
-\contentsline {section}{\numberline {5.3}Vorteile}{7}
+\contentsline {chapter}{\numberline {2}Technische Realisierung}{5}
+\contentsline {section}{\numberline {2.1}Ben\IeC {\"o}tigte Module}{5}
+\contentsline {chapter}{\numberline {3}Praktische Realisierung}{6}
+\contentsline {section}{\numberline {3.1}Kommunikation der Kameras}{6}
+\contentsline {chapter}{\numberline {4}Erkl\IeC {\"a}rung der Algorithmen}{7}
+\contentsline {section}{\numberline {4.1}Funktionsweise der Hard- und Software}{7}
+\contentsline {chapter}{\numberline {5}Realisierung als verteiltes System}{8}
+\contentsline {section}{\numberline {5.1}Anforderungen}{8}
+\contentsline {section}{\numberline {5.2}Praktische Realisierung}{8}
+\contentsline {section}{\numberline {5.3}Vorteile}{8}

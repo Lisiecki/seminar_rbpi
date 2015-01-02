@@ -14,7 +14,7 @@
 
 \chapter{Einleitung}
 \section{Anforderungen / Lastenheft}
-Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera, Infrarot-Sensoren, Servo-Motor und Magnetometer-Sensor bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
+Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera, Infrarot-Sensoren, Schrittmotor und Magnetometer-Sensor bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
 Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, welche jeweils den gleichen Bereich überwachen sollen. Die Raspberries sollen zunächst ihre Umgebung auf "Artgenossen" überprüfen und diese anhand anderer Blinkfrequenzen an ihren LEDs erkennen.
 \\ \\
 Die Geräte sollen mithilfe der Kamera und eines Schrittmotoren dazu in der Lage sein, einem anvisierten Ziel automatisch zu folgen, um dieses zu beobachten und es aufzuzeichnen. Um unerwünschte Aufzeichnungen zu vermeiden (z.B. durch sich plötzlich ändernde Lichtverhältnisse), soll die Kamera mit einem PIR-Modul kooperieren.
@@ -36,7 +36,7 @@ Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
 \chapter{Technische Realisierung}
 \section{Benötigte Module}
 %TODO Preise von Rechnungen holen
-Für das Projekt wird neben dem Raspberry-Pi B+ (33,70 EUR) das Kamera-Modul PiNoIR(24,58 EUR), das PIR-Modul(3,99 EUR), sowie ein 5V-Servomotor (ca. 7 EUR)als Peripherie benötigt. Um Motor und PIR-Modul über die GPIO-Pins des Raspberry Pi ansteuern zu können, werden außerdem Steckplatine(2,33 EUR) und Kabel(2,01 EUR) benötigt. Um die Himmelsrichtung einer Bewegung feststellen zu können, wird außerdem ein Magnetometer-Sensor (ca. 7) benötigt.
+Für das Projekt wird neben dem Raspberry-Pi B+ (33,70 EUR) das Kamera-Modul PiNoIR(24,58 EUR), das PIR-Modul(3,99 EUR), sowie ein 5V-Schrittmotor (ca. 7 EUR)als Peripherie benötigt. Um Motor und PIR-Modul über die GPIO-Pins des Raspberry Pi ansteuern zu können, werden außerdem Steckplatine(2,33 EUR) und Kabel(2,01 EUR) benötigt. Um die Himmelsrichtung einer Bewegung feststellen zu können, wird außerdem ein Magnetometer-Sensor (ca. 7) benötigt.
 Somit kommt man pro Einheit auf Materialkosten von ca 80 Euro.
 
 

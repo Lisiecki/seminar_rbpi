@@ -15,6 +15,7 @@ motion_dtype = np.dtype([
 motion_detected_led = 40
 motion_detected_pir = 7
 no_motion_detected_frames = 0
+pir_event_enabled = 0
 
 def motion(pin):
     print ("Bewegung erkannt")
@@ -43,23 +44,24 @@ class MyMotionDetector(object):
         if (data > 60).sum() > 10:
             gpio.output(motion_detected_led, gpio.HIGH)
             no_motion_detected_frames = 0
-            gpio.add_event_detect(7, gpio.RISING)
-            gpio.add_event_callback(7, motion)
+            if pir_event_enabled == 0:
+                pir_event_enabled = 1
+                gpio.add_event_detect(motion_detected_pir, gpio.RISING)
+                gpio.add_event_callback(motion_detected_pir, motion)
         else:
             if no_motion_detected_frames == 40:
-                gpio.remove_event_detected(7)
+                gpio.remove_event_detected(motion_detected_pir)
+                pir_event_enabled = 0
             else:
                 no_motion_detected_frames = no_motion_detected_frames + 1
-#            gpio.output(motion_detected_led, gpio.LOW)
+            gpio.output(motion_detected_led, gpio.LOW)
         # Pretend we wrote all the bytes of s
         return len(s)
 
 with picamera.PiCamera() as camera:
     gpio.setmode(gpio.BOARD)
-#    gpio.setup(motion_detected_led, gpio.OUT)
-    gpio.setup(7, gpio.IN, pull_up_down=gpio.PUD_DOWN)
-    gpio.add_event_detect(7, gpio.RISING)
-    gpio.add_event_callback(7, motion)
+    gpio.setup(motion_detected_led, gpio.OUT)
+    gpio.setup(motion_detected_pir, gpio.IN, pull_up_down=gpio.PUD_DOWN)
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(
@@ -70,5 +72,5 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
-#    gpio.output(motion_detected_led, gpio.LOW)
+    gpio.output(motion_detected_led, gpio.LOW)
     gpio.cleanup()

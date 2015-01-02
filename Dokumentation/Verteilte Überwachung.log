@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.3)  2 JAN 2015 15:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.3)  2 JAN 2015 18:12
 entering extended mode
 **Verteilte*Überwachung.tex
 
@@ -431,10 +431,45 @@ berwachung.toc")
 
 ]
 Chapter 1.
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--23
+
+ []
+
+
+Overfull \hbox (14.86705pt too wide) in paragraph at lines 34--37
+[]\OT1/cmr/m/n/12 Nach kurzer Recherche entschieden wir uns dafur, das Pro-jek
+t in Raspberry-Freundlichem
+ []
+
 [3
 
 ]
 Chapter 2.
+! Undefined control sequence.
+l.41 \includegraphics
+                     [scale=1]{PiNoIR.png}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.42 \includegraphics
+                     [scale=0.5]{pirmodul.jpg}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (70.72295pt too wide) in paragraph at lines 40--43
+\OT1/cmr/m/n/12 Modul, sowie ein 5V-Servomotor als Pe-riph-erie benotigt. [sca
+le=1]PiNoIR.png [scale=0.5]pirmodul.jpg 
+ []
+
 [4
 
 ]
@@ -453,17 +488,17 @@ Chapter 5.
 ("C:\Users\Torsten\Documents\GitHub\GIT\seminar_rbpi\Dokumentation\Verteilte Ü
 berwachung.aux") ) 
 Here is how much of TeX's memory you used:
- 2653 strings out of 493921
- 37707 string characters out of 3147276
+ 2654 strings out of 493921
+ 37715 string characters out of 3147276
  135819 words of memory out of 3000000
- 5947 multiletter control sequences out of 15000+200000
+ 5948 multiletter control sequences out of 15000+200000
  11428 words of font info for 44 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,7n,51p,369b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,7n,51p,605b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on "Verteilte Überwachung.pdf" (7 pages, 51867 bytes).
+Output written on "Verteilte Überwachung.pdf" (7 pages, 55033 bytes).
 PDF statistics:
  38 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

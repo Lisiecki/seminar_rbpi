@@ -13,7 +13,8 @@ motion_dtype = np.dtype([
     ])
 
 motion_detected_led = 40
-
+motion_detected_pir = 7
+no_motion_detected_frames = 0
 
 def motion(pin):
     print ("Bewegung erkannt")
@@ -40,9 +41,15 @@ class MyMotionDetector(object):
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
-#            gpio.output(motion_detected_led, gpio.HIGH)
-            print('Hallöööö')           
-#        else:
+            gpio.output(motion_detected_led, gpio.HIGH)
+            no_motion_detected_frames = 0
+            gpio.add_event_detect(7, gpio.RISING)
+            gpio.add_event_callback(7, motion)
+        else:
+            if no_motion_detected_frames == 40:
+                gpio.remove_event_detected(7)
+            else:
+                no_motion_detected_frames = no_motion_detected_frames + 1
 #            gpio.output(motion_detected_led, gpio.LOW)
         # Pretend we wrote all the bytes of s
         return len(s)

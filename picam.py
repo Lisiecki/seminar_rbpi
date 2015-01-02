@@ -135,7 +135,9 @@ while (True):
                         print(x)
                     if x < 25:
                         print("RECHTS")
+                        print(x)
                     print("MITTE")
+                    print(x)
                     changedPixels += 1
                     if (debugMode):
                         debugim[x,y] = (0, 255, 0) # in debug mode, mark all changed pixel to green

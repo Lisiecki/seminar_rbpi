@@ -130,6 +130,12 @@ while (True):
                 # Just check green channel as it's the highest quality channel
                 pixdiff = abs(buffer1[x,y][1] - buffer2[x,y][1])
                 if pixdiff > threshold:
+                    if x > 25:
+                        print("LINKS")
+                        print(x)
+                    if x < 25:
+                        print("RECHTS")
+                    print("MITTE")
                     changedPixels += 1
                     if (debugMode):
                         debugim[x,y] = (0, 255, 0) # in debug mode, mark all changed pixel to green

@@ -3,7 +3,6 @@
 \contentsline {section}{\numberline {1.2}Bestehende L\IeC {\"o}sungen}{3}
 \contentsline {chapter}{\numberline {2}Technische Realisierung}{4}
 \contentsline {section}{\numberline {2.1}Ben\IeC {\"o}tigte Module}{4}
-\contentsline {section}{\numberline {2.2}Benutzte Open-Source Software}{4}
 \contentsline {chapter}{\numberline {3}Praktische Realisierung}{5}
 \contentsline {section}{\numberline {3.1}Kommunikation der Kameras}{5}
 \contentsline {chapter}{\numberline {4}Erkl\IeC {\"a}rung der Algorithmen}{6}

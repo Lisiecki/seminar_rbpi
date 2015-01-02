@@ -14,13 +14,12 @@
 
 \chapter{Einleitung}
 \section{Anforderungen / Lastenheft}
-Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera und Infrarot-Sensoren bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
+Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera, Infrarot-Sensoren, Servo-Motor und Magnetometer-Sensor bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
 Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, welche jeweils den gleichen Bereich überwachen sollen. 
 \\
 \\
 Die Geräte sollen mithilfe der Kamera und eines Schrittmotoren dazu in der Lage sein, einem anvisierten Ziel automatisch zu folgen, um dieses zu beobachten und es aufzuzeichnen. Um unerwünschte Aufzeichnungen zu vermeiden (z.B. durch sich plötzlich ändernde Lichtverhältnisse), soll die Kamera mit einem PIR-Modul kooperieren.
-Wenn auf diese Art und Weise 2 oder mehr Geräte eine Bewegung feststellen, soll ein Alarm auslösen.
-
+Wenn nun definitiv eine Bewegung erkannt wurde, teilt der Raspberry seine Entdeckung mitsamt der Himmelsrichtung in welcher die Bewegung entdeckt wurde, mit den anderen Raspberries, die nun in eben diese Richtung drehen um das Objekt ebenfalls zu verfolgen.
 
 
 \section{Bestehende Lösungen}
@@ -39,16 +38,9 @@ Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
 \chapter{Technische Realisierung}
 \section{Benötigte Module}
 %TODO Preise von Rechnungen holen
-Für das Projekt wird neben dem Raspberry-Pi das Kamera-Modul PiNoIR(24,58), das PIR-Modul(3,99), sowie ein 5V-Servomotor (ca. 7)als Peripherie benötigt. Um Motor und PIR-Modul über die GPIO-Pins des Raspberry Pi ansteuern zu können, werden außerdem Steckplatine(PREIS) und Kabel(PREIS) benötigt.
-Somit kommt man pro EInheit auf Materialkosten von ca PREIS.
+Für das Projekt wird neben dem Raspberry-Pi das Kamera-Modul PiNoIR(24,58), das PIR-Modul(3,99), sowie ein 5V-Servomotor (ca. 7)als Peripherie benötigt. Um Motor und PIR-Modul über die GPIO-Pins des Raspberry Pi ansteuern zu können, werden außerdem Steckplatine(PREIS) und Kabel(PREIS) benötigt. Um die Himmelsrichtung einer Bewegung feststellen zu können, wird außerdem ein Magnetometer-Sensor (ca. 7) benötigt.
+Somit kommt man pro Einheit auf Materialkosten von ca PREIS.
 
-
-
-
-
-
-\section{Benutzte Open-Source Software}
-%Hier kommt der Text
 
 \chapter{Praktische Realisierung}
 \section{Kommunikation der Kameras}
@@ -57,11 +49,13 @@ Somit kommt man pro EInheit auf Materialkosten von ca PREIS.
 
 \chapter{Erklärung der Algorithmen}
 \section{Funktionsweise der Hard- und Software}
-%Hier kommt der Text
+%TODO Funktionsweise noch nicht final
+Wenn das Programm ausgeführt wird, soll die Kamera auf Bewegung achten. Sobald die Kamera eine Bewegung erkannt hat, soll das PIR-Modul prüfen, ob in der nähe auch eine wahrnehmbare Bewegung im Infraroten Bereich erfolgt ist. Ist auch dies der Fall, reden wir von einer definitiven Bewegung. 
+
 
 \chapter{Realisierung als verteiltes System}
 \section{Anforderungen}
-%Hier kommt der Text
+Ein Raspberry erkennt eine definitive Bewegung im überwachten Gebiet und kommuniziert diese 
 
 \section{Praktische Realisierung}
 %Hier kommt der Text

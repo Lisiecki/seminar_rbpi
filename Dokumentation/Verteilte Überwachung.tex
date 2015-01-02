@@ -15,21 +15,19 @@
 \chapter{Einleitung}
 \section{Anforderungen / Lastenheft}
 Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera, Infrarot-Sensoren, Servo-Motor und Magnetometer-Sensor bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
-Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, welche jeweils den gleichen Bereich überwachen sollen. 
-\\
-\\
+Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, welche jeweils den gleichen Bereich überwachen sollen. Die Raspberries sollen zunächst ihre Umgebung auf "Artgenossen" überprüfen und diese anhand anderer Blinkfrequenzen an ihren LEDs erkennen.
+\\ \\
 Die Geräte sollen mithilfe der Kamera und eines Schrittmotoren dazu in der Lage sein, einem anvisierten Ziel automatisch zu folgen, um dieses zu beobachten und es aufzuzeichnen. Um unerwünschte Aufzeichnungen zu vermeiden (z.B. durch sich plötzlich ändernde Lichtverhältnisse), soll die Kamera mit einem PIR-Modul kooperieren.
-Wenn nun definitiv eine Bewegung erkannt wurde, teilt der Raspberry seine Entdeckung mitsamt der Himmelsrichtung in welcher die Bewegung entdeckt wurde, mit den anderen Raspberries, die nun in eben diese Richtung drehen um das Objekt ebenfalls zu verfolgen.
+Wenn nun definitiv eine Bewegung erkannt wurde, teilt der Raspberry seine Entdeckung mitsamt der Himmelsrichtung in welcher die Bewegung entdeckt wurde, mit den anderen Raspberries, die nun in eben diese Richtung drehen um das Objekt ebenfalls zu verfolgen. Als Resultat soll an jedem Raspberry eine LED aufleuchten und ein Signal an eine App gesendet werden. 
 
 
 \section{Bestehende Lösungen}
 
 %TODO Hyperlink zu Motion einfügen 
-Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung des Projekts das Programm "Motion" (http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome) als passend angesehen. Das Programm konnte nach leichter Modifikation mit der Raspberry-Pi Kamera "PiNoIR" verwendet werden und besaß einen Funktionierenden Algorithmus zur Erkennung von Bewegungen. Außerdem stellte es einen http-Stream zur Verfügung, über welchen das aktuelle Geschehen beobachtet werden konnte und konnte automatisch Fotos und Videos aufnehmen, sobald eine Bewegung erkannt worden ist.
-\\\\
+Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung des Projekts das Programm Motion http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome als passend angesehen. Das Programm konnte nach leichter Modifikation mit der Raspberry-Pi Kamera PiNoIR verwendet werden und besaß einen Funktionierenden Algorithmus zur Erkennung von Bewegungen. Außerdem stellte es einen http-Stream zur Verfügung, über welchen das aktuelle Geschehen beobachtet werden konnte und konnte automatisch Fotos und Videos aufnehmen, sobald eine Bewegung erkannt worden ist. Das aufzeichnen von Videomaterial hat sich dabei als äußert Ressourcenintensiv erwiesen.
+\\ \\
 Als unüberwindlicher Nachteil stellte sich jedoch heraus, dass der Quellcode, welcher in C geschrieben ist, nicht so leicht vom Raspberry neu kompiliert werden konnte, wenn Änderungen daran getätigt worden sind.
-\\\\
-
+\\ \\
 %TODO Raspberry-Handbuch zitieren
 Nach kurzer Recherche entschieden wir uns dafür, das Projekt in Raspberry-Freundlichem Python-Code zu verwirklichen.
 Aus dem Buch "Raspberry Pi - Das umfassende Handbuch" konnte Beispielcode für die Bewegungserkennung mit der PiNoIR-Kamera und dem PIR-Modul abgeschrieben werden.
@@ -38,8 +36,8 @@ Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
 \chapter{Technische Realisierung}
 \section{Benötigte Module}
 %TODO Preise von Rechnungen holen
-Für das Projekt wird neben dem Raspberry-Pi das Kamera-Modul PiNoIR(24,58), das PIR-Modul(3,99), sowie ein 5V-Servomotor (ca. 7)als Peripherie benötigt. Um Motor und PIR-Modul über die GPIO-Pins des Raspberry Pi ansteuern zu können, werden außerdem Steckplatine(PREIS) und Kabel(PREIS) benötigt. Um die Himmelsrichtung einer Bewegung feststellen zu können, wird außerdem ein Magnetometer-Sensor (ca. 7) benötigt.
-Somit kommt man pro Einheit auf Materialkosten von ca PREIS.
+Für das Projekt wird neben dem Raspberry-Pi B+ (33,70 EUR) das Kamera-Modul PiNoIR(24,58 EUR), das PIR-Modul(3,99 EUR), sowie ein 5V-Servomotor (ca. 7 EUR)als Peripherie benötigt. Um Motor und PIR-Modul über die GPIO-Pins des Raspberry Pi ansteuern zu können, werden außerdem Steckplatine(2,33 EUR) und Kabel(2,01 EUR) benötigt. Um die Himmelsrichtung einer Bewegung feststellen zu können, wird außerdem ein Magnetometer-Sensor (ca. 7) benötigt.
+Somit kommt man pro Einheit auf Materialkosten von ca 80 Euro.
 
 
 \chapter{Praktische Realisierung}

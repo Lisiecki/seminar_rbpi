@@ -14,7 +14,7 @@ motion_dtype = np.dtype([
 
 motion_detected_led = 40
 motion_detected_pir = 7
-no_motion_detected_frames = 0
+no_motion_cnt = 0
 pir_event_enabled = 0
 
 def motion(pin):
@@ -31,6 +31,9 @@ class MyMotionDetector(object):
         self.rows = (height + 15) // 16
 
     def write(self, s):
+        global no_motion_cnt
+        global pir_event_enabled
+
         # Load the motion data from the string to a numpy array
         data = np.fromstring(s, dtype=motion_dtype)
         # Re-shape it and calculate the magnitude of each vector
@@ -43,18 +46,18 @@ class MyMotionDetector(object):
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
             gpio.output(motion_detected_led, gpio.HIGH)
-            no_motion_detected_frames = 0
+            no_motion_cnt = 0
             if pir_event_enabled == 0:
                 pir_event_enabled = 1
                 gpio.add_event_detect(motion_detected_pir, gpio.RISING)
                 gpio.add_event_callback(motion_detected_pir, motion)
         else:
-            if no_motion_detected_frames == 40:
-                gpio.remove_event_detected(motion_detected_pir)
+            if no_motion_cnt == 40:
+                gpio.output(motion_detected_led, gpio.LOW)
+                gpio.remove_event_detect(motion_detected_pir)
                 pir_event_enabled = 0
             else:
-                no_motion_detected_frames = no_motion_detected_frames + 1
-            gpio.output(motion_detected_led, gpio.LOW)
+                no_motion_cnt = no_motion_cnt + 1
         # Pretend we wrote all the bytes of s
         return len(s)
 

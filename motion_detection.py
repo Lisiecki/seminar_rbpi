@@ -35,6 +35,7 @@ class MyMotionDetector(object):
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
             gpio.output(motion_detected_led, gpio.HIGH)
+            print('data {0}'.format(data.shape))
         else:
             gpio.output(motion_detected_led, gpio.LOW)
         # Pretend we wrote all the bytes of s
@@ -43,6 +44,8 @@ class MyMotionDetector(object):
 with picamera.PiCamera() as camera:
     gpio.setmode(gpio.BOARD)
     gpio.setup(motion_detected_led, gpio.OUT)
+    #Turn the camera's LED off
+    #camera.led = False
     camera.resolution = (640, 480)
     camera.framerate = 30
     camera.start_recording(

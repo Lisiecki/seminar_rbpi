@@ -18,11 +18,6 @@ pir_out = 7
 no_motion_cnt = 0
 pir_event_enabled = 0
 
-def motion(pin):
-    GPIO.output(pir_motion_detected_led, GPIO.HIGH)
-    return
-
-
 class MyMotionDetector(object):
 
     def __init__(self, camera):
@@ -30,6 +25,10 @@ class MyMotionDetector(object):
         self.cols = (width + 15) // 16
         self.cols += 1 # there's always an extra column
         self.rows = (height + 15) // 16
+
+    def motion(self, pin):
+        GPIO.output(pir_motion_detected_led, GPIO.HIGH)
+        return
 
     def write(self, s):
         global no_motion_cnt
@@ -51,7 +50,7 @@ class MyMotionDetector(object):
             if pir_event_enabled == 0:
                 pir_event_enabled = 1
                 GPIO.add_event_detect(pir_out, GPIO.RISING)
-                GPIO.add_event_callback(pir_out, motion)
+                GPIO.add_event_callback(pir_out, self.motion)
         else:
             if no_motion_cnt == 40:
                 GPIO.output(motion_detected_led, GPIO.LOW)

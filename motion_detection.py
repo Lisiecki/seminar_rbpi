@@ -21,6 +21,9 @@ class MyMotionDetector(object):
         self.cols = (width + 15) // 16
         self.cols += 1 # there's always an extra column
         self.rows = (height + 15) // 16
+        self.first_third = round(self.cols / 3)
+        self.second_third = round((self.cols / 3) * 2)
+        self.last_third = self.cols
 
     def write(self, s):
         # Load the motion data from the string to a numpy array
@@ -35,7 +38,21 @@ class MyMotionDetector(object):
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
             gpio.output(motion_detected_led, gpio.HIGH)
-            print('data {0}'.format(data.shape))
+           #print('data {0}'.format(data.shape))
+            for i in data:
+                f = data[0, self.first_third - 1]
+                s = data[self.first_third, self.second_third - 1]
+                l = data[self.second_third, self.last_third - 1]
+                #if (f > l):
+                #    print("links")
+                #elif (s > l) and (s > f):
+                #    print("mitte")
+                #elif (l > f):
+                #    print("rechts")
+                #elif (s < f) and (s < l):
+                #    print("mitte")
+                #else:
+                #    print("nothing!")
         else:
             gpio.output(motion_detected_led, gpio.LOW)
         # Pretend we wrote all the bytes of s

@@ -18,7 +18,7 @@ pir_out = 7
 no_motion_cnt = 0
 pir_event_enabled = 0
 
-class MyMotionDetector(object):
+class MotionDetector(object):
 
     def __init__(self, camera):
         width, height = camera.resolution
@@ -52,8 +52,8 @@ class MyMotionDetector(object):
                 GPIO.add_event_detect(pir_out, GPIO.RISING)
                 GPIO.add_event_callback(pir_out, self.motion)
         else:
+            GPIO.output(motion_detected_led, GPIO.LOW)
             if no_motion_cnt == 40:
-                GPIO.output(motion_detected_led, GPIO.LOW)
                 GPIO.output(pir_motion_detected_led, GPIO.LOW)
                 GPIO.remove_event_detect(pir_out)
                 pir_event_enabled = 0
@@ -73,7 +73,7 @@ with picamera.PiCamera() as camera:
         # Throw away the video data, but make sure we're using H.264
         '/dev/null', format='h264',
         # Record motion data to our custom output object
-        motion_output=MyMotionDetector(camera)
+        motion_output=MotionDetector(camera)
         )
     camera.wait_recording(30)
     camera.stop_recording()

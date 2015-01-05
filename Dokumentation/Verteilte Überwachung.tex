@@ -54,20 +54,20 @@ Damit ein Computer um sich herum Bewegungen erkennen kann, benötigt es Sensoren
 
 
 \subsection{Raspberry Pi Kameramodul}
-Der erste Sensor ist eine Kamera, die wir an unseren Raspberry Pi angeschlossen haben. Zwar nimmt dieses Bewegungen nicht direkt wahr. Allerdings lassen sich die davon erzeugten Bilder so weiterverarbeiten, sodass ein Pi auch Bewegungen erkennen kann. Für unser Projekt verwenden wir das Raspberry Pi Infrarot Kamera Modul, weil es vom Raspberry Pi selbst auf jeden Fall unterstützt wird und der Support der Raspberry Pi Community hervorragend ist. Natürlich können zur Bewegungserkennung auch gewöhnliche Webcams verwendet werden. Wir geben zu bedenken, dass das Python Script, das wir zur Bewegungserkennung verwenden, nur das Raspberry Pi Kamera Modul unterstützt.
+Der erste Sensor ist das Raspberry Pi Kameramodul, die wir an unseren Raspberry Pi angeschlossen haben. Für unser Projekt verwenden wir das Raspberry Pi Infrarot Kamera Modul, weil es vom Raspberry Pi selbst auf jeden Fall unterstützt wird und der Support der Raspberry Pi Community hervorragend ist. Natürlich können zur Bewegungserkennung auch gewöhnliche Webcams verwendet werden. Wir geben zu bedenken, dass das Python Script, das wir zur Bewegungserkennung verwenden, nur das Raspberry Pi Kamera Modul unterstützt.
 Für die Raspberry Pi Kamera gibt es am Pi einen eigenen Slot, in dem das Flachbandkabel der Kamera passt.
 
 \subsection{PIR-Sensor}
-Beim zweiten Sensor handelt sich um ein Pyroelektrizität Infrarot Sensor
-[Zitat Raspberry Pi Das umfassende Handbuch] Hardware
-Der PIR-Sensor (Passive Infrared Sensor) ist einer der gängisten Bewegungsmelder
+Beim zweiten Sensor handelt sich um ein Pyroelektrizität Infrarot Sensor:\\
+\textit{Der PIR-Sensor (Passive Infrared Sensor) ist einer der gängisten Bewegungsmelder
 und ist oftmals auch in bewegungssensitiven Außenleuchten oder Alarmanlagen verbaut.
 Erkennbar ist der PIR-Sensor an seiner meist runden, milchigen Kuppel, die mit
 vielen einzelnen Waben versehen ist ... . Der Sensor reagiert auf
 Temperaturveränderungen in seinem Sichtfeld. Somit können Menschen oder Tiere
 im Aktionsradius des Sensors erkannt werden. Jedoch kann der Sensor nur Veränderungen
 wahrnehmen. Bleibt ein Objekt ruhig im Bereich des Sensors stehen, so wird
-es nicht weiter erkannt. Sobald es sich weiterbewegt, schlägt der Sensor erneut an. [/Zitat]
+es nicht weiter erkannt. Sobald es sich weiterbewegt, schlägt der Sensor erneut an.}\\ \\
+\textit{Raspberry Pi Das umfassende Handbuch S. 493}\\ \\ \\
 Laut Verkäufer sind die PIR Sensoren, die wir verwenden, für den menschlichen Körper gedacht.
 %Diesen Teil vllt damit ersetzen, dass wir den PIR erfolgreich an Tieren getestet haben?
 Allerdings beträgt die Abweichung der Körpertemperaturen von Säugetieren nur wenige Grad Celsius.

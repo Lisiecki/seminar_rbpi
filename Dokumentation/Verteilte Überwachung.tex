@@ -4,6 +4,10 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
+%% BIBLATEX EINBINDEN 
+\usepackage[backend=bibtex]{biblatex} 
+\bibliography{refs}
+
 \title{Kooperative, verteilte Überwachung eines Gebiets auf Eindringlinge}
 \author{Dennis Lisiecki, Torsten Kühl}
 
@@ -14,66 +18,69 @@
 
 \chapter{Einleitung}
 \section{Anforderungen / Lastenheft}
-Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera, Infrarot-Sensoren, Schrittmotor und Magnetometer-Sensor bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
-Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, welche jeweils den gleichen Bereich überwachen sollen. Die Raspberries sollen zunächst ihre Umgebung auf "Artgenossen" überprüfen und diese anhand anderer Blinkfrequenzen an ihren LEDs erkennen.
-\\ \\
-Die Geräte sollen mithilfe der Kamera und eines Schrittmotoren dazu in der Lage sein, einem anvisierten Ziel automatisch zu folgen, um dieses zu beobachten und es aufzuzeichnen. Um unerwünschte Aufzeichnungen zu vermeiden (z.B. durch sich plötzlich ändernde Lichtverhältnisse), soll die Kamera mit einem PIR-Modul kooperieren.
-Wenn nun definitiv eine Bewegung erkannt wurde, teilt der Raspberry seine Entdeckung mitsamt der Himmelsrichtung in welcher die Bewegung entdeckt wurde, mit den anderen Raspberries, die nun in eben diese Richtung drehen um das Objekt ebenfalls zu verfolgen. Als Resultat soll an jedem Raspberry eine LED aufleuchten und ein Signal an eine App gesendet werden. 
+Ziel ist es, mithilfe von 2 oder mehr Rasperry Pis, die jeweils mit Kamera und Infrarot-Sensoren bestückt sind, ein Gebiet oder Raum auf unerwünschte Eindringlinge zu überprüfen.\\
+Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, die den entsprechenden Raum aus verschiedenen Blickwinkeln zeigen. Die Raspberries sollen zunächst ihre Umgebung auf "Artgenossen" überprüfen und diese anhand anderer Blinkfrequenzen an ihren Infrarot-LEDs erkennen. \\
+Um unerwünschte Alarme, durch z.B. im Wind wiegende Bäume und Sträucher oder sich schnell wechselnde Lichtverhältnisse, auszuschließen, soll die Kamera mit dem PIR-Sensor kooperieren. \\
+Wenn nun eine Bewegung erkannt und diese ebenfalls durch das PIR-Modul bestätigt wurde, soll ein Alarm dafür sorgen, dass eine Mitteilung an das Handy des Benutzers geschickt wird und dieser entsprechend informiert wird.\\
+Ebenfalls denkbar wäre ein Mechanismus, welcher wahrgenommene Bewegungen in ihrer Dringlichkeit beurteilt:\\
+Eine einzelne wahrgenommene Bewegung stellt das geringste Risiko dar, während zwei unterschiedliche Raspberries, welche jeweils mit Kamera und PIR-Sensor eine Bewegung feststellen das höchste Risiko darstellen.
+
+%Ziel ist es, mithilfe von 2 (oder mehr) Raspberry-Pis, die jeweils mit Kamera, Infrarot-Sensoren und Schrittmotor bestückt sind, ein Gebiet oder einen Raum auf unerwünschte Eindringlinge zu überprüfen. 
+%Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt.
+%\\ 
+%Die Geräte sollen mithilfe der Kamera und eines Schrittmotoren dazu in der Lage sein, einem anvisierten Ziel automatisch zu folgen, um dieses zu beobachten und es aufzuzeichnen. Um unerwünschte Aufzeichnungen zu vermeiden (z.B. durch sich plötzlich ändernde Lichtverhältnisse), soll die Kamera mit einem PIR-Modul kooperieren.
+%Wenn nun definitiv eine Bewegung erkannt wurde, teilt der Raspberry seine Entdeckung mitsamt der Himmelsrichtung in welcher die Bewegung entdeckt wurde, mit den anderen Raspberries, die nun in eben diese Richtung drehen um das Objekt ebenfalls zu verfolgen. Als Resultat soll an jedem Raspberry eine LED aufleuchten und ein Signal an eine App gesendet werden. 
 
 
-\section{Bestehende Lösungen}
-
-%TODO Hyperlink zu Motion einfügen 
-Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung des Projekts das Programm Motion http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome als passend angesehen. Das Programm konnte nach leichter Modifikation mit der Raspberry-Pi Kamera PiNoIR verwendet werden und besaß einen Funktionierenden Algorithmus zur Erkennung von Bewegungen. Außerdem stellte es einen http-Stream zur Verfügung, über welchen das aktuelle Geschehen beobachtet werden konnte und konnte automatisch Fotos und Videos aufnehmen, sobald eine Bewegung erkannt worden ist. 
+\section{Bestehende Lösungen} 
+Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung des Projekts das Programm Motion\cite{motion} als passend angesehen. Das Programm konnte nach leichter Modifikation mit der Raspberry-Pi Kamera PiNoIR verwendet werden und besaß einen Funktionierenden Algorithmus zur Erkennung von Bewegungen. Außerdem stellte es einen http-Stream zur Verfügung, über welchen das aktuelle Geschehen vor der Kamera beobachtet werden und nach erkannter Bewegung automatisch Fotos und Videos aufnehmen konnte. 
+\\ 
+Als unüberwindlicher Nachteil stellte sich jedoch heraus, dass der Quellcode, welcher in C geschrieben ist, nicht so leicht vom Raspberry neu kompiliert werden konnte, wenn z.B. Änderungen daran getätigt worden sind. Auch ohne Änderungen gab es Probleme bei der Kompilierung, die nach erheblichen Zeitaufwand nicht beseitigt werden konnten. Auch das aufzeichnen von Videomaterial hat sich als äußert Ressourcenintensiv erwiesen und bleibt deswegen für unser Projekt unbrauchbar, zumal ein Raspberry nicht den nötigen Speicherplatz mitbringt, um dauerhaft aufnahmen zu machen und zu speichern.
 \\ \\
-Als unüberwindlicher Nachteil stellte sich jedoch heraus, dass der Quellcode, welcher in C geschrieben ist, nicht so leicht vom Raspberry neu kompiliert werden konnte, wenn Änderungen daran getätigt worden sind. Das aufzeichnen von Videomaterial hat sich darüber hinaus als äußert Ressourcenintensiv erwiesen und bleibt deswegen für unser Projekt unbrauchbar.
-\\ \\
-%TODO Raspberry-Handbuch zitieren
+%TODO Bewegungserkennung zitieren[S. XXX??] Hab ich nicht mehr gefunden:-(
 Nach kurzer Recherche entschieden wir uns dafür, das Projekt in Raspberry-Freundlichem Python-Code zu verwirklichen.
-Aus dem Buch "Raspberry Pi - Das umfassende Handbuch" konnte Beispielcode für die Bewegungserkennung mit der PiNoIR-Kamera und dem PIR-Modul abgeschrieben werden.
+In dem Buch "Raspberry Pi - Das umfassende Handbuch" konnte ein recht minimalistischer Beispielcode für die Bewegungserkennung mit der PiNoIR-Kamera gefunden werden\cite[S. XXX]{Raspi}. Durch die öffentlich zugänglichen Projekte aus der Raspberry-Community konnten lehren daraus gezogen werden, wie man einen möglichst effektiven Algorithmus schreibt, der unseren Ansprüchen genügt. Ebenfalls im Raspberry-Handbuch konnte ein Beispiel für das Arbeiten mit dem PIR-Sensor gefunden werden\cite[S. 495]{Raspi}, welchen wir in unseren Code übernehmen konnten.
 Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
+
 
 \chapter{Technische Realisierung}
 \section{Benötigte Module}
-%TODO Preise von Rechnungen holen
+%TODO Preise von Rechnungen holen ? Reich si
 \begin{itemize}
 \item Raspberry Pi B+ \textit{33,70 EUR} 
 \item SD-Karte 8GB \textit{7 EUR}
 \item PiNoIR Kamera \textit{24,58 EUR}
 \item PIR-Modul \textit{3,99 EUR}
-\item 5V-Schrittmotor \textit{ca 7 EUR}
-%\item Magnetometer-Sensor \texit{7 EUR}
 \item Steckplatine \textit{2,33 EUR}
 \item Kabel \textit{2,01 EUR}
 \end{itemize}
 
-Somit kommt man pro Einheit auf Materialkosten von ca 82 Euro.
+Somit kommt man pro Einheit auf Materialkosten von ca 58 Euro.
 
 \section{Verwendete Sensoren}
-Damit ein Computer um sich herum Bewegungen erkennen kann, benötigt es Sensoren, die in der Lage sind, die äußere Umgebung wahrzunehmen. Unser System verwendet zwei Sensoren, die jeweils auf eine völlig andere Art und weise "sehen".
-
+Damit ein Computer die Bewegungen in seinem Umfeld erkennen kann, benötigt er Sensoren, die in der Lage sind, die äußere Umgebung wahrzunehmen. Unser System verwendet zwei Sensoren, die jeweils auf eine völlig andere Art und weise "sehen". 
 
 \subsection{Raspberry Pi Kameramodul}
-Der erste Sensor ist das Raspberry Pi Kameramodul, die wir an unseren Raspberry Pi angeschlossen haben. Für unser Projekt verwenden wir das Raspberry Pi Infrarot Kamera Modul, weil es vom Raspberry Pi selbst auf jeden Fall unterstützt wird und der Support der Raspberry Pi Community hervorragend ist. Natürlich können zur Bewegungserkennung auch gewöhnliche Webcams verwendet werden. Wir geben zu bedenken, dass das Python Script, das wir zur Bewegungserkennung verwenden, nur das Raspberry Pi Kamera Modul unterstützt.
-Für die Raspberry Pi Kamera gibt es am Pi einen eigenen Slot, in dem das Flachbandkabel der Kamera passt.
+Der erste Sensor ist das Raspberry Pi Kameramodul, die wir an unseren Raspberry Pi angeschlossen haben. Für unser Projekt verwenden wir das Raspberry Pi Infrarot Kamera Modul \textit{"Pi NoIR Camera Board"}, weil es vom Raspberry Pi selbst auf jeden Fall unterstützt wird und der Support der Raspberry Pi Community hervorragend ist. Natürlich können zur Bewegungserkennung auch gewöhnliche Webcams verwendet werden. Wir geben zu bedenken, dass das Python Script, das wir zur Bewegungserkennung verwenden, nur das Raspberry Pi Kamera Modul unterstützt. Darüber hinaus ist es mit dieser Kamera auch möglich das Geschehen nachts im Auge zu behalten, Infrarot-LEDs vorausgesetzt.
+Für die Raspberry Pi Kamera gibt es am Pi einen eigenen Slot, in dem das Flachbandkabel der Kamera passt, sodass die GPIO-Anschlüsse am Raspberry vollständig für andere Aufgaben verwendet werden können.
 
 \subsection{PIR-Sensor}
-Beim zweiten Sensor handelt sich um ein Pyroelektrizität Infrarot Sensor:\\
-\textit{Der PIR-Sensor (Passive Infrared Sensor) ist einer der gängisten Bewegungsmelder
+Beim zweiten Sensor handelt sich um ein pyroelektrischen Infrarot Sensor:\\
+\textit{Der PIR-Sensor (Passive Infrared Sensor) ist einer der gängigsten Bewegungsmelder
 und ist oftmals auch in bewegungssensitiven Außenleuchten oder Alarmanlagen verbaut.
 Erkennbar ist der PIR-Sensor an seiner meist runden, milchigen Kuppel, die mit
-vielen einzelnen Waben versehen ist ... . Der Sensor reagiert auf
+vielen einzelnen Waben versehen ist. Der Sensor reagiert auf
 Temperaturveränderungen in seinem Sichtfeld. Somit können Menschen oder Tiere
-im Aktionsradius des Sensors erkannt werden. Jedoch kann der Sensor nur Veränderungen
-wahrnehmen. Bleibt ein Objekt ruhig im Bereich des Sensors stehen, so wird
-es nicht weiter erkannt. Sobald es sich weiterbewegt, schlägt der Sensor erneut an.}\\ \\
-\textit{Raspberry Pi Das umfassende Handbuch S. 493}\\ \\ \\
+im Aktionsradius des Sensors erkannt werden.Jedoch kann der Sensor nur Veränderungen wahrnehmen. 
+Bleibt ein Objekt ruhig im Bereich des Sensors stehen, so wird
+es nicht weiter erkannt. Sobald es sich weiterbewegt, schlägt der Sensor erneut an.}\cite[S. 493]{Raspi}\\ \\
+\\
 Laut Verkäufer sind die PIR Sensoren, die wir verwenden, für den menschlichen Körper gedacht.
-%Diesen Teil vllt damit ersetzen, dass wir den PIR erfolgreich an Tieren getestet haben?
+%TODO %Diesen Teil vllt damit ersetzen, dass wir den PIR erfolgreich an Tieren getestet haben?
 Allerdings beträgt die Abweichung der Körpertemperaturen von Säugetieren nur wenige Grad Celsius.
 Dementsprechend sollte der PIR auch in der Lage sein, z. B. einen Luchs zu erkennen.
 Um den PIR Sensor am Raspberry Pi anzuschließen, werden insgesamt 3 GPIO Anschlüssen benötigt.
-Einmal ein 5V Anschluss für die Stromversorgung, einen Ground und ein regulärer GPIO Pin, um den PIR zu steuern.
+Einmal ein 3V Anschluss für die Stromversorgung, einen Ground und ein regulärer GPIO Pin, um den PIR zu steuern.
 
 \chapter{Theoretische Herangehensweise}
 \section{Funktionsweise der Hard- und Software}
@@ -94,7 +101,6 @@ Wenn das Programm ausgeführt wird, soll der Raspberry zunächst seine Umgebung 
 \section{Überwachen eines Gebiets als verteiltes System}
 
 
-
-
+\printbibliography
 
 \end{document}

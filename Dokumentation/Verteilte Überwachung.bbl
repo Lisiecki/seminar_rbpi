@@ -1,0 +1,61 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{Raspi}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Kofler}{K.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Bonn : Galileo Press}%
+  }
+  \strng{namehash}{KM1}
+  \strng{fullhash}{KM1}
+  \field{sortinit}{K}
+  \field{title}{Raspberry Pi : das umfassende Handbuch ; [Grundlagen verstehen,
+  spannende Projekte realisieren ; Schnittstellen des Pi, Schaltungsaufbau,
+  Steuerung mit Python ; Erweiterungen für den Pi: Gertboard, PiFace,
+  Quick2Wire u.a. in Hardware-Projekte einsetzen ; aktuell zu allen Versionen,
+  inkl. Modell B+]}
+  \field{year}{2014}
+\endentry
+
+\entry{motion}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Lavrsen, Kenneth}}{L.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{L1}
+  \strng{fullhash}{L1}
+  \field{sortinit}{L}
+  \field{title}{{Motion - Web Home}}
+  \verb{url}
+  \verb http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome
+  \endverb
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

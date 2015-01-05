@@ -1,15 +1,31 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Einleitung}{3}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Anforderungen / Lastenheft}{3}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.2}Bestehende L\IeC {\"o}sungen}{3}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Technische Realisierung}{5}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Ben\IeC {\"o}tigte Module}{5}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Verwendete Sensoren}{5}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.1}Raspberry Pi Kameramodul}{5}
+\defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.2}PIR-Sensor}{6}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Theoretische Herangehensweise}{7}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Funktionsweise der Hard- und Software}{7}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Algorithmus f\IeC {\"u}r die Bewegungserkennung}{7}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.3}\IeC {\"U}berlegungen f\IeC {\"u}r ein verteiltes System}{7}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Praktische Realisierung}{8}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.1}Das Erkennen von Bewegungen}{8}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}\IeC {\"U}berwachen eines Gebiets als verteiltes System}{8}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.1.8)  8 JAN 2015 23:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.1.8)  9 JAN 2015 00:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1047,207 +1047,310 @@ Package biblatex Warning: Data encoding is 'utf8'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file '"Verteilte Überwachung".bbl' found.
-(./Verteilte Überwachung.bbl)
+(./Verteilte Überwachung.bbl
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'verkaufszahlen':
+(biblatex)                - Invalid format of field 'urldate'.
+
+)
 Package biblatex Info: Reference section=0 on input line 15.
 Package biblatex Info: Reference segment=0 on input line 15.
 
-Overfull \hbox (24.46964pt too wide) in paragraph at lines 21--21
+Overfull \hbox (24.46964pt too wide) in paragraph at lines 24--24
 [][][][]\OT1/ptm/m/n/9 Raspberry 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren, 
  []
 
 
-Overfull \hbox (8.47684pt too wide) in paragraph at lines 21--21
+Overfull \hbox (8.47684pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 GPIO 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren,  
  []
 
 
-Overfull \hbox (24.46964pt too wide) in paragraph at lines 21--21
+Overfull \hbox (24.46964pt too wide) in paragraph at lines 24--24
 [][][][]\OT1/ptm/m/n/9 Raspberry 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren, 
  []
 
 
-Overfull \hbox (8.47684pt too wide) in paragraph at lines 21--21
+Overfull \hbox (8.47684pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 GPIO 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren,  
  []
 
 
-Overfull \hbox (24.46964pt too wide) in paragraph at lines 21--21
+Overfull \hbox (24.46964pt too wide) in paragraph at lines 24--24
 [][][][]\OT1/ptm/m/n/9 Raspberry 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren, 
  []
 
 
-Overfull \hbox (8.47684pt too wide) in paragraph at lines 21--21
+Overfull \hbox (8.47684pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 GPIO 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren,  
  []
 
 
-Overfull \hbox (24.46964pt too wide) in paragraph at lines 21--21
+Overfull \hbox (24.46964pt too wide) in paragraph at lines 24--24
 [][][][]\OT1/ptm/m/n/9 Raspberry 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren, 
  []
 
 
-Overfull \hbox (8.47684pt too wide) in paragraph at lines 21--21
+Overfull \hbox (8.47684pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 GPIO 
  []
 
 
-Overfull \hbox (19.21365pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.21365pt too wide) in paragraph at lines 24--24
 \OT1/ptm/m/n/9 erkl[]aren,  
  []
 
 
-Underfull \hbox (badness 1472) in paragraph at lines 23--31
+Overfull \hbox (8.3418pt too wide) in paragraph at lines 31--31
+[][][][]\OT1/ptm/m/n/9 Regel 
+ []
+
+
+Overfull \hbox (36.46681pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 Abk[]urzungen 
+ []
+
+
+Overfull \hbox (12.47278pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 suchen  
+ []
+
+
+Overfull \hbox (8.3418pt too wide) in paragraph at lines 31--31
+[][][][]\OT1/ptm/m/n/9 Regel 
+ []
+
+
+Overfull \hbox (36.46681pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 Abk[]urzungen 
+ []
+
+
+Overfull \hbox (12.47278pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 suchen  
+ []
+
+
+Overfull \hbox (8.3418pt too wide) in paragraph at lines 31--31
+[][][][]\OT1/ptm/m/n/9 Regel 
+ []
+
+
+Overfull \hbox (36.46681pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 Abk[]urzungen 
+ []
+
+
+Overfull \hbox (12.47278pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 suchen  
+ []
+
+
+Overfull \hbox (8.3418pt too wide) in paragraph at lines 31--31
+[][][][]\OT1/ptm/m/n/9 Regel 
+ []
+
+
+Overfull \hbox (36.46681pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 Abk[]urzungen 
+ []
+
+
+Overfull \hbox (12.47278pt too wide) in paragraph at lines 31--31
+\OT1/ptm/m/n/9 suchen  
+ []
+
+
+Underfull \hbox (badness 1472) in paragraph at lines 28--36
 \OT1/ptm/m/n/9 die den entsprechen-den Raum aus ver-schiede-nen Blick-winkeln
  []
 
 
-Overfull \hbox (67.0126pt too wide) in paragraph at lines 43--43
+Overfull \hbox (27.97087pt too wide) in paragraph at lines 43--43
+[][][][]\OT1/ptm/m/n/9 Abk[]urzung 
+ []
+
+
+Overfull \hbox (14.97469pt too wide) in paragraph at lines 43--43
+\OT1/ptm/m/n/9 einpfle- 
+ []
+
+
+Overfull \hbox (27.97087pt too wide) in paragraph at lines 43--43
+[][][][]\OT1/ptm/m/n/9 Abk[]urzung 
+ []
+
+
+Overfull \hbox (14.97469pt too wide) in paragraph at lines 43--43
+\OT1/ptm/m/n/9 einpfle- 
+ []
+
+
+Overfull \hbox (27.97087pt too wide) in paragraph at lines 43--43
+[][][][]\OT1/ptm/m/n/9 Abk[]urzung 
+ []
+
+
+Overfull \hbox (14.97469pt too wide) in paragraph at lines 43--43
+\OT1/ptm/m/n/9 einpfle- 
+ []
+
+
+Overfull \hbox (27.97087pt too wide) in paragraph at lines 43--43
+[][][][]\OT1/ptm/m/n/9 Abk[]urzung 
+ []
+
+
+Overfull \hbox (14.97469pt too wide) in paragraph at lines 43--43
+\OT1/ptm/m/n/9 einpfle- 
+ []
+
+
+Overfull \hbox (67.0126pt too wide) in paragraph at lines 69--69
 [][][][]\OT1/ptm/m/n/9 Bewegungserkennung 
  []
 
 
-Overfull \hbox (7.97266pt too wide) in paragraph at lines 43--43
+Overfull \hbox (7.97266pt too wide) in paragraph at lines 69--69
 \OT1/ptm/m/n/9 tieren  
  []
 
 
-Overfull \hbox (67.0126pt too wide) in paragraph at lines 43--43
+Overfull \hbox (67.0126pt too wide) in paragraph at lines 69--69
 [][][][]\OT1/ptm/m/n/9 Bewegungserkennung 
  []
 
 
-Overfull \hbox (7.97266pt too wide) in paragraph at lines 43--43
+Overfull \hbox (7.97266pt too wide) in paragraph at lines 69--69
 \OT1/ptm/m/n/9 tieren  
  []
 
 
-Overfull \hbox (67.0126pt too wide) in paragraph at lines 43--43
+Overfull \hbox (67.0126pt too wide) in paragraph at lines 69--69
 [][][][]\OT1/ptm/m/n/9 Bewegungserkennung 
  []
 
 
-Overfull \hbox (7.97266pt too wide) in paragraph at lines 43--43
+Overfull \hbox (7.97266pt too wide) in paragraph at lines 69--69
 \OT1/ptm/m/n/9 tieren  
  []
 
 
-Overfull \hbox (67.0126pt too wide) in paragraph at lines 43--43
+Overfull \hbox (67.0126pt too wide) in paragraph at lines 69--69
 [][][][]\OT1/ptm/m/n/9 Bewegungserkennung 
  []
 
 
-Overfull \hbox (7.97266pt too wide) in paragraph at lines 43--43
+Overfull \hbox (7.97266pt too wide) in paragraph at lines 69--69
 \OT1/ptm/m/n/9 tieren  
  []
 
 
-Underfull \hbox (badness 2245) in paragraph at lines 34--47
+Underfull \hbox (badness 2245) in paragraph at lines 60--73
 []\OT1/ptm/m/n/9 Zu Be-ginn des Pro-jekts haben wir als Grund-lage f[]ur die
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--47
+Underfull \hbox (badness 10000) in paragraph at lines 60--73
 
  []
 
 
-Underfull \hbox (badness 3884) in paragraph at lines 34--47
+Underfull \hbox (badness 3884) in paragraph at lines 60--73
 \OT1/ptm/m/n/9 zug[]anglichen Pro-jekte aus der Raspberry-Community kon-nten
  []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 53.
+LaTeX Font Info:    Try loading font information for U+msa on input line 79.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 53.
+LaTeX Font Info:    Try loading font information for U+msb on input line 79.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 1442) in paragraph at lines 78--87
+) [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+Underfull \hbox (badness 1442) in paragraph at lines 104--113
 \OT1/ptm/m/it/9 Be-we-gungsmelder und ist oft-mals auch in be-we-gungssen-si-ti
 ven
  []
 
 
-Underfull \hbox (badness 2426) in paragraph at lines 78--87
+Underfull \hbox (badness 2426) in paragraph at lines 104--113
 \OT1/ptm/m/it/9 Au^^Yen-leuchten oder Alar-man-la-gen ver-baut. Erkennbar ist d
 er
  []
 
 
-Underfull \hbox (badness 1383) in paragraph at lines 78--87
+Underfull \hbox (badness 1383) in paragraph at lines 104--113
 \OT1/ptm/m/it/9 vie-len einzel-nen Waben verse-hen ist. Der Sen-sor reagiert au
 f
  []
 
 
-Underfull \hbox (badness 7291) in paragraph at lines 78--87
+Underfull \hbox (badness 7291) in paragraph at lines 104--113
 \OT1/ptm/m/it/9 Tem-per-aturver[]anderungen in seinem Sicht-feld. Somit k[]onne
 n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--87
+Underfull \hbox (badness 10000) in paragraph at lines 104--113
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--87
+Underfull \hbox (badness 10000) in paragraph at lines 104--113
 
  []
 
-[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
-[2
-
-] (./Verteilte Überwachung.aux)
+[2] (./Verteilte Überwachung.aux)
 Package logreq Info: Writing requests to '"Verteilte Überwachung".run.xml'.
 \openout1 = `"Verteilte Überwachung.run.xml"'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18679 strings out of 493109
- 355545 string characters out of 6135005
- 648763 words of memory out of 5000000
- 21807 multiletter control sequences out of 15000+600000
+ 18690 strings out of 493109
+ 355850 string characters out of 6135005
+ 653761 words of memory out of 5000000
+ 21818 multiletter control sequences out of 15000+600000
  33522 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,9n,80p,834b,1002s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1255,7 +1358,7 @@ Here is how much of TeX's memory you used:
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/tex
 live/2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/
 texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Verteilte Überwachung.pdf" (2 pages, 53475 bytes).
+Output written on "Verteilte Überwachung.pdf" (2 pages, 55856 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream

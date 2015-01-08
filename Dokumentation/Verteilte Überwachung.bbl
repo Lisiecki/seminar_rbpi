@@ -32,7 +32,7 @@
   \field{sortinit}{K}
   \field{title}{Raspberry Pi : das umfassende Handbuch ; [Grundlagen verstehen,
   spannende Projekte realisieren ; Schnittstellen des Pi, Schaltungsaufbau,
-  Steuerung mit Python ; Erweiterungen für den Pi: Gertboard, PiFace,
+  Steuerung mit Python ; Erweiterungen f{\"u}r den Pi: Gertboard, PiFace,
   Quick2Wire u.a. in Hardware-Projekte einsetzen ; aktuell zu allen Versionen,
   inkl. Modell B+]}
   \field{year}{2014}
@@ -53,6 +53,27 @@
   \verb{url}
   \verb http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome
   \endverb
+\endentry
+
+\entry{verkaufszahlen}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Lindner}{L.}%
+     {Mirko}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{LM1}
+  \strng{fullhash}{LM1}
+  \field{sortinit}{L}
+  \field{title}{{\"U}ber 3,8 Millionen Raspberry Pi verkauft}
+  \verb{url}
+  \verb http://www.pro-linux.de/news/1/21613/ueber-38-millionen-raspberry-pi-ve
+  \verb rkauft.html
+  \endverb
+  \field{month}{10}
+  \field{year}{2014}
+  \warn{\item Invalid format of field 'urldate'}
 \endentry
 
 \lossort

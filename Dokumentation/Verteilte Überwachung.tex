@@ -18,16 +18,39 @@
 %\tableofcontents	%Inhaltsverzeichnis erstellen....NICHT
 
 %\chapter{Einleitung}
-\todo{Raspberry erklären, GPIO erklären, }
-\section{Anforderungen / Lastenheft}
+
+
+
+\section{Einleitung}
 Ziel ist es, mithilfe von zwei oder mehr Rasperry Pis, die jeweils mit Kamera und Infrarot-Sensoren bestückt sind, ein Gebiet oder Raum auf unerwünschte Eindringlinge zu überprüfen.\\
 Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, die den entsprechenden Raum aus verschiedenen Blickwinkeln zeigen. 
 Die Raspberry Pis sollen zunächst ihre Umgebung auf "Artgenossen" überprüfen und diese anhand anderer Blinkfrequenzen an ihren Infrarot-LEDs erkennen. \\
-Um unerwünschte Alarme auszuschließen, soll die Kamera mit dem PIR-Sensor kooperieren. \\
-Wenn nun eine Bewegung erkannt und diese ebenfalls durch das PIR-Sensor bestätigt wurde, soll ein Alarm dafür sorgen, dass eine Mitteilung an das Handy des Benutzers geschickt wird und dieser entsprechend informiert wird.\\
+Um unerwünschte Alarme auszuschließen, soll die Kamera außerdem mit dem Infrarot-Sensor, PIR-Sensor genannt, \todo{Regel für Abkürzungen suchen}kooperieren. \\
+Wenn nun eine Bewegung erkannt und diese ebenfalls durch das PIR-Sensor wahrgenommen wurde, soll ein Alarm dafür sorgen, dass eine Mitteilung an das Handy des Benutzers geschickt wird und dieser entsprechend informiert wird.\\
 Ebenfalls denkbar wäre ein Mechanismus, welcher wahrgenommene Bewegungen in ihrer Dringlichkeit beurteilt:\\
 Eine einzelne wahrgenommene Bewegung durch die Kamera eines einzelnen Raspberry Pi stellt das geringste Risiko dar.
 Zwei unterschiedliche Raspberry Pis, welche mit Kamera und PIR-Sensor eine Bewegung feststellen, stellen das höchste Risiko dar.
+
+
+
+
+\section{System}
+Der Raspberry Pi, welcher in unserem Projekt die Grundlage bildet, ist ein voll funktionsfähiger PC im Scheckkartenformat. 
+In erster Linie wurde der Raspberry Pi mit dem Ziel entwickelt, interessierten Menschen das erlernen von hardwarenaher Programmierung zu erleichtern.
+Jedes Gerät besitzt ein General Purpose Input Output-Board (genannt GPIO-Board).\todo{Abkürzung einpflegen}
+Die einzelnen Pins dieses Boards lassen sich mit selbst programmierten Programmen ansteuern und können vielseitigen Zwecken dienen.
+Als Betriebssystem können unter anderem an die Architektur angepasste Linux-Distributionen installiert werden. 
+Auch Betriebssysteme, welche den Raspberry Pi zum Mediencenter umfunktionieren, um damit Filme und Musik abzuspielen, sind von der Community mittlerweile zur Verfügung gestellt worden.
+Bis dato konnte sich der Raspberry Pi knapp 4 Millionen mal verkaufen und ist inzwischen in seiner vierten Version erschienen. \cite{verkaufszahlen}
+Die erste Version dieses Rechner kam Anfang 2012 auf den Markt und erfreut sich seither größter Beliebtheit.
+Je nach Ausführung ist das Gerät zwischen 25 und 35 Euro teuer. 
+Die unterschiedlichen Ausführungen unterscheiden sich in gewissen Punkten: \\
+Modell A und A+ besitzen 256 MB Arbeitsspeicher und nur einen USB-Anschluss, Modell B und B+ besitzen 512 MB Arbeitsspeicher, eine Ethernet-Schnittstelle sowie zwei, respektive vier USB-Anschlüsse.
+Alle Modelle müssen ohne Festplattenschnittstelle auskommen und verwenden SD-Karten als Speichermedium.
+Die aktuellste Version, den Raspberry Pi B+, verwenden wir für dieses Projekt.
+
+
+
 
 
 \section{Bestehende Lösungen} 
@@ -46,8 +69,11 @@ Ebenfalls im Raspberry-Handbuch konnte ein Beispiel für das Arbeiten mit dem PI
 Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
 
 
+
+
+
 %\chapter{Technische Realisierung}
-\section{Benötigte}
+\section{Benötigte Bauteile}
 %TODO Preise von Rechnungen holen ? Reich si
 \begin{itemize}
 \item Raspberry Pi B+ \textit{33,70 EUR} 

@@ -15,54 +15,56 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Verteilte_Überwachung-blx.bib
 Database file #2: refs.bib
-Warning--entry type for "motioncode" isn't style-file defined
+Warning--entry type for "pir" isn't style-file defined
 --line 12 of file refs.bib
+Warning--entry type for "motioncode" isn't style-file defined
+--line 19 of file refs.bib
 Warning--entry type for "verkaufszahlen" isn't style-file defined
---line 20 of file refs.bib
+--line 28 of file refs.bib
 Warning--entry type for "motion" isn't style-file defined
---line 38 of file refs.bib
+--line 46 of file refs.bib
 Biblatex version: 2.9
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 5 entries,
+You've used 6 entries,
             6047 wiz_defined-function locations,
-            1145 strings with 8809 characters,
-and the built_in function-call counts, 11211 in all, are:
-= -- 430
+            1148 strings with 8928 characters,
+and the built_in function-call counts, 12727 in all, are:
+= -- 469
 > -- 337
-< -- 119
-+ -- 116
-- -- 110
-* -- 547
-:= -- 787
+< -- 134
++ -- 117
+- -- 112
+* -- 597
+:= -- 815
 add.period$ -- 0
-call.type$ -- 5
-change.case$ -- 48
+call.type$ -- 6
+change.case$ -- 52
 chr.to.int$ -- 46
-cite$ -- 8
-duplicate$ -- 1213
-empty$ -- 1272
+cite$ -- 10
+duplicate$ -- 1425
+empty$ -- 1523
 format.name$ -- 145
-if$ -- 2593
+if$ -- 2964
 int.to.chr$ -- 0
-int.to.str$ -- 8
+int.to.str$ -- 9
 missing$ -- 0
-newline$ -- 86
+newline$ -- 94
 num.names$ -- 145
-pop$ -- 1347
+pop$ -- 1670
 preamble$ -- 1
-purify$ -- 50
+purify$ -- 53
 quote$ -- 0
-skip$ -- 683
+skip$ -- 759
 stack$ -- 0
-substring$ -- 275
-swap$ -- 355
-text.length$ -- 111
-text.prefix$ -- 4
+substring$ -- 285
+swap$ -- 412
+text.length$ -- 125
+text.prefix$ -- 5
 top$ -- 1
-type$ -- 175
+type$ -- 212
 warning$ -- 0
-while$ -- 114
+while$ -- 117
 width$ -- 0
-write$ -- 80
-(There were 3 warnings)
+write$ -- 87
+(There were 4 warnings)

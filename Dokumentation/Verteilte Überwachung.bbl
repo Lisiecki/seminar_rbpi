@@ -24,6 +24,14 @@
   \field{year}{2014}
 \endentry
 
+\entry{pir}{misc}{}
+  \field{sortinit}{E}
+  \field{title}{Elektronikwissen zu: PIR-Sensor - Aufbau und Funktion}
+  \verb{url}
+  \verb http://www.elv.de/controller.aspx?cid=758&detail=10&detail2=129
+  \endverb
+\endentry
+
 \entry{Raspi}{book}{}
   \name{author}{1}{}{%
     {{}%

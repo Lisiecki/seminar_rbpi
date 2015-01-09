@@ -15,52 +15,54 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Verteilte_Überwachung-blx.bib
 Database file #2: refs.bib
-Warning--entry type for "verkaufszahlen" isn't style-file defined
+Warning--entry type for "motioncode" isn't style-file defined
 --line 12 of file refs.bib
+Warning--entry type for "verkaufszahlen" isn't style-file defined
+--line 20 of file refs.bib
 Warning--entry type for "motion" isn't style-file defined
---line 30 of file refs.bib
+--line 38 of file refs.bib
 Biblatex version: 2.9
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 4 entries,
+You've used 5 entries,
             6047 wiz_defined-function locations,
-            1143 strings with 8731 characters,
-and the built_in function-call counts, 9638 in all, are:
-= -- 391
-> -- 325
-< -- 100
-+ -- 110
-- -- 105
-* -- 497
-:= -- 749
+            1145 strings with 8809 characters,
+and the built_in function-call counts, 11211 in all, are:
+= -- 430
+> -- 337
+< -- 119
++ -- 116
+- -- 110
+* -- 547
+:= -- 787
 add.period$ -- 0
-call.type$ -- 4
-change.case$ -- 46
-chr.to.int$ -- 40
-cite$ -- 6
-duplicate$ -- 998
-empty$ -- 1023
+call.type$ -- 5
+change.case$ -- 48
+chr.to.int$ -- 46
+cite$ -- 8
+duplicate$ -- 1213
+empty$ -- 1272
 format.name$ -- 145
-if$ -- 2219
+if$ -- 2593
 int.to.chr$ -- 0
-int.to.str$ -- 7
+int.to.str$ -- 8
 missing$ -- 0
-newline$ -- 78
+newline$ -- 86
 num.names$ -- 145
-pop$ -- 1017
+pop$ -- 1347
 preamble$ -- 1
-purify$ -- 49
+purify$ -- 50
 quote$ -- 0
-skip$ -- 607
+skip$ -- 683
 stack$ -- 0
-substring$ -- 265
-swap$ -- 295
-text.length$ -- 95
-text.prefix$ -- 3
+substring$ -- 275
+swap$ -- 355
+text.length$ -- 111
+text.prefix$ -- 4
 top$ -- 1
-type$ -- 138
+type$ -- 175
 warning$ -- 0
-while$ -- 106
+while$ -- 114
 width$ -- 0
-write$ -- 73
-(There were 2 warnings)
+write$ -- 80
+(There were 3 warnings)

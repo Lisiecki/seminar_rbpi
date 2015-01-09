@@ -16,6 +16,14 @@
   {}
 \endgroup
 
+\entry{motioncode}{misc}{}
+  \verb{url}
+  \verb https://github.com/waveform80/picamera/blob/master/docs/recipes2.rst
+  \endverb
+  \field{month}{10}
+  \field{year}{2014}
+\endentry
+
 \entry{Raspi}{book}{}
   \name{author}{1}{}{%
     {{}%

@@ -21,10 +21,9 @@
 
 
 
-\section{Einleitung}
+\section{Einleitung} \todo[inline]{Tottis Baustelle}
 Ziel ist es, mithilfe von zwei oder mehr Rasperry Pis, die jeweils mit Kamera und Infrarot-Sensoren bestückt sind, ein Gebiet oder Raum auf unerwünschte Eindringlinge zu überprüfen.\\
 Dazu werden die Geräte an unterschiedlichen Positionen aufgestellt, die den entsprechenden Raum aus verschiedenen Blickwinkeln zeigen. 
-Die Raspberry Pis sollen zunächst ihre Umgebung auf "Artgenossen" überprüfen und diese anhand anderer Blinkfrequenzen an ihren Infrarot-LEDs erkennen. \\
 Um unerwünschte Alarme auszuschließen, soll die Kamera außerdem mit dem Infrarot-Sensor, ("PIR-Sensor") kooperieren. \\
 Wenn nun eine Bewegung erkannt und diese ebenfalls durch das PIR-Sensor wahrgenommen wurde, soll ein Alarm dafür sorgen, dass eine Mitteilung an das Handy des Benutzers geschickt wird und dieser entsprechend informiert wird.\\
 Ebenfalls denkbar wäre ein Mechanismus, welcher wahrgenommene Bewegungen in ihrer Dringlichkeit beurteilt:\\
@@ -34,7 +33,7 @@ Zwei unterschiedliche Raspberry Pis, welche mit Kamera und PIR-Sensor eine Beweg
 
 
 
-\section{System}
+\section{System}\todo[inline]{Tottis Baustelle}
 \subsection{Raspberry Pi}
 Der Raspberry Pi, welcher in unserem Projekt die Grundlage bildet, ist ein voll funktionsfähiger PC im Scheckkartenformat. 
 In erster Linie wurde der Raspberry Pi mit dem Ziel entwickelt, interessierten Menschen das erlernen von hardwarenaher Programmierung zu erleichtern.
@@ -61,8 +60,7 @@ Wir geben zu bedenken, dass das Python Script, das wir zur Bewegungserkennung ve
 Da die Kamera dazu in der Lage ist, Licht aus dem Infraroten Spektralbereich zu sehen, kann man auch nach Sonnenuntergang noch Bewegungen erkennen.
 Dazu muss der entsprechende Bereich mit Infrarotlicht ausgeleuchtet werden.
 Bei vielen Überwachungskameras wird dieses Licht mittels LEDs erzeugt, welche um das Objektiv der Kamera platziert werden.
-Für dieses Projekt sollen auch Infrarot-LEDs zum Einsatz kommen.
-Diese sollen allerdings nur dem Zweck dienen, dass sich die Raspberry Pis gegenseitig erkennen können.
+Für unser Projekt sollen allerdings vorerst keine Infrarot-LEDs zum Einsatz kommen.
 
 \subsection{PIR-Sensor}
 Beim zweiten Sensor handelt sich um ein pyroelektrischen Infrarot Sensor:\\
@@ -81,7 +79,7 @@ Um den PIR Sensor am Raspberry Pi anzuschließen, werden insgesamt 3 GPIO Anschl
 Einmal ein 3V Anschluss für die Stromversorgung, einen Ground und ein regulärer GPIO Pin, um den PIR zu steuern.
 
 
-\section{Unser Ansatz}
+\section{Unser Ansatz}\todo[inline]{Dennis Baustelle}
 \todo[inline]{Funktionsweise noch nicht final}
 Wenn das Programm ausgeführt wird, soll der Raspberry zunächst seine Umgebung auf andere anwesende Raspberries überprüfen und deren Koordinaten mithilfe des Magnetometer speichern. 
 Anschließend soll die Kamera auf Bewegung achten. 
@@ -90,7 +88,7 @@ Ist auch dies der Fall, reden wir von einer definitiven Bewegung.
 Die Himmelsrichtung wird an die anderen anwesenden Systeme geschickt, welche dann (falls nötig) ebenfalls in diese Richtung schwenken. 
 Am Raspberry geht dann noch eine LED an, um eine erkannte Bewegung zu signalisieren. 
 
-\section{Related Work} 
+\section{Related Work}\todo[inline]{Dennis Baustelle} 
 Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung des Projekts das Programm Motion\cite{motion} als passend angesehen. 
 Das Programm konnte nach leichter Modifikation mit der Raspberry Pi Kamera verwendet werden und besaß einen Funktionierenden Algorithmus zur Erkennung von Bewegungen. 
 Außerdem stellte es einen http-Stream zur Verfügung, über welchen das aktuelle Geschehen vor der Kamera beobachtet werden und nach erkannter Bewegung automatisch Fotos und Videos aufnehmen konnte. 
@@ -125,10 +123,10 @@ Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
 
 
 %\chapter{Theoretische Herangehensweise}
-\section{Evaluation}
+\section{Evaluation}\todo[inline]{Dennis Baustelle}
 
 
-\section{Summary}
+\section{Summary}\todo[inline]{Tottis Baustelle}
 
 \printbibliography
 

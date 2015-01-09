@@ -1,4 +1,4 @@
-\documentclass[journal, compsoc ]{IEEEtran}
+\documentclass[journal]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -38,7 +38,8 @@ Zwei unterschiedliche Raspberry Pis, welche mit Kamera und PIR-Sensor eine Beweg
 \subsection{Raspberry Pi}
 Der Raspberry Pi, welcher in unserem Projekt die Grundlage bildet, ist ein voll funktionsfähiger PC im Scheckkartenformat. 
 In erster Linie wurde der Raspberry Pi mit dem Ziel entwickelt, interessierten Menschen das erlernen von hardwarenaher Programmierung zu erleichtern.
-Jedes Gerät besitzt ein General Purpose Input Output-Board ("GPIO-Board").
+Jedes Gerät besitzt ein frei programmierbares General Purpose Input Output-Board ("GPIO-Board").
+Das GPIO-Board stellt je nach Modell 26 oder 40 Pins zur Verfügung, von denen 17 bzw. 26 Pins frei programmierbar sind und die weiteren der Spannungsversorgung dienen oder als Masse dienen.
 Die einzelnen Pins dieses Boards lassen sich mit selbst programmierten Programmen ansteuern und können vielseitigen Zwecken dienen.
 So kann diverse externe Peripherie angesteuert werden, wie z.B. ein Temperatur-Sensor, ein Ultraschall-Sensor, ein Motor oder sogar ein kleiner externen Monitor mit Touch-Funktion.
 Als Betriebssystem können unter anderem an die Architektur angepasste Linux-Distributionen wie \textit{Raspbian} installiert werden. 
@@ -53,7 +54,6 @@ Die aktuellste Version, den Raspberry Pi B+, verwenden wir für dieses Projekt.\
 
 
 \subsection{Raspberry Pi Kameramodul}
-Der erste Sensor den wir benötigen ist das Raspberry Pi Kameramodul, die wir an unseren Raspberry Pi angeschlossen haben. 
 Für unser Projekt verwenden wir das Raspberry Pi Infrarot Kamera Modul ("Pi NoIR Camera Board"), weil es vom Raspberry Pi selbst auf jeden Fall unterstützt wird und der Support der Raspberry Pi Community hervorragend ist. 
 Natürlich können zur Bewegungserkennung auch gewöhnliche Webcams verwendet werden. 
 Für die Raspberry Pi Kamera gibt es am Raspberry Pi einen eigenen Slot, in dem das Flachbandkabel der Kamera passt, sodass die GPIO-Anschlüsse am Raspberry Pi vollständig für andere Aufgaben verwendet werden können.
@@ -81,9 +81,16 @@ Um den PIR Sensor am Raspberry Pi anzuschließen, werden insgesamt 3 GPIO Anschl
 Einmal ein 3V Anschluss für die Stromversorgung, einen Ground und ein regulärer GPIO Pin, um den PIR zu steuern.
 
 
+\section{Unser Ansatz}
+\todo[inline]{Funktionsweise noch nicht final}
+Wenn das Programm ausgeführt wird, soll der Raspberry zunächst seine Umgebung auf andere anwesende Raspberries überprüfen und deren Koordinaten mithilfe des Magnetometer speichern. 
+Anschließend soll die Kamera auf Bewegung achten. 
+Sobald die Kamera eine Bewegung erkannt hat, soll das PIR-Sensor prüfen, ob in der nähe auch eine wahrnehmbare Bewegung im Infraroten Bereich erfolgt ist. 
+Ist auch dies der Fall, reden wir von einer definitiven Bewegung. 
+Die Himmelsrichtung wird an die anderen anwesenden Systeme geschickt, welche dann (falls nötig) ebenfalls in diese Richtung schwenken. 
+Am Raspberry geht dann noch eine LED an, um eine erkannte Bewegung zu signalisieren. 
 
-
-\section{Bestehende Lösungen} 
+\section{Related Work} 
 Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung des Projekts das Programm Motion\cite{motion} als passend angesehen. 
 Das Programm konnte nach leichter Modifikation mit der Raspberry Pi Kamera verwendet werden und besaß einen Funktionierenden Algorithmus zur Erkennung von Bewegungen. 
 Außerdem stellte es einen http-Stream zur Verfügung, über welchen das aktuelle Geschehen vor der Kamera beobachtet werden und nach erkannter Bewegung automatisch Fotos und Videos aufnehmen konnte. 
@@ -118,28 +125,10 @@ Diesen wollen wir um die von uns benötigten Funktionen ergänzen.
 
 
 %\chapter{Theoretische Herangehensweise}
-\section{Funktionsweise der Hard- und Software}
-\todo[inline]{Funktionsweise noch nicht final}
-Wenn das Programm ausgeführt wird, soll der Raspberry zunächst seine Umgebung auf andere anwesende Raspberries überprüfen und deren Koordinaten mithilfe des Magnetometer speichern. 
-Anschließend soll die Kamera auf Bewegung achten. 
-Sobald die Kamera eine Bewegung erkannt hat, soll das PIR-Sensor prüfen, ob in der nähe auch eine wahrnehmbare Bewegung im Infraroten Bereich erfolgt ist. 
-Ist auch dies der Fall, reden wir von einer definitiven Bewegung. 
-Die Himmelsrichtung wird an die anderen anwesenden Systeme geschickt, welche dann (falls nötig) ebenfalls in diese Richtung schwenken. 
-Am Raspberry geht dann noch eine LED an, um eine erkannte Bewegung zu signalisieren. 
-
-\section{Algorithmus für die Bewegungserkennung}
+\section{Evaluation}
 
 
-\section{Überlegungen für ein verteiltes System}
-
-
-%\chapter{Praktische Realisierung}
-
-\section{Das Erkennen von Bewegungen}
-
-
-\section{Überwachen eines Gebiets als verteiltes System}
-
+\section{Summary}
 
 \printbibliography
 

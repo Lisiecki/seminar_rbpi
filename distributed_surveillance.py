@@ -18,9 +18,13 @@ UDP_PORT = 58333
 MOTION_DETECTED_MSG = bytes([0x1])
 PIR_DETECTED_MSG = bytes([0x2])
 PIR_GPIO = 7
+MOTION_DETECTED_THRESHOLD = 10
 
+motion_cnt = 0
 no_motion_cnt = 0
 pir_event_enabled = 0
+server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
 
 class MotionDetector(object):
 
@@ -31,8 +35,7 @@ class MotionDetector(object):
         self.rows = (height + 15) // 16
 
     def motion(self, pin):
-        #server.sendto(PIR_DETECTED_MSG, (UDP_IP, UDP_PORT))
-        print("pir detected");
+        server.sendto(PIR_DETECTED_MSG, (UDP_IP, UDP_PORT))
         return
 
     def write(self, s):
@@ -50,20 +53,22 @@ class MotionDetector(object):
             ).clip(0, 255).astype(np.uint8)
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
-        if (data > 60).sum() > 10:
-            server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)            
-            server.sendto(MOTION_DETECTED_MSG, (UDP_IP, UDP_PORT))
-            server.close()
+        if (data > 60).sum() > 10:         
+            motion_cnt += 1
             no_motion_cnt = 0
-            if pir_event_enabled == 0:
-                pir_event_enabled = 1
-                GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
-                GPIO.add_event_callback(PIR_GPIO, self.motion)
+
+            if motion_cnt == MOTION_DETECTED_THRESHOLD:
+                motion_cnt = 0
+                server.sendto(MOTION_DETECTED_MSG, (UDP_IP, UDP_PORT))
+                if pir_event_enabled == 0:
+                    pir_event_enabled = 1
+                    GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
+                    GPIO.add_event_callback(PIR_GPIO, self.motion)
         else:
             if no_motion_cnt == 40:
                 GPIO.remove_event_detect(PIR_GPIO)
                 pir_event_enabled = 0
+                motion_cnt = 0
             else:
                 no_motion_cnt = no_motion_cnt + 1
         # Pretend we wrote all the bytes of s
@@ -82,4 +87,5 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
+    server.close()
     GPIO.cleanup()

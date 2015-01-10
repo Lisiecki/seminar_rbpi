@@ -42,6 +42,7 @@ class MotionDetector(object):
         global no_motion_cnt
         global pir_event_enabled
         global server
+        global motion_cnt
 
         # Load the motion data from the string to a numpy array
         data = np.fromstring(s, dtype=motion_dtype)

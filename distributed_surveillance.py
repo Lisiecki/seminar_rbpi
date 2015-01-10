@@ -21,8 +21,6 @@ PIR_GPIO = 7
 
 no_motion_cnt = 0
 pir_event_enabled = 0
-server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
 class MotionDetector(object):
 
@@ -33,7 +31,8 @@ class MotionDetector(object):
         self.rows = (height + 15) // 16
 
     def motion(self, pin):
-        server.sendto(PIR_DETECTED_MSG, (UDP_IP, UDP_PORT))
+        #server.sendto(PIR_DETECTED_MSG, (UDP_IP, UDP_PORT))
+        print("pir detected");
         return
 
     def write(self, s):
@@ -52,7 +51,10 @@ class MotionDetector(object):
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
+            server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)            
             server.sendto(MOTION_DETECTED_MSG, (UDP_IP, UDP_PORT))
+            server.close()
             no_motion_cnt = 0
             if pir_event_enabled == 0:
                 pir_event_enabled = 1
@@ -80,5 +82,4 @@ with picamera.PiCamera() as camera:
         )
     camera.wait_recording(30)
     camera.stop_recording()
-    server.close()
     GPIO.cleanup()

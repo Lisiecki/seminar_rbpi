@@ -45,10 +45,10 @@ public class MainActivity extends ActionBarActivity {
 
                     switch (signal) {
                         case MOTION_DETECTED:
-                            intruderDetected += 1;
+                            intruderDetected += 5;
                             break;
                         case PIR_DETECTED:
-                            intruderDetected += 2;
+                            intruderDetected += 10;
                             break;
                         default:
                             intruderDetected -= 5;

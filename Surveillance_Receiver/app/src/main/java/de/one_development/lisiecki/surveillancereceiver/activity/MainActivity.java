@@ -6,63 +6,64 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 import de.one_development.lisiecki.surveillancereceiver.R;
 import de.one_development.lisiecki.surveillancereceiver.network.udp.AndroidUDPServer;
 
 
 public class MainActivity extends ActionBarActivity {
+    public static final byte MOTION_DETECTED = 0x1;
+    public static final byte PIR_DETECTED = 0x2;
     public static final int PORT = 58333;
     public static final int SIZE = 0x1;
     public static final long DECREASE_PERCENTAGE_INTERVAL = 10;
 
-    private int intruderDetected = 0;
-    private long lastTimeStamp = 0;
+    private static int intruderDetected = 0;
+
+    private TextView intruderDetectedTextView;
+
+    private Runnable setIntruderDetectedTextRunnable = new Runnable() {
+        @Override
+        public void run() {
+            intruderDetectedTextView.setText(String.valueOf(intruderDetected));
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView intruderDetectedTextView =
+        intruderDetectedTextView =
                 (TextView) findViewById(R.id.intruder_detected_text_view);
         final AndroidUDPServer androidUDPServer = new AndroidUDPServer(PORT);
 
         Thread t = new Thread(new Runnable() {
             @Override
-            public void run() {
-                lastTimeStamp = System.currentTimeMillis();
-
+            public synchronized void run() {
                 while (true) {
-                    try {
-                        int signal = androidUDPServer.readyRead(SIZE)[0];
+                    byte signal = androidUDPServer.readyRead(SIZE)[0];
 
-                        if (signal > 0) {
-                            intruderDetected += signal;
-                        }
-                        else {
-                            intruderDetected = 0;
-                        }
-
-
-                        if (intruderDetected > 100 ) {
-                            intruderDetected = 100;
-                        }
-
-                        if (intruderDetected < 0) {
-                            intruderDetected = 0;
-                        }
-
-                        intruderDetectedTextView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                intruderDetectedTextView.setText(String.valueOf(intruderDetected));
-                            }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    switch (signal) {
+                        case MOTION_DETECTED:
+                            intruderDetected += 1;
+                            break;
+                        case PIR_DETECTED:
+                            intruderDetected += 2;
+                            break;
+                        default:
+                            intruderDetected -= 5;
+                            break;
                     }
+
+                    if (intruderDetected > 100) {
+                        intruderDetected = 100;
+                    }
+
+                    if (intruderDetected < 0) {
+                        intruderDetected = 0;
+                    }
+
+                    intruderDetectedTextView.post(setIntruderDetectedTextRunnable);
                 }
             }
         });

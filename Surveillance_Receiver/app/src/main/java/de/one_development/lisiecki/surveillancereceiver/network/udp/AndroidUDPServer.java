@@ -19,15 +19,29 @@ public class AndroidUDPServer {
         }
     }
 
-    public byte[] readyRead(int size) throws IOException {
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        try {
+            serverDatagramSocket.close();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public byte[] readyRead(int size) {
         byte[] receiveData = new byte[size];
         DatagramPacket receiveDatagramPacket = new DatagramPacket(receiveData, receiveData.length);
 
         try {
-            serverDatagramSocket.setSoTimeout(20);
+            serverDatagramSocket.setSoTimeout(500);
             serverDatagramSocket.receive(receiveDatagramPacket);
-            return receiveDatagramPacket.getData();
+            return receiveData;
         } catch (SocketException e) {
+            byte[] retVal = new byte[size];
+            retVal[0] = 0;
+            return retVal;
+        } catch (IOException e) {
             byte[] retVal = new byte[size];
             retVal[0] = 0;
             return retVal;

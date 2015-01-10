@@ -1,6 +1,7 @@
 from __future__ import division
 #!/usr/bin/python3
 
+import socket
 import picamera
 import numpy as np
 import RPi.GPIO as GPIO
@@ -11,6 +12,10 @@ motion_dtype = np.dtype([
     ('y', 'i1'),
     ('sad', 'u2'),
     ])
+
+UDP_IP = '192.168.0.18'
+UDP_PORT = 58333
+UDP_MSG = bytes([0xA])
 
 motion_detected_led = 40
 pir_motion_detected_led = 5
@@ -46,6 +51,8 @@ class MotionDetector(object):
         # than 60, then say we've detected motion
         if (data > 60).sum() > 10:
             GPIO.output(motion_detected_led, GPIO.HIGH)
+            server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            server.sendto(UDP_MSG, (UDP_IP, UDP_PORT))
             no_motion_cnt = 0
             if pir_event_enabled == 0:
                 pir_event_enabled = 1

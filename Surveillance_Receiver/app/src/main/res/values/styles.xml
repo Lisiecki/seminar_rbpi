@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+
+    </style>
+
+    <color name="dark_grey3">#ff191919</color>
+    <color name="dark_grey2">#ff262626</color>
+    <color name="dark_grey">#ff333333</color>
+    <color name="obsidian">#ff111111</color>
+    <color name="dim_grey">#FF666666</color>
+    <color name="dark_alu">#ff4C4C4C</color>
+    <color name="light_grey">#FFc0c0c0</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparent_grey">#7F4C4C4C</color>
+
+</resources>

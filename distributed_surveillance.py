@@ -86,7 +86,10 @@ with picamera.PiCamera() as camera:
         # Record motion data to our custom output object
         motion_output=MotionDetector(camera)
         )
-    camera.wait_recording(30)
+    i = 0
+    while (i != 100):
+        i += 1
+        print(i)
     camera.stop_recording()
     server.close()
     GPIO.cleanup()

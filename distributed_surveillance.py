@@ -13,6 +13,10 @@ motion_dtype = np.dtype([
     ('sad', 'u2'),
     ])
 
+SHUTDOWN_CAM = 0
+MOTION_DETECTED = 1
+IDENTIFY = 2
+
 UDP_IP = '255.255.255.255'
 UDP_PORT = 58333
 MOTION_DETECTED_MSG = bytes([0x1])
@@ -87,9 +91,10 @@ with picamera.PiCamera() as camera:
         motion_output=MotionDetector(camera)
         )
     i = 0
-    while (i != 100):
-        i += 1
-        print(i)
+    while True:
+        remote_cmd = server.recvfrom(2)
+        if remote_cmd ==
+
     camera.stop_recording()
     server.close()
     GPIO.cleanup()

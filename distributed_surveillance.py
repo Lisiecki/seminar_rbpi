@@ -23,14 +23,14 @@ UDP_PORT = 58333
 MOTION_DETECTED_MSG = bytes([CMD_MOTION_DETECTED])
 PIR_DETECTED_MSG = bytes([0x2])
 PIR_GPIO = 7
-MOTION_DETECTED_THRESHOLD = 10
+MOTION_DETECTED_THRESHOLD = 5
 
 motion_cnt = 0
 no_motion_cnt = 0
 pir_event_enabled = 0
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
-server.bind(('255.255.255.255', UDP_PORT))
+server.bind(('192.168.0.19', UDP_PORT))
 
 class MotionDetector(object):
 
@@ -92,10 +92,12 @@ with picamera.PiCamera() as camera:
         # Record motion data to our custom output object
         motion_output=MotionDetector(camera)
         )
-    i = 0
-    while True:
+    
+    while 1:
         remote_cmd = server.recvfrom(2)
+        print(remote_cmd[0])
         if remote_cmd == CMD_SHUTDOWN_CAM:
+            print("break")
             break
         elif remote_cmd == CMD_MOTION_DETECTED:
             if pir_event_enabled == 0:
@@ -106,6 +108,9 @@ with picamera.PiCamera() as camera:
             break
         elif remote_cmd == CMD_PAUSE_CAM:
             break
+        else:
+            break    
+
     camera.stop_recording()
     server.close()
     GPIO.cleanup()

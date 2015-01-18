@@ -13,13 +13,14 @@ motion_dtype = np.dtype([
     ('sad', 'u2'),
     ])
 
-SHUTDOWN_CAM = 0
-MOTION_DETECTED = 1
-IDENTIFY = 2
+CMD_SHUTDOWN_CAM = 0x0
+CMD_MOTION_DETECTED = 0x1
+CMD_IDENTIFY = 0x2
+CMD_PAUSE_CAM = 0x3
 
 UDP_IP = '255.255.255.255'
 UDP_PORT = 58333
-MOTION_DETECTED_MSG = bytes([0x1])
+MOTION_DETECTED_MSG = bytes([CMD_MOTION_DETECTED])
 PIR_DETECTED_MSG = bytes([0x2])
 PIR_GPIO = 7
 MOTION_DETECTED_THRESHOLD = 10
@@ -93,8 +94,17 @@ with picamera.PiCamera() as camera:
     i = 0
     while True:
         remote_cmd = server.recvfrom(2)
-        if remote_cmd ==
-
+        if remote_cmd == CMD_SHUTDOWN_CAM:
+            break
+        elif remote_cmd == CMD_MOTION_DETECTED:
+            if pir_event_enabled == 0:
+                pir_event_enabled = 1
+                GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
+                GPIO.add_event_callback(PIR_GPIO, self.motion)
+        elif remote_cmd == CMD_IDENTIFY:
+            break
+        elif remote_cmd == CMD_PAUSE_CAM:
+            break
     camera.stop_recording()
     server.close()
     GPIO.cleanup()

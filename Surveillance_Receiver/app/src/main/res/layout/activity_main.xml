@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/intruder_text_size"
+        android:textColor="@color/light_grey"
         android:layout_alignParentRight="true"/>
 
     <TextView
@@ -24,7 +25,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/intruder_text_size"
+        android:textColor="@color/light_grey"
         android:layout_toLeftOf="@id/percentage_text_view"/>
 
-
+    <Button
+        android:id="@+id/shutdown_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_background_list"
+        android:text="@string/shutdown"
+        android:textSize="@dimen/button_text_size"
+        android:textColor="@color/light_grey"/>
 </RelativeLayout>

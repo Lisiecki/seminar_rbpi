@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import de.one_development.lisiecki.surveillancereceiver.R;
+import de.one_development.lisiecki.surveillancereceiver.network.udp.AndroidUDPClient;
 import de.one_development.lisiecki.surveillancereceiver.network.udp.AndroidUDPServer;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     public static final byte MOTION_DETECTED = 0x1;
     public static final byte PIR_DETECTED = 0x2;
     public static final int PORT = 58333;
@@ -21,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
 
     private TextView intruderDetectedTextView;
 
+    private AndroidUDPClient androidUDPClient;
     private Runnable setIntruderDetectedTextRunnable = new Runnable() {
         @Override
         public void run() {
@@ -35,7 +39,11 @@ public class MainActivity extends ActionBarActivity {
 
         intruderDetectedTextView =
                 (TextView) findViewById(R.id.intruder_detected_text_view);
+        Button shutdownButton = (Button) findViewById(R.id.shutdown_button);
+        shutdownButton.setOnClickListener(this);
+
         final AndroidUDPServer androidUDPServer = new AndroidUDPServer(PORT);
+        androidUDPClient = new AndroidUDPClient(PORT, "192.168.0.19");
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -71,6 +79,15 @@ public class MainActivity extends ActionBarActivity {
         t.start();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.shutdown_button:
+                byte[] data = {0x0};
+                androidUDPClient.sendData(data);
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

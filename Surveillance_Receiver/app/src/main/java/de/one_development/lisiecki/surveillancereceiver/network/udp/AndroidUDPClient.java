@@ -18,6 +18,7 @@ public class AndroidUDPClient extends AndroidClient {
 		try {
 			address = InetAddress.getByName(ip);
             socket = new DatagramSocket();
+            System.out.println("Socket: " + socket);
             port = p;
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

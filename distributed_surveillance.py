@@ -109,6 +109,8 @@ with picamera.PiCamera() as camera:
             break
         elif remote_cmd[0] == CMD_PAUSE_CAM:
             break
+        else:
+            break
 
     camera.stop_recording()
     server.close()

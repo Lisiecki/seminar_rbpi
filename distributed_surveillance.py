@@ -30,7 +30,7 @@ no_motion_cnt = 0
 pir_event_enabled = 0
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
-server.bind(('192.168.0.19', UDP_PORT))
+server.bind(('localhost', UDP_PORT))
 
 class MotionDetector(object):
 
@@ -88,6 +88,7 @@ with picamera.PiCamera() as camera:
     camera.framerate = 30
     camera.start_recording(
         # Throw away the video data, but make sure we're using H.264
+
         '/dev/null', format='h264',
         # Record motion data to our custom output object
         motion_output=MotionDetector(camera)

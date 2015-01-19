@@ -98,7 +98,6 @@ with picamera.PiCamera() as camera:
         remote_cmd = server.recvfrom(1)[0]
         print(remote_cmd[0])
         if remote_cmd[0] == CMD_SHUTDOWN_CAM:
-            print("break")
             break
         elif remote_cmd[0] == CMD_MOTION_DETECTED:
             if pir_event_enabled == 0:
@@ -108,8 +107,6 @@ with picamera.PiCamera() as camera:
         elif remote_cmd[0] == CMD_IDENTIFY:
             break
         elif remote_cmd[0] == CMD_PAUSE_CAM:
-            break
-        else:
             break
 
     camera.stop_recording()

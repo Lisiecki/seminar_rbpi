@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{todonotes}	
 
 \title{Handbuch \\ Gemeinsame, verteilte Überwachung eines Gebietes auf Eindringlinge}
 \author{Dennis Lisiecki, Torsten Kühl}
@@ -11,22 +12,44 @@
 
 \maketitle	%Titelblatt erstellen
 \tableofcontents	%Inhaltsverzeichnis erstellen
+
+
 \chapter{Vorbereitung}
+
 \section{Diese Teile werden benötigt}
 \begin{itemize}
 \item Raspberry Pi B+
-\item SD-Karte mit 8GB
-\item Strom für den Raspi
+\item SD-Karte
+\item Strom für den Raspberry Pi
 \item Monitor für Ersteinrichtung
 \item Tastatur und Maus
 \item Pi NoIR-Kamera
 \item PIR-Modul
-\item Steckplatine
 \item Ein Paket Kabel
+\item Android-Kompatibles Gerät(Handy oder Tablet)
 \end{itemize}
 
-\section{Gib mir einen Namen}
-Im folgendem gehen wir davon aus, dass der Raspberry-Pi bzw. die SD-Karte bereits mit der aktuellsten Version vom Raspbian-OS ausgestattet ist. Zunächst ist es immer ratsam den Raspberry per Befehl \textit{sudo apt-get update} und \textit{sudo apt-get upgrade} auf den neuesten Stand zu bringen.
+\section{Den Raspberry vorbereiten}
+Im folgendem gehen wir davon aus, dass der Raspberry-Pi bzw. die SD-Karte bereits mit der aktuellsten Version vom Raspbian-OS ausgestattet ist. Die Größe der SD-Karte ist dabei zu vernachlässigen, da keine Videodaten aufgezeichnet werden und lediglich das Betriebssystem . Zunächst ist es immer ratsam den Raspberry per Befehl \textit{sudo apt-get update} und \textit{sudo apt-get upgrade} auf den neuesten Stand zu bringen. Die Befehle gibt man einfach im Terminal ein. Dadurch werden alle installierten Pakete auf den neuesten Stand angehoben und auch das Betriebssystem aktualisiert. \\Um später auch ohne einen direkt angeschlossenen Monitor arbeiten zu können, empfiehlt es sich außerdem, einen VNC-Server auf den Raspberry zu installieren, welcher einen Desktop für entfernte Anwender zur Verfügung stellt. Entsprechende Anleitungen für die Einrichtung des Servers finden sich im Internet. Für Anwender mit Erfahrungen im Umgang mit der Kommandozeile, kann auch eine Verbindung über die Secure Shell, kurz SSH, hergestellt werden, mit welcher man den Raspberry Pi fernsteuern kann. In diesem Fall benötigt man natürlich keinen VNC-Server - unter Raspbian ist SSH bereits standardmäßig am laufen. Einzige Voraussetzung für die Nutzung von SSH ist eine funktionierende Netzwerkanbindung.  \\Für die Funktionsweise des Überwachungssystems ist eine funktionierende Netzwerkanbindung ohnehin unablässig und die Ersteinrichtung wird im Folgendem Kapitel kurz erklärt.
 
+\section{WLAN einrichten}
+Für unsere Überwachungskamera ist es nützlicher, von vornherein einen WLAN-Stick für die Netzwerkanbindung zu nutzen. Dadurch ist man viel flexibler was die Positionierung der Kamera(s) angeht. Leider ist das Einrichten auch ein wenig komplexer. Für eine Nutzung mit Kabel reicht es meist, das Lan-Kabel in den Netzwerkanschluss des Raspberry Pi anzuschließen. In den wenigsten Fällen sollte jetzt noch ein Eingreifen nötig sein - sofern der Router im Netzwerk DHCP unterstützt und dem Raspberry Pi erfolgreich eine IP-Adresse zuteilt. Für die Nutzung eines WLAN-Sticks ist leider ein wenig mehr Aufwand vonnöten: Am einfachsten gestaltet sich die Einrichtung über Raspbian, denn dort existiert ein Programm mit grafischer Oberfläche, welches bei der Ersteinrichtung unterstützt. \todo{Namen herausfinden} Wenn man den Stick an einen der USB-Anschlüsse angesteckt hat, Scannt man das Netzwerk, sucht seinen Router aus der Liste und kann nach Eingabe des Passworts eine Verbindung herstellen. Praktisch: Bei erfolgreicher Verbindung zeigt uns das Programm sofort die IP-Adresse des Raspberry Pi an. Die IP-Adresse ist wichtig für die SSH-Verbindung und kann jetzt schonmal notiert werden. Alternativ kann die Einrichtung auch über die Kommandozeile erfolgen, was für den Laien allerdings (noch) nicht zu empfehlen ist. Hierzu navigieren wir in den Pfad \textit{"/etc/wpasupplicant/"} und öffnen mit dem Befehl \textit{"sudo nano wpasupplicant.conf"}\todo{Unterstriche einfügen} die Konfigurationsdatei für die Drahtlosverbindung. Hier müssen nun per Hand die Daten für die Konfiguration eingetragen werden. In die Zeile beginnend mit \textit{"ssid="} gehört der Name des Routers in Anführungszeichen eingetragen. In der folgenden Zeile, beginnend mit \textit{"psk="} muss das Passwort eingetragen werden. Die Zeilen sollten dann in etwa so aussehen: \\ \textit{ssid="IhrRouter"\\psk="IhrPasswort"}\\ Je nach Verschlüsselung müssen in den Folgenden Zeilen ebenfalls Anpassungen vorgenommen werden. Diese werden in dem Dokument selbst gut erklärt und sollten für den versierten Nutzer kein Problem darstellen.\\ Um die erfolgreiche Konfiguration zu testen, empfiehlt sich nun zunächst ein kurzer Neustart mittels des Befehls \textit{"sudo reboot"}. Nach dem Neustart kann die IP-Adresse im Terminal oder der Kommandozeile mit dem Befehl \textit{"ifconfig"}ausgelesen werden. Wenn die Einrichtung erfolgreich war, sollte in den Folgenden Zeilen die aktuelle IP-Adresse des Raspberry Pi angezeigt werden.
+
+
+\section{Zugriff über SSH}
+Um nun auf den Raspberry Pi zugreifen zu können, müssen je nach Betriebssystem von welchem der Zugriff erfolgen soll andere Wege genommen werden. Bei einem Zugriff von Windows aus empfiehlt sich das Programm \textit{Putty}. Nach dem Download kann über die IP-Adresse der Zugriff erfolgen. \\Der Zugriff von Macintosh- und Linux-Rechnern kommt ohne zusätzliche Software aus. Öffnen Sie dazu das Terminal und geben dort den Befehl \textit{ssh pi@192.168.2.10} ein. Dieser Befehl versucht nun eine gesicherte Verbindung zu dem Raspberry Pi mit der IP-Adresse 192.168.2.10 herzustellen und meldet den Benutzer "pi" an. Egal welches Betriebssystem und welche Software verwendet wird, werden Sie vor der erfolgreichen Verbindung noch nach dem Passwort für den Benutzer gefragt, der die Verbindung herstellen möchte. Falls Sie das Passwort für den Standardbenutzer "pi" noch nicht geändert haben sollten, so lautet dieses \textit{raspberrypi}. Falls die Verbindung erfolgreich war, können Sie nun über die Kommandozeile auf dem Raspberry Pi arbeiten. \\ Übrigens lässt sich die Secure Shell auch für die Datenübertragung verwenden: Mit einem Ftp-Client können Sie eine gesicherte Datenübertragung mit dem Raspberry Pi starten. Achten Sie bei dem Verbindungsversuch darauf das sftp-Protokoll zu benutzen und sie können fleißig Daten verschieben.
+
+\section{Die Kamera}
+Um die Kamera nutzen zu können, ist nicht viel Aufwand nötig. Schalten Sie den Raspberry Pi für die Folgende Prozedur aus. Die Raspberry Pi Kamera kommt mit einem Flachbandkabel für deren Anschluss nur eine passende Schnittstelle zur Verfügung steht. Der Anschluss befindet sich bei dem Modell Raspberry Pi B+ zwischen dem HDMI-Anschluss und dem Klinken-Stecker (Audio-Ausgang). Bevor das Kabel dort eingesteckt werden kann, achten Sie darauf den Klemmverschluss zu lösen. Mit ein wenig Fingernagel können sie den Verschluss anheben und das Flachbandkabel einstecken. Wenn die den Anschluss wieder runter drücken, kann das Kabel nicht so leicht wieder entweichen und steckt schön fest im Raspberry. Starten sie nun den Raspberry Pi und führen in der Kommandozeile den Befehl \textit{sudo raspi-config} aus. In diesem Menü gibt es für die Kamera einen eigenen Menüpunkt mit dem Namen: \textit{Enable Camera}. Wählen Sie diesen aus und bestätigen im nächsten Menü die Eingabe, indem sie \textit{Enable} Auswählen. Nach einem Neustart ist die Raspberry Pi Kamera auch schon einsatzbereit. Ob die Kamera auch richtig funktioniert, können Sie mit dem Befehl \textit{raspivid -t 0} testen (Achtung: Bild wird nur bei direkt angeschlossenem Monitor gezeigt). 
+
+\section{Das PIR-Modul}
+Das PIR-Modul muss ohne eigenen Anschluss auskommen. Hierfür müssen wir auf das GPIO-Board auf dem Raspberry Pi zugreifen. Der Anschluss sollte nicht zu viel Zeit in Anspruch nehmen.\todo{}
+
+\section{Die Handy-App}
+Die Android-App, welche die Überwachungszentrale des Systems darstellt, kann bequem aus dem Google Play Store heruntergeladen werden und bedarf keiner weiteren Konfiguration. Sobald die App gestartet ist, ist diese auch bereits für den Empfang der Daten Ihrer Überwachungskamera(s) gerüstet.
+
+\chapter{Das Programm}
+\section{Das Programm starten}
+Um das Programm auszuführen, navigieren Sie
 
 \end{document}

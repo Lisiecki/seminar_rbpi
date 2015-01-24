@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.1.8)  23 JAN 2015 20:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.1.8)  24 JAN 2015 17:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -899,27 +899,32 @@ Overfull \hbox (6.7074pt too wide) in paragraph at lines 36--37
 
 [4] [5] [6]
 Chapter 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+
+ []
+
 [7
 
-] (./Handbuch.aux) ) 
+] [8] (./Handbuch.aux) ) 
 Here is how much of TeX's memory you used:
- 14512 strings out of 493109
- 282176 string characters out of 6135005
- 368065 words of memory out of 5000000
- 17683 multiletter control sequences out of 15000+600000
+ 14516 strings out of 493109
+ 282268 string characters out of 6135005
+ 368146 words of memory out of 5000000
+ 17687 multiletter control sequences out of 15000+600000
  11775 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,9n,76p,2588b,695s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmti12.pfb>
-Output written on Handbuch.pdf (7 pages, 80795 bytes).
+ 73i,9n,80p,2602b,695s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmssbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmti12.pfb>
+Output written on Handbuch.pdf (8 pages, 87511 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+ 54 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

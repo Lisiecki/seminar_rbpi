@@ -18,7 +18,7 @@ public class AndroidUDPClient extends AndroidClient {
 		try {
 			address = InetAddress.getByName(ip);
             socket = new DatagramSocket();
-            System.out.println("Socket: " + socket);
+            socket.setBroadcast(true);
             port = p;
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -28,13 +28,12 @@ public class AndroidUDPClient extends AndroidClient {
 	}
 
     @Override
-	public synchronized void sendData(byte[] buffer) {
-		message = buffer;
+	public synchronized void sendData(final byte[] msg) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    byte[] msg = message;
+                    System.out.println("msg: " + msg[0]);
                     DatagramPacket packet = new DatagramPacket(msg, msg.length, address, port);
                     socket.send(packet);
                 } catch (IOException e) {

@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {1.5}Zugriff \IeC {\"u}ber SSH}{5}
 \contentsline {chapter}{\numberline {2}Aufbau}{7}
 \contentsline {section}{\numberline {2.1}Die Kamera}{7}
-\contentsline {section}{\numberline {2.2}Das PIR-Modul}{7}
+\contentsline {section}{\numberline {2.2}Der PIR-Sensor}{7}
 \contentsline {section}{\numberline {2.3}Die Handy-App}{9}
 \contentsline {chapter}{\numberline {3}Das Programm}{10}
 \contentsline {section}{\numberline {3.1}Das Programm starten}{10}

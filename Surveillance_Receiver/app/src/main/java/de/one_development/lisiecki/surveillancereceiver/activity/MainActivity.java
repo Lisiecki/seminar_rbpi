@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         shutdownButton.setOnClickListener(this);
 
         final AndroidUDPServer androidUDPServer = new AndroidUDPServer(PORT);
-        androidUDPClient = new AndroidUDPClient(PORT, "255.255.255.255");
+        androidUDPClient = new AndroidUDPClient(PORT, "192.168.0.17");
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.shutdown_button:
-                byte[] data = {0x0};
+                byte[] data = {0x7};
                 androidUDPClient.sendData(data);
                 break;
         }

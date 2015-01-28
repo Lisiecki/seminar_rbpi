@@ -164,7 +164,7 @@ with picamera.PiCamera() as camera:
             elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_REQUEST:
                 identify(remote_addr)
             elif remote_cmd[MSG_INDEX_CMD] == CMD_STATUS:
-                print("codis pos: " + codis_list_pos + '\n' + "codis size: " + codis_list_size)
+                print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)
     except KeyboardInterrupt:
         leave()
         camera.stop_recording()

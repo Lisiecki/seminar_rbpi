@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  26 JAN 2015 18:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  27 JAN 2015 13:50
 entering extended mode
 **Verteilte*Überwachung.tex
 ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.tex"
@@ -1164,54 +1164,52 @@ Underfull \hbox (badness 3792) in paragraph at lines 39--40
  []
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 65--66
+Underfull \hbox (badness 2005) in paragraph at lines 72--73
 \OT1/ptm/m/n/10 einen Funk-tion-ieren-den Al-go-rith-mus zur Erken-nung von
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
 
-Underfull \hbox (badness 2608) in paragraph at lines 65--66
+Underfull \hbox (badness 2608) in paragraph at lines 72--73
 \OT1/ptm/m/n/10 schreibt, der un-seren Anspr[]uchen gen[]ugt. Eben-falls im
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
 [2]
-LaTeX Font Info:    Try loading font information for U+msa on input line 81.
+LaTeX Font Info:    Try loading font information for U+msa on input line 88.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 81.
+LaTeX Font Info:    Try loading font information for U+msb on input line 88.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 2334) in paragraph at lines 82--82
+Underfull \hbox (badness 2334) in paragraph at lines 89--89
 \OT1/ptm/m/it/10 buch ; [Grund-la-gen ver-ste-hen, span-nende Pro-jekte
  []
 
 
-Underfull \hbox (badness 3108) in paragraph at lines 82--82
+Underfull \hbox (badness 3108) in paragraph at lines 89--89
 []\OT1/ptm/m/n/10 Mirko Lind-ner. []\OT1/ptm/m/it/10 Uber 3,8 Mil-lio-nen Rasp-
 berry Pi
  []
 
-[3
-
-] ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.aux")
+[3] ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.aux")
 Package logreq Info: Writing requests to 'Verteilte*Überwachung.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  18315 strings out of 493921
  350151 string characters out of 3147279
- 646683 words of memory out of 3000000
+ 647683 words of memory out of 3000000
  21313 multiletter control sequences out of 15000+200000
  33581 words of font info for 69 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1219,7 +1217,7 @@ Here is how much of TeX's memory you used:
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on "Verteilte Überwachung.pdf" (3 pages, 54967 bytes).
+Output written on "Verteilte Überwachung.pdf" (3 pages, 55211 bytes).
 PDF statistics:
  24 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

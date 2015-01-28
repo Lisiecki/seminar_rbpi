@@ -133,11 +133,11 @@ with picamera.PiCamera() as camera:
         while time.clock() < wait:
             remote_cmd, remote_addr = server_socket.recvfrom(4)
             if remote_cmd[MSG_INDEX_CMD] == CMD_IDENTIFY:
-                codis_list.append(remote_addr, remote_cmd[MSG_INDEX_POS])
+                codis_list.insert(remote_addr[0], remote_cmd[MSG_INDEX_POS])
                 codis_list_pos += 1
 
         codis_list_pos += 1
-        codis_list.append(remote_addr)
+        codis_list.append(remote_addr[0])
         codis_list_size = codis_list_pos
         join()
 
@@ -154,10 +154,10 @@ with picamera.PiCamera() as camera:
             elif remote_cmd[MSG_INDEX_CMD] == CMD_PAUSE_CAM:
                 break
             elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_CODIS:
-                codis_list.append(remote_addr)
+                codis_list.append(remote_addr[0])
                 codis_list_size += 1
             elif remote_cmd[MSG_INDEX_CMD] == CMD_LEAVE_CODIS:
-                codis_list.remove(remote_addr)
+                codis_list.remove(remote_addr[0])
                 codis_list_size -= 1
                 if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
                     codis_list_pos -= 1

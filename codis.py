@@ -42,7 +42,7 @@ no_motion_cnt = 0
 pir_event_enabled = 0
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
-server_socket.bind((sys.argv[2:], UDP_PORT))
+server_socket.bind((sys.argv[2], UDP_PORT))
 
 class MotionDetector(object):
 

@@ -135,11 +135,11 @@ with picamera.PiCamera() as camera:
             if remote_cmd[MSG_INDEX_CMD] == CMD_IDENTIFY:
                 codis_list.append(remote_addr, remote_cmd[MSG_INDEX_POS])
                 codis_list_pos += 1
-                if remote_cmd[MSG_INDEX_OTHER] == codis_list_pos:
-                    codis_list_pos += 1
-                    codis_list.append(remote_addr)
-                    codis_list_size = codis_list_pos
-                    join()
+
+        codis_list_pos += 1
+        codis_list.append(remote_addr)
+        codis_list_size = codis_list_pos
+        join()
 
         while 1:
             remote_cmd, remote_addr = server_socket.recvfrom(4)

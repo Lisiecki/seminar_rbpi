@@ -99,6 +99,10 @@ class MotionDetector(object):
     def disable_cam(self):
         print(2)
 
+def motion(pin):
+    server_socket.sendto(PIR_DETECTED_MSG, (UDP_IP, UDP_PORT))
+    return
+
 def identify(addr):
     identify_msg = bytes([CMD_IDENTIFY, codis_list_pos, codis_list_size])
     server_socket.sendto(identify_msg, addr)
@@ -150,7 +154,7 @@ with picamera.PiCamera() as camera:
                 if pir_event_enabled == 0:
                     pir_event_enabled = 1
                     GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
-                    GPIO.add_event_callback(PIR_GPIO, self.motion)
+                    GPIO.add_event_callback(PIR_GPIO, motion)
             elif remote_cmd[MSG_INDEX_CMD] == CMD_PAUSE_CAM:
                 break
             elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_CODIS:

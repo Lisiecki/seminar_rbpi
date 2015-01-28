@@ -158,14 +158,15 @@ with picamera.PiCamera() as camera:
             elif remote_cmd[MSG_INDEX_CMD] == CMD_PAUSE_CAM:
                 break
             elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_CODIS:
-                codis_list.append(remote_addr[0])
-                codis_list_size += 1
+                print("HEEREEREE")
             elif remote_cmd[MSG_INDEX_CMD] == CMD_LEAVE_CODIS:
                 codis_list.remove(remote_addr[0])
                 codis_list_size -= 1
                 if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
                     codis_list_pos -= 1
             elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_REQUEST:
+                codis_list.append(remote_addr[0])
+                codis_list_size += 1
                 identify(remote_addr)
             elif remote_cmd[MSG_INDEX_CMD] == CMD_STATUS:
                 print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)

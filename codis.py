@@ -101,7 +101,7 @@ class MotionDetector(object):
 
 def identify(addr):
     identify_msg = bytes([CMD_IDENTIFY, codis_list_pos, codis_list_size])
-    server_socket.sendto(identify_msg, (addr, UDP_PORT))
+    server_socket.sendto(identify_msg, addr)
 
 def request_join():
     join_msg = bytes([CMD_JOIN_REQUEST, codis_list_pos, codis_list_size])

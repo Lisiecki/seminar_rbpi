@@ -6,6 +6,7 @@ import picamera
 import numpy as np
 import RPi.GPIO as GPIO
 import time, sys
+from socketserver import UDPServer, BaseRequestHandler
 
 motion_dtype = np.dtype([
     ('x', 'i1'),
@@ -26,7 +27,7 @@ CMD_LEAVE_CODIS = 0x5
 CMD_JOIN_REQUEST = 0x6
 CMD_STATUS = 0x7
 
-UDP_IP = '255.255.255.255'
+UDP_IP = ""
 UDP_PORT = 58333
 MOTION_DETECTED_MSG = bytes([CMD_MOTION_DETECTED])
 PIR_DETECTED_MSG = bytes([0x2])
@@ -98,6 +99,32 @@ class MotionDetector(object):
 
     def disable_cam(self):
         print(2)
+
+class CodisHandler(BaseRequestHandler):
+    def handle(self):
+        if remote_cmd[MSG_INDEX_CMD] == CMD_SHUTDOWN_CAM:
+            print("shutdown")
+        elif remote_cmd[MSG_INDEX_CMD] == CMD_MOTION_DETECTED:
+            if pir_event_enabled == 0:
+                pir_event_enabled = 1
+                GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
+                GPIO.add_event_callback(PIR_GPIO, motion)
+        elif remote_cmd[MSG_INDEX_CMD] == CMD_PAUSE_CAM:
+            print("pause")
+        elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_CODIS:
+            print("HEEREEREE")
+        elif remote_cmd[MSG_INDEX_CMD] == CMD_LEAVE_CODIS:
+            codis_list.remove(remote_addr[0])
+            codis_list_size -= 1
+            if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
+                codis_list_pos -= 1
+        elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_REQUEST:
+            print("identify")
+            codis_list.append(remote_addr[0])
+            codis_list_size += 1
+            identify(remote_addr)
+        elif remote_cmd[MSG_INDEX_CMD] == CMD_STATUS:
+            print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)
 
 def motion(pin):
     server_socket.sendto(PIR_DETECTED_MSG, (UDP_IP, UDP_PORT))

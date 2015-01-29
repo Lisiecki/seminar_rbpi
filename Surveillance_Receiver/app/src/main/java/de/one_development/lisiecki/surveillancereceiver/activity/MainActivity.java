@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         shutdownButton.setOnClickListener(this);
 
         final AndroidUDPServer androidUDPServer = new AndroidUDPServer(PORT);
-        androidUDPClient = new AndroidUDPClient(PORT, "192.168.0.17");
+        androidUDPClient = new AndroidUDPClient(PORT, "192.168.0.255");
 
         Thread t = new Thread(new Runnable() {
             @Override

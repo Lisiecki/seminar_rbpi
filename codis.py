@@ -111,9 +111,9 @@ def request_join():
     join_msg = bytes([CMD_JOIN_REQUEST, codis_list_pos, codis_list_size])
     server_socket.sendto(join_msg, (UDP_IP, UDP_PORT))
 
-def join():
+def join(addr):
     join_msg = bytes([CMD_JOIN_CODIS, codis_list_pos, codis_list_size])
-    server_socket.sendto(join_msg, (UDP_IP, UDP_PORT))
+    server_socket.sendto(join_msg, addr)
 
 def leave():
     leave_msg = bytes([CMD_LEAVE_CODIS, codis_list_pos, codis_list_size])
@@ -137,13 +137,14 @@ with picamera.PiCamera() as camera:
         while time.clock() < wait:
             remote_cmd, remote_addr = server_socket.recvfrom(4)
             if remote_cmd[MSG_INDEX_CMD] == CMD_IDENTIFY:
+                print("join")
                 codis_list.insert(remote_cmd[MSG_INDEX_POS], remote_addr[0])
                 codis_list_pos += 1
+                join(remote_addr)
 
         codis_list_pos += 1
         codis_list.append(remote_addr[0])
         codis_list_size = codis_list_pos
-        join()
 
         while 1:
             remote_cmd, remote_addr = server_socket.recvfrom(4)
@@ -165,6 +166,7 @@ with picamera.PiCamera() as camera:
                 if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
                     codis_list_pos -= 1
             elif remote_cmd[MSG_INDEX_CMD] == CMD_JOIN_REQUEST:
+                print("identify")
                 codis_list.append(remote_addr[0])
                 codis_list_size += 1
                 identify(remote_addr)

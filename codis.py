@@ -27,7 +27,7 @@ CMD_LEAVE_CODIS = 0x5
 CMD_JOIN_REQUEST = 0x6
 CMD_STATUS = 0x7
 
-UDP_IP = ""
+UDP_IP = "<broadcast>"
 UDP_PORT = 58333
 MOTION_DETECTED_MSG = bytes([CMD_MOTION_DETECTED])
 PIR_DETECTED_MSG = bytes([0x2])
@@ -43,7 +43,7 @@ no_motion_cnt = 0
 pir_event_enabled = 0
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
-server_socket.bind((sys.argv[1], UDP_PORT))
+server_socket.bind(("", UDP_PORT))
 
 class MotionDetector(object):
 

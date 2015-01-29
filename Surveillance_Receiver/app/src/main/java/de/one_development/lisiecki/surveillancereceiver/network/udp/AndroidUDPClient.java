@@ -17,10 +17,10 @@ public class AndroidUDPClient extends AndroidClient {
 	public AndroidUDPClient(int p, String ip) {
 		try {
 			address = InetAddress.getByName(ip);
+            port = p;
             socket = new DatagramSocket();
             socket.setBroadcast(true);
-            port = p;
-		} catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
             e.printStackTrace();

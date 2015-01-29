@@ -39,11 +39,11 @@ Für unser Projekt verwenden wir das Raspberry Pi Infrarot Kamera Modul ("Pi NoI
 Beim zweiten Sensor handelt sich um ein passiven Infrarot Sensor:\\ \textit{Der PIR-Sensor (Passive Infrared Sensor) ist einer der gängigsten Bewegungsmelder und ist oftmals auch in bewegungssensitiven Außenleuchten oder Alarmanlagen verbaut. Erkennbar ist der PIR-Sensor an seiner meist runden, milchigen Kuppel, die mit vielen einzelnen Waben versehen ist. Der Sensor reagiert auf Temperaturveränderungen in seinem Sichtfeld. Somit können Menschen oder Tiere im Aktionsradius des Sensors erkannt werden. Jedoch kann der Sensor nur Veränderungen wahrnehmen. Bleibt ein Objekt ruhig im Bereich des Sensors stehen, so wird es nicht weiter erkannt.  Sobald es sich weiterbewegt, schlägt der Sensor erneut an.}\cite[S. 493]{Raspi}\\ \\ Im inneren eines solchen Moduls befinden sich zwei Folien, die an ihrer Oberfläche unterschiedliche elektrische Ladungen aufweisen. Trifft nun die Wärmestrahlung eines bestimmten Frequenzbereichs auf diese Folien, wird deren Polarisation verschoben und eine elektronische Spannung erzeugt, welche den Sensor zum auslösen bringt. Die auf den Sensor aufgesetzte "milchige Kuppel" erweitert den Erfassungsbereich des Sensors, indem es wie eine Anordnung von Linsen fungiert und lenkt die Wärmestrahlung direkt auf eine der beiden Folien. Bewegt sich nun eine Wärmequelle durch den vom Sensor überwachten Raum, kann man eine Bewegung über einen großen Bereich und in relativ großer Entfernung registrieren.\cite{pir}\todo{freies zitieren einfügen} Um den PIR Sensor am Raspberry Pi anzuschließen, werden insgesamt 3 GPIO Anschlüsse benötigt. Einen 3,3V Anschluss für die Stromversorgung, einen Ground und ein frei programmierbarer GPIO Pin, um den PIR-Sensor zu steuern.
 
 
-\section{Unser Ansatz}\todo[inline]{Dennis Baustelle} \todo[inline]{Funktionsweise noch nicht final}
+\section{Unser Ansatz}
 
-In diesem Abschnitt, befassen wir uns mit unserem Ansatz, eine kooperative, verteilte Überwachung eines Gebiets auf Eindringlinge zu realisieren. Wir gehen unser System nach dem Top-Down-Prinzip durch. Wir betrachten also unser System als Ganzes, dann die einzelnen Komponenten, klären wie diese arbeiten, welche Algorithmen verwendet werden und wie diese implementiert wurden. Anschließend befassen wir uns damit, wie die Komponenten miteinander zusammenarbeiten und wie aus unserem Ansatz ein verteiltes System entsteht.
+In diesem Abschnitt, befassen wir uns damit, wie wir mit Codis eine kooperative, verteilte Überwachung eines Gebiets auf Eindringlinge realisieren. Wir beschäftigen uns mit den Fragen, wie wir überhaupt einen Eindringling erkennen und wie Codis als verteiltes System seine Genauigkeit beim Erkennen von Eindringlingen erhöht. Dabei befassen wir uns damit, wie aus Codis ein verteiltes System entsteht.
 
-\subsection{Überwachung eines Gebiets auf Eindringlinge}
+\subsection{Erkennung eines möglichen Eindringlings}
 
 
 \subsubsection{Erkennen von Bewegungen}
@@ -54,17 +54,18 @@ In diesem Abschnitt, befassen wir uns mit unserem Ansatz, eine kooperative, vert
 
 \subsection{Kooperative, verteilte Überwachung}
 
-Codis' Hauptmerkmal ist die Überwachung eines Gebiets mit mehreren RasPis, die in einem Netzwerk miteinander verbunden sind und dadurch zuverlässiger arbeiten sollen. Dieses Hauptmerkmal bezeichnen wir als kooperative, verteilte Überwachung. Um diese Funktion zu realisieren, kommunizieren alle RasPis miteinander. Im folgenden behandeln wir drei Funktionen von Codis, die eine kooperative, verteilte Überwachung realisieren.
+Codis' Hauptmerkmal ist die Überwachung eines Gebiets mit mehreren RasPis, die in einem Netzwerk miteinander kommunizieren und dadurch zuverlässiger arbeiten sollen. Wir verwenden im Folgenden den Begriff Codis-Netzwerk für die Menge aller RasPis, auf denen Codis läuft und die miteinander kommunizieren. Als Koordinator bezeichnen wir ein RasPi im Codis-Netzwerk, der ausgewählt wurde, spezielle Aufgaben zu übernehmen, die wir im Laufe dieses Unterkapitels klären. Der Koordinator ist allen RasPis im Codis-Netzwerk bekannt und wird innerhalb des Codis-Netzwerks ausgewählt. Wodurch das Codis-Netzwerk erzeugt wird, wie der Koordinator ausgewählt wird und wie wir eine kooperative, verteilte Überwachung realisieren, klären wir in den nächsten Unterabschnitten.
 
-\subsubsection{Verteilte PIR-Aktivierung}
+\subsubsection{Verteilte Liste}
 
-Wie bereits erwähnt <Verweis hinzufügen>, aktiviert ein RasPi seinen PIR-Sensor, wenn dessen Kamera eine Bewegung erkennt. Außerdem sendet der RasPi eine Nachricht an alle anderen Geräte im Netzwerk. Empfangen andere RasPis, die das Gebiet auch überwachen, diese Nachricht, dann aktivieren diese ihre PIR-Sensoren ebenfalls. 
+Codis verwendet eine verteilte Liste der IPv4-Adressen aller RasPis im Codis-Netzwerk. Als verteilte Liste bezeichnen wir eine Liste, die auf allen Geräten eines verteilten Systems lokal abgespeichert ist und stets redundant zu den lokal abgespeicherten Listen der jeweils anderen Geräten ist. Die verteilte Liste, die Codis verwendet, bezeichnen wir im Folgenden als Codis-Liste. Die Codis-Liste wird zu Koordinationszwecken zwischen den RasPis im Codis-Netzwerk benötigt.
+Die Codis-Liste wird zum ersten Mal dann gebildet, wenn das Codis-Netzwerk erzeugt wird. Möchte ein RasPi dem Codis-Netzwerk beitreten, sendet dieser eine \MakeUppercase{joinrequest} Nachricht an das Codis-Netzwerk. Daraufhin wartet der RasPi N Sekunden lang auf eine \MakeUppercase{joinresponse} Nachricht vom Koordinator. Die \MakeUppercase{joinresponse} Nachricht enthält die Codis-Liste und die Position des Koordinators in der Codis-Liste. Erhält der RasPi nach N Sekunden keine \MakeUppercase{joinresponse} Nachricht, trägt er sich als Erster in die Codis-Liste ein und ist somit auch der Koordinator im Codis-Netzwerk. Bekommt der RasPi eine \MakeUppercase{joinresponse} Nachricht, aktualisiert er seine Codis-Liste anhand der Nachricht, trägt sich ans Ende der Codis-Liste ein und sendet eine \MakeUppercase{join} Nachricht an alle Geräte im Codis-Netzwerk. Erhält ein RasPi eine \MakeUppercase{join} Nachricht, trägt er den Absender der \MakeUppercase{join} Nachricht ans Ende seiner Codis-Liste ein.
 
-\subsubsection{Verteilte Überwachung}
+\subsubsection{Wahl eines Koordinators}
 
-Bei der verteilten Überwachung überwachen mehrere RasPis das selbe Gebiet aus mehreren Blickwinkeln. 
 
-\subsubsection{Verteilte wechselseitige Überwachung}
+
+\subsubsection{Abwechselnde Überwachung}
 
 Bei der verteilten wechselseitigen Überwachung, wird ein einzigartiges Token an einem RasPi zugeteilt. Der RasPi dem das Token zugeteilt ist, gilt als aktiv und überwacht als einziger das Gebiet für ein Zeitinterval X. Währenddessen gelten alle anderen RasPis als inaktiv. Inaktive RasPis haben ihre Sensoren abgeschaltet und warten auf eine eingehende Nachricht, die ihnen das Token übergibt. Entdeckt der aktive RasPi einen möglichen Eindringling, dann sendet dieser eine Nachricht an alle anderen RasPis. Empfängt ein inaktiver RasPi diese Nachricht, geht dieser in einen Alarmzustand über. Im Alarmzustand sind die Sensoren des RasPis aktiviert. Entdeckt ein RasPi im Alarmzustand für N Minuten keine Bewegung, dann geht dieser wieder in den inaktiven Zustand. Erhält ein RasPi im Alarmzustand das Token, geht dieser in den aktiven Zustand über. Während sich ein RasPi im aktiven Zustand befindet, kann sich dieser auch im Alarmzustand befinden. Dieser Fall trifft ein, wenn der RasPi selbst einen möglichen Eindringling entdeckt. Das verhindert, dass der RasPi in den inaktiven Zustand geht, während er einen möglichen Eindringling entdeckt hat und das Token weitergibt. Wir verwenden für das Verteilen des Tokens den wechselseitigen Ausschluss. Wir realisieren den wechselseitigen Ausschluss durch einen Ringalgorithmus. Für den Ringalgorithmus nutzt jeder RasPi die Liste, die alle 
 

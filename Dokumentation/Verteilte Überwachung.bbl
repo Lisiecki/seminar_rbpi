@@ -129,6 +129,23 @@
   \warn{\item Invalid format of field 'urldate'}
 \endentry
 
+\entry{vektoren}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Upton, Liz}}{U.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{U1}
+  \strng{fullhash}{U1}
+  \field{sortinit}{U}
+  \field{title}{{Vectors from coarse motion estimation}}
+  \verb{url}
+  \verb http://www.raspberrypi.org/vectors-from-coarse-motion-estimation
+  \endverb
+\endentry
+
 \lossort
 \endlossort
 

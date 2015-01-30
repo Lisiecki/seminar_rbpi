@@ -37,6 +37,7 @@ PIR_GPIO = 7
 MOTION_DETECTED_THRESHOLD = 5
 INTRUDER_DETECTED_THRESHOLD = 25
 
+coordinator = 0
 codis_list = []
 codis_list_size = 0
 codis_list_pos = 0
@@ -171,9 +172,9 @@ with picamera.PiCamera() as camera:
                 codis_list_pos += 1
                 join(remote_addr)
 
-        codis_list_pos += 1
+        codis_list_pos += codis_list_size
         codis_list.append(remote_addr[0])
-        codis_list_size = codis_list_pos
+        codis_list_size = codis_list_pos + 1
 
         while 1:
             remote_cmd, remote_addr = server_socket.recvfrom(4)

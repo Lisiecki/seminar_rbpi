@@ -24,12 +24,49 @@
   \field{year}{2014}
 \endentry
 
+\entry{verteilte1}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Andrew S.~Tanenbaum}{A.~S.~T.}%
+     {Martinus R. van~Steen}{M.~R. v.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {München : Pearson Studium}%
+  }
+  \strng{namehash}{ASTMRvS1}
+  \strng{fullhash}{ASTMRvS1}
+  \field{sortinit}{A}
+  \field{title}{Verteilte Systeme : Grundlagen und Paradigmen. Distributed
+  Systems <dt.>}
+  \field{year}{2003}
+\endentry
+
 \entry{pir}{misc}{}
   \field{sortinit}{E}
   \field{title}{Elektronikwissen zu: PIR-Sensor - Aufbau und Funktion}
   \verb{url}
   \verb http://www.elv.de/controller.aspx?cid=758&detail=10&detail2=129
   \endverb
+\endentry
+
+\entry{verteilte2}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {George Coulouris; Jean~Dollimore}{G.~C. J.~D.}%
+     {Tim~Kindberg}{T.~K.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {München : Pearson Studium}%
+  }
+  \strng{namehash}{GCJDTK1}
+  \strng{fullhash}{GCJDTK1}
+  \field{sortinit}{G}
+  \field{title}{Verteilte Systeme : Konzepte und Design}
+  \field{year}{2003}
 \endentry
 
 \entry{Raspi}{book}{}

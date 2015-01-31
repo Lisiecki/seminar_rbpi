@@ -152,7 +152,7 @@ def leave():
 with picamera.PiCamera() as camera:
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(PIR_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    camera.resolution = (640, 480)
+    camera.resolution = (1280, 720)
     camera.framerate = 30
     camera.start_recording(
         # Throw away the video data, but make sure we're using H.264

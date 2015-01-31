@@ -65,7 +65,7 @@ class MotionDetector(object):
         global pir_event_enabled
         global server_socket
         global motion_cnt
-
+        
         # Load the motion data from the string to a numpy array
         data = np.fromstring(s, dtype=motion_dtype)
         # Re-shape it and calculate the magnitude of each vector
@@ -88,7 +88,7 @@ class MotionDetector(object):
                     GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
                     GPIO.add_event_callback(PIR_GPIO, self.motion)
         else:
-            if no_motion_cnt == 40:
+            if no_motion_cnt == 20:
                 GPIO.remove_event_detect(PIR_GPIO)
                 pir_event_enabled = 0
                 motion_cnt = 0

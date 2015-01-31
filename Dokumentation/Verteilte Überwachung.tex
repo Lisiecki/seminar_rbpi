@@ -41,7 +41,7 @@ Beim zweiten Sensor handelt sich um ein passiven Infrarot Sensor:\\ \textit{Der 
 
 \section{Codis: Kooperative, verteilte Überwachung}
 
-Um eine kooperative, verteilte Überwachung zu realisieren, haben wir das Programm Codis entwickelt. Codis steht für cooperative, distributed surveillance\footnote{zu Deutsch: Kooperative, verteilte Überwachung}. In diesem Abschnitt, befassen wir uns damit, wie Codis einen Eindringling erkennt. Dazu sehen wir uns auch an, wie aus Codis ein verteiltes System entsteht und wie es als solches seine Genauigkeit beim Entdecken von Eindringlingen erhöht. Entdeckt Codis einen Eindringling, sendet es eine \MakeUppercase{INTRUDER} Nachricht an alle Geräte im Netzwerk. Wie diese Nachricht verarbeitet wird und welche Maßnahmen eingeleitet werden sollen, wenn ein Eindringling entdeckt wurde, ist den Anwendern von Codis überlassen.
+Um eine kooperative, verteilte Überwachung zu realisieren, haben wir das Programm Codis entwickelt. Codis steht für cooperative, distributed surveillance\footnote{zu Deutsch: Kooperative, verteilte Überwachung}. In diesem Abschnitt, befassen wir uns damit, wie Codis einen Eindringling erkennt. Dazu sehen wir uns auch an, wie aus Codis ein verteiltes System entsteht und wie es als solches seine Genauigkeit beim Entdecken von Eindringlingen erhöht. Entdeckt Codis einen Eindringling, sendet es eine \MakeUppercase{intruder} Nachricht an alle Geräte im Netzwerk, die Nachrichten von Codis empfangen können. Wie diese Nachricht verarbeitet wird und welche Maßnahmen eingeleitet werden sollen, wenn ein Eindringling entdeckt wurde, ist den Anwendern von Codis überlassen.
 
 \subsection{Entdecken eines möglichen Eindringlings}
 
@@ -49,18 +49,11 @@ Codis verwendet pro RasPi einen PIR-Sensor und eine Kamera.
 
 \subsubsection{Bewegungserkennung mit der Kamera}
 
-Um Bewegungen zu erkennen, verwendet der H264 Kodierer des Raspberry Pis, einen simplen Algorithmus\cite{vektoren}. Der Bewegungserkennungsalgorithmus grob zusammengefasst:
-
-\begin{itemize}
-\item Es werden pro Sekunde eine festgelegte Anzahl an Bildern aufgenommen
-\item Jedes Bild wird mit dem jeweils vorherigen Bild (das sog. Referenzbild) verglichen.
-\item Dazu wird geschaut, an welchen Stellen sich das aufgenommene Bild und das Referenzbild am meisten ähneln. Dafür werden Bitmap ähnliche Makroböcke verwendet, um beide Bilder darzustellen und zu vergleichen.
-\item Ein 2-dimensionales Array wird ausgegeben, dessen Vektoren die Punkte darstellen, die sich im Bild bewegt haben. Der Wert eines Vektors gibt das Ausmaß der Bewegung an.
-\item Eine Bewegung wurde dann erkannt, wenn sich im Bild mindestens x Vektoren befinden, dessen Ausmaß an Bewegung einen Wert y nicht unterschreitet.
-\end{itemize}
+Der RasPi verwendet einen H264 Kodierer. Um Videos zu kodieren, verwendet der Kodierer ein Verfahren, das als Motion Estimation\footnote{wortwörtlich: Bewegungsvorhersage} bezeichnet wird. Dabei wird das Bild in 16x16 Pixel große Quadrate eingeteilt. Diese Quadrate bezeichnet man als Makroblöcke. Beim Kodieren von Videos vergleicht der Kodierer das aktuelle Bild mit einem Referenzbild. Dazu untersucht der Kodierer jeden einzelnen Makroblock im aktuellen Bild und sucht nach dem ähnlichsten Makroblock im Referenzbild. Der jeweilige Abstand zwischen den Makroblock im aktuellen Bild und im Referenzbild wird vom Kodierer gespeichert. Bis zu diesem Schritt wurde alles von der Hardware übernommen!\cite{vektoren} Im nächsten Schritt, nehmen wir uns für jedes Bild die Bewegungsdaten als Array und berechnen damit die Menge an Bewegung, die im Bild stattfindet. Dazu berechnen wir das Ausmaß der einzelnen Vektoren im Array mit dem Satz des Pythagoras'. Eine Bewegung wurde dann erkannt, wenn im Array mindestens zehn Vektoren vorhanden sind, deren Bewegungsausmaß mindestens 60 beträgt.
 
 \subsubsection{Entdecken eines Eindringlings}
 
+Um einen möglichen Eindringling zu erkennen, kombiniert Codis die Kamera mit dem PIR-Sensor. Wurden für zehn Bilder kurz hintereinander eine Bewegung erkannt, aktiviert Codis den PIR-Sensor. Ein möglicher Eindringling wird dann entdeckt, wenn die Kamera und der PIR-Sensor Bewegungen ungefähr zeitgleich erkennen. Daraufhin sendet Codis die \MakeUppercase{intruder} Nachricht. Unser Codis Prototyp verwendet zurzeit das UDP-Protokoll um Nachrichten zu versenden. Für einen praktischen Einsatz im Freien, müsste Codis auf ein anderes Protokoll, wie z. B. Bluetooth umgeschrieben werden.
 
 \subsection{Codis als verteiltes System}
 

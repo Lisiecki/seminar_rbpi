@@ -129,6 +129,24 @@
   \warn{\item Invalid format of field 'urldate'}
 \endentry
 
+\entry{estimation}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Shilpa~Metkar}{S.~M.}%
+     {Sanjay~Talbar}{S.~T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer India}%
+  }
+  \strng{namehash}{SMST1}
+  \strng{fullhash}{SMST1}
+  \field{sortinit}{S}
+  \field{title}{Motion Estimation Techniques for Digital Video Coding}
+  \field{year}{2013}
+\endentry
+
 \entry{vektoren}{misc}{}
   \name{author}{1}{}{%
     {{}%

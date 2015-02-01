@@ -1,5 +1,7 @@
 \documentclass[journal]{IEEEtran}
 \usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -78,7 +80,7 @@ Zu Beginn des Projekts haben wir als Grundlage für die Bearbeitung das Programm
 
 
 
-\section{Zusammenfassung}\todo[inline]{Tottis Baustelle}
+\section{Zusammenfassung}
 Für jeden von uns war das Thema Raspberry Pi ein nahezu unbeschriebenes Blatt. Von der Existenz des Gerätes haben wir gewusst, welche Ideen mit dem Gerät verwirklicht werden können, beginnen wir gerade zu begreifen. Nachdem wir anfangs davon ausgingen, mit Motion bereits ein sehr gut funktionierendes Softwaregerüst entdeckt zu haben, haben wir dementsprechend hohe Ziele gesteckt. Immerhin konnte davon ausgegangen werden, dass es nicht nötig war sich um den Algorithmus zur Bewegungserkennung und anderen Funktionen selbst zu kümmern. An den richtigen Stellen im Quellcode eingesetzt, hätten viele kleine Features (wie ein Motorbetriebener Schwenkvorgang der Kamera) verwirklicht werden können, denn für viele Features ist Motion auch bereits gut genug designed, sodass die Implementierung leicht gewesen wäre. Aber auch der Weg hin zu der Erkenntnis, im Endeffekt selbst den Code schreiben zu müssen, war sehr lehrreich. So tiefgehend hat sich keiner aus unserer Gruppe jemals mit einem Linux-System auseinander gesetzt. Die Installation diverser Programme, wie dem VNC-Server oder anderen, zugegebenermaßen für private Zwecke genutzten Dingen wie dem Music Player Daemon, haben ein größeres Verständnis für Linux hervorgerufen und auch aufgezeigt, was ein Linux-System im Gegensatz zu einem Windows-System aus macht. Viele nützliche Sachen kommen ohne Grafische Oberfläche aus und lassen sich nur über Text-Dateien konfigurieren, sind dafür aber bis ins kleinste Detail konfigurierbar. Wenn für die Installation eines Paketes bestimmte andere Pakete vorhanden sein müssen, installiert das System die nötigen gleich mit. Diese positiven Eigenheiten sind natürlich nur exemplarisch herausgezogen. \\Nicht nur das Betriebssystem hat sich mir/uns durch das Projekt weiter geöffnet. Auch der Rapsberry Pi hat sich durch seine kompakte Bauform für viele weitere Projekte interessant gemacht. Die Community um den Raspberry Pi hat sich schon vieler nützlicher Projekte angenommen. So ist es zum Beispiel ein Leichtes, den Raspberry Pi in eine Retro-Spielekonsole oder einen Medienserver zu verwandeln (für letzteren Verwendungszweck gibt es sogar bereits ein eigenes Betriebssystem). Durch das GPIO-Board ist es aber auch für Hobby-Robotik ein perfektes System (Stichwort: Automatischer Geschützturm (mit Schaumstoffraketen natürlich)). \\Aber zurück zu Codis: Durch den Rückschlag mit Motion haben wir uns mit Python auseinander setzen müssen, viele ursprünglich geplante Features fallen gelassen aber blicken dafür auf eine völlig Eigenständige Lösung für die Aufgabenstellung zurück: Der Code ist lediglich durch Versatzstücke anderer Projekte inspiriert und zeichnet sich durch eine einzigartige Lösung für das verteilte, kooperative Überwachen eines Gebiets auf Eindringlinge aus. 
 
 
@@ -88,21 +90,3 @@ Für jeden von uns war das Thema Raspberry Pi ein nahezu unbeschriebenes Blatt. 
 
 \end{document}
 
-
-
-%\chapter{Technische Realisierung}
-%\section{Benötigte Bauteile}
-%\begin{itemize}
-%\item Raspberry Pi B+ \textit{33,70 EUR} 
-%\item SD-Karte 8GB \textit{7 EUR}
-%\item PiNoIR Kamera \textit{24,58 EUR}
-%\item PIR-Sensor \textit{3,99 EUR}
-%\item Steckplatine \textit{2,33 EUR}
-%\item Kabel \textit{2,01 EUR}
-%\end{itemize}
-%
-%Somit kommt man pro Einheit auf Materialkosten von ca 58 Euro.
-
-
-
-%\chapter{Theoretische Herangehensweise}

@@ -1,6 +1,6 @@
 \documentclass[journal]{IEEEtran}
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
+\usepackage[ngerman]{babel} %Deutsches Sprachpaket verwenden
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -51,7 +51,7 @@ Der Raspberry verwendet einen H264 Kodierer zur Videokompression. Um Videos zu k
 
 \subsection{Codis als verteiltes System}
 
-Codis' Hauptfunktion ist es, ein Gebiet aus verschiedenen Blickwinkeln zu überwachen. Dieser Ansatz soll die Genauigkeit beim Erkennen von möglichen Eindringlingen erhöhen.\todo[inline]{} Dazu verwendet Codis mehrere Raspberrys, die sich in einem Netzwerk befinden und untereinander Nachrichten austauschen. Wir verwenden im Folgenden den Begriff Codis-System für die Menge aller Raspberrys, auf denen Codis läuft und die miteinander in einem Netzwerk kommunizieren. Als Koordinator bezeichnen wir ein Raspberry im Codis-System, der spezielle Aufgaben übernimmt, die wir im Laufe dieses Abschnittes klären. Der Koordinator ist allen Raspberrys im Codis-System bekannt und wird innerhalb des Codis-Systems ausgewählt. Das Codis-System wird dann erzeugt, wenn ein Raspberry Codis ausführt, während kein anderer Raspberry im Netzwerk Codis ausführt und wird dann zerstört, wenn Codis vom letzten Raspberry im Codis-System beendet wird. 
+Codis' Hauptfunktion ist es, ein Gebiet aus verschiedenen Blickwinkeln zu überwachen. Dieser Ansatz soll die Genauigkeit beim Erkennen von möglichen Eindringlingen erhöhen. Dazu verwendet Codis mehrere Raspberrys, die sich in einem Netzwerk befinden und untereinander Nachrichten austauschen. Wir verwenden im Folgenden den Begriff Codis-System für die Menge aller Raspberrys, auf denen Codis läuft und die miteinander in einem Netzwerk kommunizieren. Als Koordinator bezeichnen wir ein Raspberry im Codis-System, der spezielle Aufgaben übernimmt, die wir im Laufe dieses Abschnittes klären. Der Koordinator ist allen Raspberrys im Codis-System bekannt und wird innerhalb des Codis-Systems ausgewählt. Das Codis-System wird dann erzeugt, wenn ein Raspberry Codis ausführt, während kein anderer Raspberry im Netzwerk Codis ausführt und wird dann zerstört, wenn Codis vom letzten Raspberry im Codis-System beendet wird. 
 
 \subsubsection{Codis-Liste}
 
@@ -79,7 +79,7 @@ Der Versuch, einen Raspberry Pi als kooperatives, verteiltes Überwachungssystem
 Codis soll als verteiltes System nicht nur seine Genauigkeit beim Entdecken von Eindringlingen erhöhen, sondern auch die CPU-Auslastung der einzelnen Raspberrys verbessern. Dazu ist Codis' Funktion der abwechselnden Überwachung gedacht. Überwacht ein Raspberry mit Codis das Gebiet, beansprucht er ungefähr 30 Prozent an CPU Leistung, ohne einen Eindringling zu entdecken. Durch die abwechselnde Überwachung, teilen sich die Raspberrys die CPU-Last auf, indem nur einer für ein Intervall von 15 Minuten das Gebiet überwacht, bis ein Eindringling entdeckt wurde. Die Raspberrys, die mit Codis ein Gebiet im Freien überwachen, müssten mit externen Akkus betrieben werden. Durch die abwechselnde Überwachung wird der Akku eines Raspberrys weniger beansprucht.
 
 \section{Zusammenfassung}
-
+Für uns war das Thema Raspberry Pi ein nahezu unbeschriebenes Blatt. Von der Existenz des Gerätes haben wir gewusst. Welche Ideen mit dem Gerät verwirklicht werden können, beginnen wir gerade zu begreifen. Durch seine kompakte Bauform und der frei programmierbaren GPIO-Schnittstelle ist der Raspberry Pi für viele Anwendungsbereiche wie geschaffen. Er kann völlig kabellos betrieben werden und findet Platz in den kleinsten Ecken. So ist es nichts ungewöhnliches, dass das System auch als Überwachungskamera eingesetzt wird. Dabei existiert jedoch kein Ansatz, der in diesem Zusammenhang auch eine Kooperation mehrerer Raspberry Pis unterstützt. \\In unserer Ausarbeitung haben wir uns diesem Umstand angenommen. Unsere Motivation bestand darin, das Vorhandensein mehrerer Raspberry Pis auszunutzen. Mit Codis besteht die Möglichkeit, ein leicht zu erweiterndes Netzwerk zur Überwachung zu errichten, bei welchem sich die Geräte gegenseitig in den Alarmzustand versetzen. Wie der Alarmzustand im Endeffekt genutzt wird, kann vielfältiger Natur sein und steht dem Anwender offen. Die leichte Erweiterbarkeit ist einer der größten Vorteile, der dadurch gegeben ist. Zusätzlich wird sehr sparsam mit den Ressourcen umgegangen, da in einem Codis-System nur ein Koordinator existiert, der alle Sensoren aktiv geschaltet hat. Gerade bei kabelloser Verwendung ist der Unterschied enorm. 
 
 
 

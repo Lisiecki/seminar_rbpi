@@ -44,11 +44,11 @@
   <internal package="biblatex" priority="9" active="1">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>"Verteilte Überwachung".aux</file>
-      <file>Verteilte_Überwachung-blx.bib</file>
+      <file>Verteilte*Überwachung.aux</file>
+      <file>Verteilte*Überwachung-blx.bib</file>
     </provides>
     <requires type="dynamic">
-      <file>"Verteilte Überwachung".bbl</file>
+      <file>Verteilte*Überwachung.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-compat.def</file>
@@ -66,20 +66,20 @@
     <cmdline>
       <binary>bibtex</binary>
       <option>-min-crossrefs 2</option>
-      <infile>"Verteilte Überwachung"</infile>
+      <infile>Verteilte*Überwachung</infile>
     </cmdline>
     <input>
-      <file>"Verteilte Überwachung".aux</file>
+      <file>Verteilte*Überwachung.aux</file>
     </input>
     <output>
-      <file>"Verteilte Überwachung".bbl</file>
+      <file>Verteilte*Überwachung.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>"Verteilte Überwachung".bbl</file>
+      <file>Verteilte*Überwachung.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>"Verteilte Überwachung".aux</file>
-      <file>Verteilte_Überwachung-blx.bib</file>
+      <file>Verteilte*Überwachung.aux</file>
+      <file>Verteilte*Überwachung-blx.bib</file>
     </requires>
     <requires type="editable">
       <file>refs.bib</file>

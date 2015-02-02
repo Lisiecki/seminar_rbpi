@@ -60,21 +60,26 @@
   \endverb
 \endentry
 
-\entry{motion}{misc}{}
+\entry{raspi}{book}{}
   \name{author}{1}{}{%
     {{}%
-     {{Lavrsen, Kenneth}}{L.}%
-     {}{}%
+     {Kofler}{K.}%
+     {Michael}{M.}%
      {}{}%
      {}{}}%
   }
-  \strng{namehash}{L1}
-  \strng{fullhash}{L1}
-  \field{sortinit}{L}
-  \field{title}{{Motion - Web Home}}
-  \verb{url}
-  \verb http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome
-  \endverb
+  \list{publisher}{1}{%
+    {Bonn : Galileo Press}%
+  }
+  \strng{namehash}{KM1}
+  \strng{fullhash}{KM1}
+  \field{sortinit}{K}
+  \field{title}{Raspberry Pi : das umfassende Handbuch ; [Grundlagen verstehen,
+  spannende Projekte realisieren ; Schnittstellen des Pi, Schaltungsaufbau,
+  Steuerung mit Python ; Erweiterungen f{\"u}r den Pi: Gertboard, PiFace,
+  Quick2Wire u.a. in Hardware-Projekte einsetzen ; aktuell zu allen Versionen,
+  inkl. Modell B+]}
+  \field{year}{2014}
 \endentry
 
 \entry{verkaufszahlen}{misc}{}

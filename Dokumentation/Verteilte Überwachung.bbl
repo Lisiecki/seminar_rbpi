@@ -16,14 +16,6 @@
   {}
 \endgroup
 
-\entry{motioncode}{misc}{}
-  \verb{url}
-  \verb https://github.com/waveform80/picamera/blob/master/docs/recipes2.rst
-  \endverb
-  \field{month}{10}
-  \field{year}{2014}
-\endentry
-
 \entry{verteilte2}{book}{}
   \name{author}{3}{}{%
     {{}%
@@ -60,6 +52,24 @@
   \endverb
 \endentry
 
+\entry{vaadin}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Grönroos}{G.}%
+     {Marko}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Vaadin Ltd}%
+  }
+  \strng{namehash}{GM1}
+  \strng{fullhash}{GM1}
+  \field{sortinit}{G}
+  \field{title}{Book of Vaadin: Vaadin 7 Edition - 2nd Revision}
+  \field{year}{2014}
+\endentry
+
 \entry{raspi}{book}{}
   \name{author}{1}{}{%
     {{}%
@@ -80,6 +90,23 @@
   Quick2Wire u.a. in Hardware-Projekte einsetzen ; aktuell zu allen Versionen,
   inkl. Modell B+]}
   \field{year}{2014}
+\endentry
+
+\entry{motion}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Lavrsen, Kenneth}}{L.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{L1}
+  \strng{fullhash}{L1}
+  \field{sortinit}{L}
+  \field{title}{{Motion - Web Home}}
+  \verb{url}
+  \verb http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome
+  \endverb
 \endentry
 
 \entry{verkaufszahlen}{misc}{}

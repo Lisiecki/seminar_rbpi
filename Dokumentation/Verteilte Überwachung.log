@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 21:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 21:53
 entering extended mode
 **Verteilte*Überwachung.tex
 ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.tex"
@@ -1092,7 +1092,7 @@ Underfull \hbox (badness 4621) in paragraph at lines 32--33
 
 
 Underfull \hbox (badness 2753) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 er-schie-nen. [5] Die ers-te Ver-si-on die-ses Rech-ner kam
+\OT1/ptm/m/n/10 er-schie-nen. [6] Die ers-te Ver-si-on die-ses Rech-ner kam
  []
 
 
@@ -1160,7 +1160,7 @@ Underfull \hbox (badness 1852) in paragraph at lines 39--40
 
 
 Underfull \hbox (badness 3407) in paragraph at lines 39--40
-\OT1/ptm/m/n/10 re-gis-trie-ren.[3] Um den PIR Sen-sor am Raspber-ry Pi
+\OT1/ptm/m/n/10 re-gis-trie-ren.[2] Um den PIR Sen-sor am Raspber-ry Pi
  []
 
 
@@ -1182,9 +1182,6 @@ Underfull \hbox (badness 5787) in paragraph at lines 65--66
  ab-wech-seln-der
  []
 
-
-LaTeX Warning: Citation 'motion' on page 3 undefined on input line 72.
-
 [3]
 Underfull \hbox (badness 1515) in paragraph at lines 81--82
 []\OT1/ptm/m/n/10 Codis bie-tet als ver-teil-tes Sys-tem ei-ne bes-se-re CPU-
@@ -1193,31 +1190,22 @@ Underfull \hbox (badness 1515) in paragraph at lines 81--82
 [4] [5
 
 ] ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.aux")
-
-LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run BibTeX on the file(s):
-(biblatex)                Verteilte*Überwachung
-(biblatex)                and rerun LaTeX afterwards.
-
 Package logreq Info: Writing requests to 'Verteilte*Überwachung.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 18608 strings out of 493921
+ 18607 strings out of 493921
  352906 string characters out of 3147279
  651363 words of memory out of 3000000
  21578 multiletter control sequences out of 15000+200000
- 39373 words of font info for 84 fonts, out of 3000000 for 9000
+ 38266 words of font info for 83 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
- 62i,8n,56p,2598b,2224s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,8n,56p,2598b,1317s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
-s/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on "Verteilte Überwachung.pdf" (5 pages, 72028 bytes).
+s/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/urw/times/utmri8a.pfb>
+Output written on "Verteilte Überwachung.pdf" (5 pages, 67165 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
+ 30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

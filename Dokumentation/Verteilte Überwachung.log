@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 01:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 01:44
 entering extended mode
 **Verteilte*Überwachung.tex
 ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.tex"
@@ -1209,10 +1209,10 @@ Package biblatex Warning: Please (re)run BibTeX on the file(s):
 Package logreq Info: Writing requests to 'Verteilte*Überwachung.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 18611 strings out of 493921
- 352947 string characters out of 3147279
+ 18610 strings out of 493921
+ 352931 string characters out of 3147279
  658362 words of memory out of 3000000
- 21581 multiletter control sequences out of 15000+200000
+ 21580 multiletter control sequences out of 15000+200000
  39373 words of font info for 84 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  62i,8n,56p,4378b,1317s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1220,7 +1220,7 @@ Here is how much of TeX's memory you used:
 s/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
 /utmri8a.pfb>
-Output written on "Verteilte Überwachung.pdf" (5 pages, 75435 bytes).
+Output written on "Verteilte Überwachung.pdf" (5 pages, 74271 bytes).
 PDF statistics:
  34 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

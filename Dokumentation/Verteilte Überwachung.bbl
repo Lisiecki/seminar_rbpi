@@ -24,22 +24,31 @@
   \field{year}{2014}
 \endentry
 
-\entry{verteilte1}{book}{}
-  \name{author}{1}{}{%
+\entry{verteilte2}{book}{}
+  \name{author}{3}{}{%
     {{}%
-     {Andrew S.~Tanenbaum}{A.~S.~T.}%
-     {Martinus R. van~Steen}{M.~R. v.~S.}%
+     {Coulouris}{C.}%
+     {George}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dollimore}{D.}%
+     {Jean}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kindberg}{K.}%
+     {Tim}{T.}%
      {}{}%
      {}{}}%
   }
   \list{publisher}{1}{%
     {München : Pearson Studium}%
   }
-  \strng{namehash}{ASTMRvS1}
-  \strng{fullhash}{ASTMRvS1}
-  \field{sortinit}{A}
-  \field{title}{Verteilte Systeme : Grundlagen und Paradigmen. Distributed
-  Systems <dt.>}
+  \strng{namehash}{CGDJKT1}
+  \strng{fullhash}{CGDJKT1}
+  \field{sortinit}{C}
+  \field{title}{Verteilte Systeme : Konzepte und Design}
   \field{year}{2003}
 \endentry
 
@@ -49,46 +58,6 @@
   \verb{url}
   \verb http://www.elv.de/controller.aspx?cid=758&detail=10&detail2=129
   \endverb
-\endentry
-
-\entry{verteilte2}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {George Coulouris; Jean~Dollimore}{G.~C. J.~D.}%
-     {Tim~Kindberg}{T.~K.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {München : Pearson Studium}%
-  }
-  \strng{namehash}{GCJDTK1}
-  \strng{fullhash}{GCJDTK1}
-  \field{sortinit}{G}
-  \field{title}{Verteilte Systeme : Konzepte und Design}
-  \field{year}{2003}
-\endentry
-
-\entry{Raspi}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Kofler}{K.}%
-     {Michael}{M.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Bonn : Galileo Press}%
-  }
-  \strng{namehash}{KM1}
-  \strng{fullhash}{KM1}
-  \field{sortinit}{K}
-  \field{title}{Raspberry Pi : das umfassende Handbuch ; [Grundlagen verstehen,
-  spannende Projekte realisieren ; Schnittstellen des Pi, Schaltungsaufbau,
-  Steuerung mit Python ; Erweiterungen f{\"u}r den Pi: Gertboard, PiFace,
-  Quick2Wire u.a. in Hardware-Projekte einsetzen ; aktuell zu allen Versionen,
-  inkl. Modell B+]}
-  \field{year}{2014}
 \endentry
 
 \entry{motion}{misc}{}
@@ -130,21 +99,50 @@
 \endentry
 
 \entry{estimation}{book}{}
-  \name{author}{1}{}{%
+  \name{author}{2}{}{%
     {{}%
-     {Shilpa~Metkar}{S.~M.}%
-     {Sanjay~Talbar}{S.~T.}%
+     {Metkar}{M.}%
+     {Shilpa}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Talbar}{T.}%
+     {Sanjay}{S.}%
      {}{}%
      {}{}}%
   }
   \list{publisher}{1}{%
     {Springer India}%
   }
-  \strng{namehash}{SMST1}
-  \strng{fullhash}{SMST1}
-  \field{sortinit}{S}
+  \strng{namehash}{MSTS1}
+  \strng{fullhash}{MSTS1}
+  \field{sortinit}{M}
   \field{title}{Motion Estimation Techniques for Digital Video Coding}
   \field{year}{2013}
+\endentry
+
+\entry{verteilte1}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {S.~Tanenbaum}{S.~T.}%
+     {Andrew}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Steen}{S.}%
+     {Martinus}{M.}%
+     {R.~van}{R.~v.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {München : Pearson Studium}%
+  }
+  \strng{namehash}{STASMRv1}
+  \strng{fullhash}{STASMRv1}
+  \field{sortinit}{S}
+  \field{title}{Verteilte Systeme : Grundlagen und Paradigmen. Distributed
+  Systems <dt.>}
+  \field{year}{2003}
 \endentry
 
 \entry{vektoren}{misc}{}

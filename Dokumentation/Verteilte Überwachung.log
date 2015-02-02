@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 21:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 22:33
 entering extended mode
 **Verteilte*Überwachung.tex
 ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.tex"
@@ -1092,7 +1092,7 @@ Underfull \hbox (badness 4621) in paragraph at lines 32--33
 
 
 Underfull \hbox (badness 2753) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 er-schie-nen. [6] Die ers-te Ver-si-on die-ses Rech-ner kam
+\OT1/ptm/m/n/10 er-schie-nen. [7] Die ers-te Ver-si-on die-ses Rech-ner kam
  []
 
 
@@ -1121,10 +1121,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1{C:/Users/Dennis/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+[1{C:/Users/Dennis/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
@@ -1154,18 +1151,13 @@ Underfull \hbox (badness 3792) in paragraph at lines 39--40
  []
 
 
-Underfull \hbox (badness 1852) in paragraph at lines 39--40
-\OT1/ptm/m/n/10 einen groen Be-reich und in re-la-tiv groer Ent-fer-nung
+Underfull \hbox (badness 2469) in paragraph at lines 39--40
+\OT1/ptm/m/n/10 Fo-li-en. Be-wegt sich nun ei-ne W[]armequelle durch den
  []
 
 
-Underfull \hbox (badness 3407) in paragraph at lines 39--40
-\OT1/ptm/m/n/10 re-gis-trie-ren.[2] Um den PIR Sen-sor am Raspber-ry Pi
- []
-
-
-Underfull \hbox (badness 7796) in paragraph at lines 39--40
-\OT1/ptm/m/n/10 an-zu-schlie-en, wer-den ins-ge-samt 3 GPIO An-schl[]usse
+Underfull \hbox (badness 4995) in paragraph at lines 39--40
+\OT1/ptm/m/n/10 f[]ur die Strom-ver-sor-gung, einen Ground und ein frei
  []
 
 LaTeX Font Info:    Try loading font information for U+msa on input line 44.
@@ -1176,7 +1168,10 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 44.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [2]
+)
+Underfull \vbox (badness 1953) has occurred while \output is active []
+
+ [2]
 Underfull \hbox (badness 5787) in paragraph at lines 65--66
  \OT1/ptm/m/it/10 3) Ab-wech-seln-de []Uberwachung: [][] \OT1/ptm/m/n/10 Un-ter
  ab-wech-seln-der
@@ -1187,23 +1182,22 @@ Underfull \hbox (badness 1515) in paragraph at lines 81--82
 []\OT1/ptm/m/n/10 Codis bie-tet als ver-teil-tes Sys-tem ei-ne bes-se-re CPU-
  []
 
-[4] [5
-
-] ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.aux")
+[4] [5] ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.aux
+")
 Package logreq Info: Writing requests to 'Verteilte*Überwachung.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 18607 strings out of 493921
- 352906 string characters out of 3147279
+ 18608 strings out of 493921
+ 352924 string characters out of 3147279
  651363 words of memory out of 3000000
- 21578 multiletter control sequences out of 15000+200000
+ 21579 multiletter control sequences out of 15000+200000
  38266 words of font info for 83 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  62i,8n,56p,2598b,1317s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on "Verteilte Überwachung.pdf" (5 pages, 67165 bytes).
+Output written on "Verteilte Überwachung.pdf" (5 pages, 67998 bytes).
 PDF statistics:
  30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -70,6 +70,24 @@
   \field{year}{2014}
 \endentry
 
+\entry{motion2}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Hughes, Dave}}{H.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{H1}
+  \strng{fullhash}{H1}
+  \field{sortinit}{H}
+  \field{title}{{Recording motion vector data}}
+  \verb{url}
+  \verb http://picamera.readthedocs.org/en/release-1.8/recipes2.html#recording-
+  \verb motion-vector-data
+  \endverb
+\endentry
+
 \entry{raspi}{book}{}
   \name{author}{1}{}{%
     {{}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 22:33
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.13)  2 FEB 2015 23:41
 entering extended mode
 **Verteilte*Überwachung.tex
 ("C:\Users\Dennis\seminar_rbpi\Dokumentation\Verteilte Überwachung.tex"
@@ -1064,63 +1064,6 @@ Underfull \hbox (badness 1354) in paragraph at lines 25--26
 \OT1/ptm/m/n/10 Der PIR-Sensor rea-giert le-dig-lich auf Ob-jek-te, die ei-ne
  []
 
-
-Underfull \hbox (badness 4072) in paragraph at lines 32--33
-[]\OT1/ptm/m/n/10 Der Raspber-ry Pi, wel-cher in un-se-rem Pro-jekt die
- []
-
-
-Underfull \hbox (badness 3417) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 Grund-la-ge bil-det, ist ein voll funk-ti-onsf[]ahiger PC im
- []
-
-
-Underfull \hbox (badness 2828) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 die-nen. So kann di-ver-se ex-ter-ne Pe-ri-phe-rie an-ge-steu-e
-rt
- []
-
-
-Underfull \hbox (badness 4582) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 steht al-ter-na-tiv auch ein 3,5mm Klin-ken-an-schluss zur
- []
-
-
-Underfull \hbox (badness 4621) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 Neben z.B. den meis-ten Handy-Ladeger[]aten kann die
- []
-
-
-Underfull \hbox (badness 2753) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 er-schie-nen. [7] Die ers-te Ver-si-on die-ses Rech-ner kam
- []
-
-
-Underfull \hbox (badness 1546) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 und 35 Eu-ro teu-er. Die un-ter-schied-li-chen Ausf[]uhrungen
- []
-
-
-Underfull \hbox (badness 4595) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 re-spek-ti-ve vier USB-Anschl[]usse. Al-le Mo-del-le m[]ussen
- []
-
-
-Underfull \hbox (badness 3668) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 oh-ne Fest-plat-ten-schnitt-stel-le aus-kom-men und ver-wen-den
-
- []
-
-
-Underfull \hbox (badness 6157) in paragraph at lines 32--33
-\OT1/ptm/m/n/10 SD-Karten bzw. Micro-SD-Karten als Spei-cher-me-di-um.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 32--33
-
- []
-
 [1{C:/Users/Dennis/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
@@ -1130,14 +1073,14 @@ Underfull \hbox (badness 1527) in paragraph at lines 39--40
  []
 
 
-Underfull \hbox (badness 5091) in paragraph at lines 39--40
-\OT1/ptm/m/it/10 g[]angigsten Be-we-gungs-mel-der und ist oft-mals auch in
+Underfull \hbox (badness 4144) in paragraph at lines 39--40
+\OT1/ptm/m/it/10 g[]angigsten Be-we-gungs-mel-der und ist oft-mals auch an
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
-\OT1/ptm/m/it/10 be-we-gungs-sen-si-ti-ven Au-en-leuch-ten oder Alarm-an-la-ge
-n
+Underfull \hbox (badness 1742) in paragraph at lines 39--40
+\OT1/ptm/m/it/10 auf Tem-pe-ra-tur-ver[]anderungen in sei-nem Sicht-feld. So-mi
+t
  []
 
 
@@ -1168,16 +1111,23 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 44.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \vbox (badness 1953) has occurred while \output is active []
-
- [2]
+) [2]
 Underfull \hbox (badness 5787) in paragraph at lines 65--66
  \OT1/ptm/m/it/10 3) Ab-wech-seln-de []Uberwachung: [][] \OT1/ptm/m/n/10 Un-ter
  ab-wech-seln-der
  []
 
 [3]
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+[]\OT1/ptm/m/n/10 Eine Rea-li-sie-rung ei-ner ko-ope-ra-ti-ven, ver-teil-ten
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+\OT1/ptm/m/n/10 Motion ver-folgt das Ziel, aus dem Com-pu-ter mit
+ []
+
+
 Underfull \hbox (badness 1515) in paragraph at lines 81--82
 []\OT1/ptm/m/n/10 Codis bie-tet als ver-teil-tes Sys-tem ei-ne bes-se-re CPU-
  []
@@ -1189,15 +1139,15 @@ Package logreq Info: Writing requests to 'Verteilte*Überwachung.run.xml'.
 Here is how much of TeX's memory you used:
  18608 strings out of 493921
  352924 string characters out of 3147279
- 651363 words of memory out of 3000000
+ 652363 words of memory out of 3000000
  21579 multiletter control sequences out of 15000+200000
  38266 words of font info for 83 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
- 62i,8n,56p,2598b,1317s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,8n,56p,3185b,1317s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on "Verteilte Überwachung.pdf" (5 pages, 67998 bytes).
+Output written on "Verteilte Überwachung.pdf" (5 pages, 70499 bytes).
 PDF statistics:
  30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

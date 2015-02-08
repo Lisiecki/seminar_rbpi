@@ -50,9 +50,10 @@ no_motion_cnt = 0
 pir_event_enabled = 0
 
 # prepares the server socket to receive data from Codis system
+server_address = ("", UDP_PORT)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
-server_socket.bind(("", UDP_PORT))
+server_socket.bind(server_address)
 server_socket.settimeout(5.0)
 
 class MotionDetector(object):
@@ -138,6 +139,17 @@ def intruder_detected(pos):
     server_socket.sendto(intruder_msg, codis_list[pos])
 
 with picamera.PiCamera() as camera:
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(PIR_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    camera.resolution = (1280, 720)
+    camera.framerate = 30
+    camera.start_recording(
+        # Throw away the video data, but make sure we're using H.264
+        '/dev/null', format='h264',
+        # Record motion data to our custom output object
+        motion_output=MotionDetector(camera)
+        )
+
     try:
         request_join()
         wait = time.clock() + 5.0
@@ -156,16 +168,6 @@ with picamera.PiCamera() as camera:
         codis_list_pos += codis_list_size
         codis_list.append(remote_addr)
         codis_list_size = codis_list_pos + 1
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(PIR_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        camera.resolution = (1280, 720)
-        camera.framerate = 30
-        camera.start_recording(
-            # Throw away the video data, but make sure we're using H.264
-            '/dev/null', format='h264',
-            # Record motion data to our custom output object
-            motion_output=MotionDetector(camera)
-            )
         new_election_time = time.clock() + COORDINATOR_PERIOD
         while 1:
             print("loop")

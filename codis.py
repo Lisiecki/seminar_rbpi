@@ -99,7 +99,7 @@ class MotionDetector(object):
 
 def motion(pin):
     if coordinator == codis_list_pos:
-        intruder_detected()
+        intruder_alert()
     else:
         intruder_detected(coordinator)
     return
@@ -129,7 +129,7 @@ def leave():
     leave_msg = bytes([LEAVE_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(leave_msg, (UDP_IP, UDP_PORT))
 
-def intruder_detected():
+def intruder_alert():
     intruder_msg = bytes([INTRUDER_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(intruder_msg, (UDP_IP, UDP_PORT))
 
@@ -168,7 +168,7 @@ with picamera.PiCamera() as camera:
         codis_list_size = codis_list_pos + 1
         new_election_time = time.clock() + COORDINATOR_PERIOD
         while 1:
-            if time.clock() < new_election_time:
+            if time.clock() >= new_election_time:
                 new_election_time = time.clock() + COORDINATOR_PERIOD
                 print("new coordinator")
             try:

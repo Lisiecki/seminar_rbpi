@@ -159,7 +159,7 @@ with picamera.PiCamera() as camera:
                     codis_list_pos += 1
                     join(remote_addr)
             except (socket.timeout):
-                print("timeout")
+                print("timeout1")
                 break
 
         codis_list_pos += codis_list_size
@@ -194,7 +194,7 @@ with picamera.PiCamera() as camera:
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
                     print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)
             except (socket.timeout):
-                print("timeout")
+                print("timeout2")
     except KeyboardInterrupt:
         leave()
         camera.stop_recording()

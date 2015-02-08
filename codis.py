@@ -38,6 +38,8 @@ PIR_GPIO = 7
 MOTION_DETECTED_THRESHOLD = 10
 INTRUDER_DETECTED_THRESHOLD = 25
 MAX_NO_MOTION_CNT = 10
+TIMEOUT = 5.0
+COORDINATOR_PERIOD = 15.0
 
 coordinator = 0
 codis_list = []
@@ -146,7 +148,6 @@ with picamera.PiCamera() as camera:
         # Record motion data to our custom output object
         motion_output=MotionDetector(camera)
         )
-    camera.stop_recording()
     try:
         request_join()
         wait = time.clock() + 5.0
@@ -165,8 +166,11 @@ with picamera.PiCamera() as camera:
         codis_list_pos += codis_list_size
         codis_list.append(remote_addr)
         codis_list_size = codis_list_pos + 1
-
+        new_election_time = time.clock() + COORDINATOR_PERIOD
         while 1:
+            if time.clock() < new_election_time:
+                new_election_time = time.clock() + COORDINATOR_PERIOD
+                print("new coordinator")
             try:
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 print(remote_cmd[MSG_INDEX_CMD])

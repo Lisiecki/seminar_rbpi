@@ -18,6 +18,10 @@ MSG_INDEX_CMD = 0x0
 MSG_INDEX_POS = 0x1
 MSG_INDEX_OTHER = 0x2
 
+ALERTED_STATE = 0x0
+COORDINATOR_STATE = 0x1
+INACTIVE_STATE = 0x2
+
 SHUTDOWN_CAM_MSG = 0x0
 INTRUDER_MSG = 0x1
 JOIN_RESPONSE_MSG = 0x2
@@ -48,6 +52,9 @@ codis_list_pos = 0
 motion_cnt = 0
 no_motion_cnt = 0
 pir_event_enabled = 0
+
+is_alert = 0
+is_coordinator = 0
 
 # prepares the server socket to receive data from Codis system
 server_address = ("", UDP_PORT)
@@ -87,8 +94,6 @@ class MotionDetector(object):
             if motion_cnt == MOTION_DETECTED_THRESHOLD:
                 motion_cnt = 0
                 server_socket.sendto(MOTION_DETECTED_MSG, (UDP_IP, UDP_PORT))
-                if pir_event_enabled == 0:
-                    enable_pir()
         else:
             if no_motion_cnt == MAX_NO_MOTION_CNT:
                 disable_pir()
@@ -105,14 +110,49 @@ def motion(pin):
         intruder_detected(coordinator)
     return
 
+def enable_camera(camera):
+    camera.start_recording(
+        # Throw away the video data, but make sure we're using H.264
+        '/dev/null', format='h264',
+        # Record motion data to our custom output object
+        motion_output=MotionDetector(camera)
+        )
+
 def enable_pir():
     pir_event_enabled = 1
     GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
     GPIO.add_event_callback(PIR_GPIO, motion)
 
+def disable_camera(camera):
+    camera.stop_recording()
+
 def disable_pir():
     GPIO.remove_event_detect(PIR_GPIO)
     pir_event_enabled = 0
+
+def remove_alert():
+    is_alert = 0
+    if is_coordinator == 0:
+        disable_pir()
+        disable_camera()
+
+def remove_coordinator():
+    is_coordinator = 0
+    if is_alert == 0:
+        disable_pir()
+        disable_camera()
+
+def set_alert():
+    is_alert = 1
+    if is_coordinator == 0:
+        enable_camera()
+        enable_pir()
+
+def set_coordinator():
+    is_coordinator = 1
+    if is_alert == 0:
+        enable_camera()
+        enable_pir()
 
 def join_response(addr):
     join_response_msg = bytes([JOIN_RESPONSE_MSG, codis_list_pos, codis_list_size])
@@ -143,12 +183,6 @@ with picamera.PiCamera() as camera:
     GPIO.setup(PIR_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     camera.resolution = (1280, 720)
     camera.framerate = 30
-    camera.start_recording(
-        # Throw away the video data, but make sure we're using H.264
-        '/dev/null', format='h264',
-        # Record motion data to our custom output object
-        motion_output=MotionDetector(camera)
-        )
 
     try:
         request_join()
@@ -157,12 +191,12 @@ with picamera.PiCamera() as camera:
             try:
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 if remote_cmd[MSG_INDEX_CMD] == JOIN_RESPONSE_MSG:
-                    print("join")
+                    print("join response")
                     codis_list.insert(remote_cmd[MSG_INDEX_POS], remote_addr)
                     codis_list_pos += 1
                     join(remote_addr)
             except (socket.timeout):
-                print("timeout1")
+                print("join timeout")
                 break
 
         codis_list_pos += codis_list_size
@@ -176,39 +210,39 @@ with picamera.PiCamera() as camera:
                 print("new coordinator")
             try:
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
-                print(remote_cmd[MSG_INDEX_CMD])
                 if remote_cmd[MSG_INDEX_CMD] == SHUTDOWN_CAM_MSG:
-                    break
+                    print("shutdown")
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
-                    if pir_event_enabled == 0:
-                        pir_event_enabled = 1
-                        GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
-                        GPIO.add_event_callback(PIR_GPIO, motion)
+                    print("intruder")
                 elif remote_cmd[MSG_INDEX_CMD] == PAUSE_CAM_MSG:
-                    break
+                    print("pause cam")
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    print("HEEREEREE")
+                    print("join")
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
+                    print("leave")
                     codis_list.remove(remote_addr)
                     codis_list_size -= 1
                     if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
                         codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
-                    print("identify")
+                    print("join request")
                     codis_list.append(remote_addr)
                     codis_list_size += 1
                     join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
+                    print("status")
                     print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)
             except (socket.timeout):
-                print("timeout2")
+                print("main timeout")
     except KeyboardInterrupt:
         leave()
-        camera.stop_recording()
+        disable_pir()
+        disable_camera()
         server_socket.close()
         GPIO.cleanup()
 
     leave()
-    camera.stop_recording()
+    disable_pir()
+    disable_camera()
     server_socket.close()
     GPIO.cleanup()

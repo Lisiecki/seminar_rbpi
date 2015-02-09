@@ -134,7 +134,11 @@ def enable_pir():
         GPIO.add_event_callback(PIR_GPIO, motion)
 
 def disable_camera(camera):
-    camera.stop_recording()
+    try:
+        _check_camera_open()
+        camera.stop_recording()
+    except:
+        print("exception")
 
 def disable_pir():
     global pir_enabled

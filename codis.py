@@ -178,6 +178,13 @@ def intruder_detected(pos):
     intruder_msg = bytes([INTRUDER_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(intruder_msg, codis_list[pos])
 
+def election():
+    successor_pos = codis_list_pos + 1
+    if codis_list_size == codis_list_pos:
+        successor_pos = 0
+    election_msg = bytes([ELECTION_MSG, codis_list_pos, codis_list_size])
+    server_socket.sendto(election_msg, codis_list[successor_pos])
+
 with picamera.PiCamera() as camera:
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(PIR_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -202,16 +209,26 @@ with picamera.PiCamera() as camera:
         codis_list_pos += codis_list_size
         codis_list.append(remote_addr)
         codis_list_size = codis_list_pos + 1
+        if codis_list_size == 1:
+            set_coordinator()
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
-                if time.time() >= new_election_time:
+                if is_coordinator and codis_list_size > 1 and time.time() >= new_election_time:
                     print("new coordinator")
-                    new_election_time = time.time() + COORDINATOR_PERIOD
+                    election()
 
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 if remote_cmd[MSG_INDEX_CMD] == SHUTDOWN_CAM_MSG:
                     print("shutdown")
+                elif remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
+                    print("coordinator")
+                    if is_coordinator:
+                        remove_coordinator()
+                elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
+                    print("election")
+                    set_coordinator()
+                    new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     print("intruder")
                 elif remote_cmd[MSG_INDEX_CMD] == PAUSE_CAM_MSG:

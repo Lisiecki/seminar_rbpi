@@ -64,7 +64,7 @@ is_coordinator = 0
 # prepares the server socket to receive data from Codis system
 server_address = ("", UDP_PORT)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 5)   
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
 server_socket.bind(server_address)
 server_socket.settimeout(5.0)
 
@@ -224,7 +224,7 @@ with picamera.PiCamera() as camera:
         wait = time.time() + 5.0
         while time.time() < wait:
             try:
-                remote_cmd, remote_addr = server_socket.recvfrom(4)
+                remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == JOIN_RESPONSE_MSG:
                     print("join response")
                     if codis_list_size == 0:
@@ -232,14 +232,18 @@ with picamera.PiCamera() as camera:
                             codis_list.append(remote_addr)
                     codis_list.insert(remote_cmd[MSG_INDEX_POS], remote_addr)
                     codis_list_pos += 1
+                    codis_list_size += 1
                     join(remote_addr)
+                    if codis_list_size == remote_cmd[MSG_INDEX_OTHER]:
+                        print("ready")
+                        break
             except (socket.timeout):
                 print("join timeout")
                 break
 
-        codis_list_pos += codis_list_size
-        codis_list.append(remote_addr)
-        codis_list_size = codis_list_pos + 1
+        codis_list_pos = codis_list_size
+        codis_list.append(server_address)
+        codis_list_size += 1
         if codis_list_size == 1:
             print("is coordinator")
             set_coordinator(camera)
@@ -255,7 +259,7 @@ with picamera.PiCamera() as camera:
                 if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
                     print("remove alert")
                     remove_alert(camera)
-                remote_cmd, remote_addr = server_socket.recvfrom(4)
+                remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
@@ -273,7 +277,7 @@ with picamera.PiCamera() as camera:
                         if (is_alert == 0):
                             set_alert(camera)
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    print("join")
+                    print("join ", remote_addr)
                     codis_list.append(remote_addr)
                     codis_list_size += 1
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:

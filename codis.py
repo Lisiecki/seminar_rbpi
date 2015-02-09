@@ -55,6 +55,7 @@ codis_list_size = 0
 codis_list_pos = 0
 motion_cnt = 0
 no_motion_cnt = 0
+camera_enabled = 0
 pir_enabled = 0
 last_motion_detected = 0.0
 last_intruder_detected = 0.0
@@ -228,12 +229,14 @@ with picamera.PiCamera() as camera:
         if codis_list_size == 1:
             print("is coordinator")
             set_coordinator()
-            camera.start_recording(
-                # Throw away the video data, but make sure we're using H.264
-                '/dev/null', format='h264',
-                # Record motion data to our custom output object
-                motion_output=MotionDetector(camera)
-                )
+            if camera_enabled == 0:
+                camera_enabled = 1
+                camera.start_recording(
+                    # Throw away the video data, but make sure we're using H.264
+                    '/dev/null', format='h264',
+                    # Record motion data to our custom output object
+                    motion_output=MotionDetector(camera)
+                    )
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
@@ -258,12 +261,14 @@ with picamera.PiCamera() as camera:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("election")
                         set_coordinator()
-                        camera.start_recording(
-                            # Throw away the video data, but make sure we're using H.264
-                            '/dev/null', format='h264',
-                            # Record motion data to our custom output object
-                            motion_output=MotionDetector(camera)
-                            )
+                        if camera_enabled == 0:
+                            camera_enabled = 1
+                            camera.start_recording(
+                                # Throw away the video data, but make sure we're using H.264
+                                '/dev/null', format='h264',
+                                # Record motion data to our custom output object
+                                motion_output=MotionDetector(camera)
+                                )
                         new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
@@ -271,12 +276,14 @@ with picamera.PiCamera() as camera:
                         last_intruder_by_another = time.time()
                         if (is_alert == 0):
                             set_alert()
-                            camera.start_recording(
-                                # Throw away the video data, but make sure we're using H.264
-                                '/dev/null', format='h264',
-                                # Record motion data to our custom output object
-                                motion_output=MotionDetector(camera)
-                                )
+                            if camera_enabled == 0:
+                                camera_enabled = 1
+                                camera.start_recording(
+                                    # Throw away the video data, but make sure we're using H.264
+                                    '/dev/null', format='h264',
+                                    # Record motion data to our custom output object
+                                    motion_output=MotionDetector(camera)
+                                    )
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
                     print("join ")
                     codis_list.append(remote_addr)

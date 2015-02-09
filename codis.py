@@ -228,16 +228,12 @@ with picamera.PiCamera() as camera:
         if codis_list_size == 1:
             print("is coordinator")
             set_coordinator()
-            try:
-                _check_recording_stopped()
-                camera.start_recording(
-                    # Throw away the video data, but make sure we're using H.264
-                    '/dev/null', format='h264',
-                    # Record motion data to our custom output object
-                    motion_output=MotionDetector(camera)
-                    )
-            except:
-                print("exception")
+            camera.start_recording(
+                # Throw away the video data, but make sure we're using H.264
+                '/dev/null', format='h264',
+                # Record motion data to our custom output object
+                motion_output=MotionDetector(camera)
+                )
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:

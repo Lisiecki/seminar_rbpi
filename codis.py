@@ -82,7 +82,7 @@ class MotionDetector(object):
         global pir_enabled
         global server_socket
         global motion_cnt
-        
+        global motion_flag
         # Load the motion data from the string to a numpy array
         data = np.fromstring(s, dtype=motion_dtype)
         # Re-shape it and calculate the magnitude of each vector
@@ -242,36 +242,24 @@ with picamera.PiCamera() as camera:
                 if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
                     print("remove alert")
                     remove_alert()
-                    try:
-                        _check_camera_open()
-                        camera.stop_recording()
-                    except:
-                        print("exception")
+                    camera.stop_recording()
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
                         if is_coordinator == 1:
                             remove_coordinator()
-                            try:
-                                _check_camera_open()
-                                camera.stop_recording()
-                            except:
-                                print("exception")
+                            camera.stop_recording()
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("election")
                         set_coordinator()
-                        try:
-                            _check_recording_stopped()
-                            camera.start_recording(
-                                # Throw away the video data, but make sure we're using H.264
-                                '/dev/null', format='h264',
-                                # Record motion data to our custom output object
-                                motion_output=MotionDetector(camera)
-                                )
-                        except:
-                            print("exception")
+                        camera.start_recording(
+                            # Throw away the video data, but make sure we're using H.264
+                            '/dev/null', format='h264',
+                            # Record motion data to our custom output object
+                            motion_output=MotionDetector(camera)
+                            )
                         new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
@@ -279,22 +267,16 @@ with picamera.PiCamera() as camera:
                         last_intruder_by_another = time.time()
                         if (is_alert == 0):
                             set_alert()
-                            try:
-                                _check_recording_stopped()
-                                camera.start_recording(
-                                    # Throw away the video data, but make sure we're using H.264
-                                    '/dev/null', format='h264',
-                                    # Record motion data to our custom output object
-                                    motion_output=MotionDetector(camera)
-                                    )
-                            except:
-                                print("exception")
+                            camera.start_recording(
+                                # Throw away the video data, but make sure we're using H.264
+                                '/dev/null', format='h264',
+                                # Record motion data to our custom output object
+                                motion_output=MotionDetector(camera)
+                                )
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
                     print("join ")
                     codis_list.append(remote_addr)
                     codis_list_size += 1
-                    for i in codis_list:
-                        print("item ", i)
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
                     print("leave")
                     codis_list.remove(remote_addr)
@@ -307,26 +289,18 @@ with picamera.PiCamera() as camera:
                     join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
                     print("status")
-                    print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)
+                    print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size, '\n', "coordinator: ", is_coordinator, '\n', "alert: ", is_alert)
             except (socket.timeout):
                 print("main timeout")
     except KeyboardInterrupt:
         leave()
         disable_pir()
-        try:
-            _check_camera_open()
-            camera.stop_recording()
-        except:
-            print("exception")
+        camera.stop_recording()
         server_socket.close()
         GPIO.cleanup()
 
     leave()
     disable_pir()
-    try:
-        _check_camera_open()
-        camera.stop_recording()
-    except:
-        print("exception")
+    camera.stop_recording()
     server_socket.close()
     GPIO.cleanup()

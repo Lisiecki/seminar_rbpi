@@ -250,6 +250,7 @@ with picamera.PiCamera() as camera:
                     print("remove alert")
                     remove_alert()
                     camera.stop_recording()
+                    camera_enabled = 0
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
@@ -257,6 +258,7 @@ with picamera.PiCamera() as camera:
                         if is_coordinator == 1:
                             remove_coordinator()
                             camera.stop_recording()
+                            camera_enabled = 0
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("election")

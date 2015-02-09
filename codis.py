@@ -224,7 +224,7 @@ with picamera.PiCamera() as camera:
                     print("shutdown")
                 elif remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     print("coordinator")
-                    if is_coordinator:
+                    if is_coordinator == 1:
                         remove_coordinator()
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     print("election")
@@ -236,6 +236,8 @@ with picamera.PiCamera() as camera:
                     print("pause cam")
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
                     print("join")
+                    codis_list.append(remote_addr)
+                    codis_list_size += 1
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
                     print("leave")
                     codis_list.remove(remote_addr)
@@ -244,8 +246,6 @@ with picamera.PiCamera() as camera:
                         codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
                     print("join request")
-                    codis_list.append(remote_addr)
-                    codis_list_size += 1
                     join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
                     print("status")

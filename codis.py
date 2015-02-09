@@ -113,6 +113,10 @@ def motion(pin):
     print("pir motion")
     if motion_flag:
         if is_coordinator == 1:
+            for pi in codis_list:
+                if pi != server_address:
+                    intruder_msg = bytes([INTRUDER_MSG, codis_list_pos, codis_list_size])
+                    server_socket.sendto(intruder_msg, pi)
             if (time.time() - last_intruder_by_another) <= LAST_INTRUDER_THRESHOLD or codis_list_size == 1:
                 print("intruder alert")
                 intruder_alert()

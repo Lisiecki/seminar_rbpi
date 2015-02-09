@@ -14,11 +14,9 @@ import de.one_development.lisiecki.surveillancereceiver.network.udp.AndroidUDPSe
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
-    public static final byte MOTION_DETECTED = 0x1;
-    public static final byte PIR_DETECTED = 0x2;
+    public static final byte INTRUDER_DETECTED = 0x1;
     public static final int PORT = 58333;
     public static final int SIZE = 0x1;
-    public static final long DECREASE_PERCENTAGE_INTERVAL = 10;
 
     private static int intruderDetected = 0;
 
@@ -52,11 +50,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     byte signal = androidUDPServer.readyRead(SIZE)[0];
 
                     switch (signal) {
-                        case MOTION_DETECTED:
-                            intruderDetected += 5;
-                            break;
-                        case PIR_DETECTED:
-                            intruderDetected += 10;
+                        case INTRUDER_DETECTED:
+                            intruderDetected = 100;
                             break;
                         default:
                             intruderDetected -= 5;

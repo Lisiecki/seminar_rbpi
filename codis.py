@@ -110,8 +110,10 @@ class MotionDetector(object):
 def motion(pin):
     if (time.time() - last_motion_detected) <= MOTION_THRESHOLD:
         if coordinator == codis_list_pos:
+            print("intruder alert")
             intruder_alert()
         else:
+            print("intruder detected")
             intruder_detected(coordinator)
     return
 
@@ -202,8 +204,10 @@ def intruder_detected(pos):
 def election():
     successor_pos = codis_list_pos + 1
     if codis_list_size == successor_pos:
+        print("loop")
         successor_pos = 0
-    print("pos ", codis_list_pos)
+    print("size ", codis_list_size)
+    print("pos ", successor_pos)
     print("successor ", codis_list[successor_pos])
     election_msg = bytes([ELECTION_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(election_msg, codis_list[successor_pos])

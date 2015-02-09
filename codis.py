@@ -186,8 +186,8 @@ with picamera.PiCamera() as camera:
 
     try:
         request_join()
-        wait = time.clock() + 5.0
-        while time.clock() < wait:
+        wait = time.time() + 5.0
+        while time.time() < wait:
             try:
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 if remote_cmd[MSG_INDEX_CMD] == JOIN_RESPONSE_MSG:
@@ -202,13 +202,13 @@ with picamera.PiCamera() as camera:
         codis_list_pos += codis_list_size
         codis_list.append(remote_addr)
         codis_list_size = codis_list_pos + 1
-        new_election_time = time.clock()
+        new_election_time = time.time()
         while 1:
             try:
-                print("time ", time.clock() - new_election_time)
-                if (time.clock() - new_election_time) > COORDINATOR_PERIOD:
+                print("time ", time.time() - new_election_time)
+                if time.time() >= new_election_time:
                     print("new coordinator")
-                    new_election_time = time.clock()
+                    new_election_time = time.time() + COORDINATOR_PERIOD
 
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 if remote_cmd[MSG_INDEX_CMD] == SHUTDOWN_CAM_MSG:

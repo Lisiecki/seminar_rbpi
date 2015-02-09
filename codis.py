@@ -51,7 +51,8 @@ codis_list_size = 0
 codis_list_pos = 0
 motion_cnt = 0
 no_motion_cnt = 0
-pir_event_enabled = 0
+pir_enabled = 0
+camera_enabled = 0
 
 is_alert = 0
 is_coordinator = 0
@@ -73,7 +74,7 @@ class MotionDetector(object):
 
     def write(self, s):
         global no_motion_cnt
-        global pir_event_enabled
+        global pir_enabled
         global server_socket
         global motion_cnt
         
@@ -111,26 +112,30 @@ def motion(pin):
     return
 
 def enable_camera(camera):
-    camera.start_recording(
-        # Throw away the video data, but make sure we're using H.264
-        '/dev/null', format='h264',
-        # Record motion data to our custom output object
-        motion_output=MotionDetector(camera)
-        )
+    global camera_enabled
+    if camera_enabled == 0:
+        camera.start_recording(
+            # Throw away the video data, but make sure we're using H.264
+            '/dev/null', format='h264',
+            # Record motion data to our custom output object
+            motion_output=MotionDetector(camera)
+            )
+        camera_enabled = 1
 
 def enable_pir():
-    global pir_event_enabled
-    pir_event_enabled = 1
-    GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
-    GPIO.add_event_callback(PIR_GPIO, motion)
+    global pir_enabled
+    if pir_enabled == 0:
+        pir_enabled = 1
+        GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
+        GPIO.add_event_callback(PIR_GPIO, motion)
 
 def disable_camera(camera):
     camera.stop_recording()
 
 def disable_pir():
-    global pir_event_enabled
+    global pir_enabled
     GPIO.remove_event_detect(PIR_GPIO)
-    pir_event_enabled = 0
+    pir_enabled = 0
 
 def remove_alert():
     global is_alert
@@ -156,6 +161,8 @@ def set_alert():
 def set_coordinator():
     global is_coordinator
     is_coordinator = 1
+    coordinator_msg = bytes([COORDINATOR_MSG, codis_list_pos, codis_list_size])
+    server_socket.sendto(coordinator_msg, (UDP_IP, UDP_PORT))
     if is_alert == 0:
         enable_camera(camera)
         enable_pir()

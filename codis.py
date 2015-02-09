@@ -215,10 +215,10 @@ with picamera.PiCamera() as camera:
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
-                if (time.time() >= new_election_time):
+                if (is_coordinator == 1) and (time.time() >= new_election_time):
                     print("new period")
                     new_election_time = time.time() + COORDINATOR_PERIOD
-                    if (is_coordinator == 1) and (codis_list_size > 1):
+                    if codis_list_size > 1:
                         print("new coordinator")
                         election()
 

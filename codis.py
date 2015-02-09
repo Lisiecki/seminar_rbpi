@@ -256,21 +256,18 @@ with picamera.PiCamera() as camera:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("pause cam")
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("join")
-                        codis_list.append(remote_addr)
-                        codis_list_size += 1
+                    print("join")
+                    codis_list.append(remote_addr)
+                    codis_list_size += 1
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
-                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("leave")
-                        codis_list.remove(remote_addr)
-                        codis_list_size -= 1
-                        if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
-                            codis_list_pos -= 1
+                    print("leave")
+                    codis_list.remove(remote_addr)
+                    codis_list_size -= 1
+                    if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
+                        codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
-                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("join request")
-                        join_response(remote_addr)
+                    print("join request")
+                    join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
                     print("status")
                     print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)

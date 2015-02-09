@@ -192,7 +192,6 @@ with picamera.PiCamera() as camera:
     GPIO.setup(PIR_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     camera.resolution = (1280, 720)
     camera.framerate = 30
-    camera.start_preview()
     try:
         request_join()
         wait = time.time() + 5.0
@@ -307,7 +306,6 @@ with picamera.PiCamera() as camera:
         if camera_enabled == 1:
             camera.stop_recording()
         server_socket.close()
-        camera.stop_preview()
         GPIO.cleanup()
 
     leave()
@@ -315,5 +313,4 @@ with picamera.PiCamera() as camera:
     if camera_enabled == 1:
         camera.stop_recording()
     server_socket.close()
-    camera.stop_preview()
     GPIO.cleanup()

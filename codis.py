@@ -202,10 +202,9 @@ with picamera.PiCamera() as camera:
         codis_list_pos += codis_list_size
         codis_list.append(remote_addr)
         codis_list_size = codis_list_pos + 1
-        new_election_time = time.time()
+        new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
-                print("time ", time.time() - new_election_time)
                 if time.time() >= new_election_time:
                     print("new coordinator")
                     new_election_time = time.time() + COORDINATOR_PERIOD

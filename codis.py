@@ -60,7 +60,7 @@ is_coordinator = 0
 # prepares the server socket to receive data from Codis system
 server_address = ("", UDP_PORT)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)   
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 5)   
 server_socket.bind(server_address)
 server_socket.settimeout(5.0)
 

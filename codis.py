@@ -41,12 +41,14 @@ PIR_DETECTED_MSG = bytes([0x2])
 PIR_GPIO = 7
 MOTION_DETECTED_THRESHOLD = 10
 INTRUDER_DETECTED_THRESHOLD = 25
-MAX_NO_MOTION_CNT = 10
+MAX_NO_MOTION_CNT = 50
 TIMEOUT = 5.0
 COORDINATOR_PERIOD = 15.0
 MOTION_THRESHOLD = 3.0
 NO_MOTION_THRESHOLD = 5.0
+LAST_INTRUDER_THRESHOLD = 3.0
 
+motion_flag = False
 coordinator = 0
 codis_list = []
 codis_list_size = 0
@@ -54,7 +56,6 @@ codis_list_pos = 0
 motion_cnt = 0
 no_motion_cnt = 0
 pir_enabled = 0
-camera_enabled = 0
 last_motion_detected = 0.0
 last_intruder_detected = 0.0
 last_intruder_by_another = 0.0
@@ -98,35 +99,38 @@ class MotionDetector(object):
 
             if motion_cnt == MOTION_DETECTED_THRESHOLD:
                 motion_cnt = 0
-                last_motion_detected = time.time()
+                motion_flag = True
         else:
             if no_motion_cnt == MAX_NO_MOTION_CNT:
                 motion_cnt = 0
+                motion_flag = False
             else:
                 no_motion_cnt = no_motion_cnt + 1
         # Pretend we wrote all the bytes of s
         return len(s)
 
 def motion(pin):
-    if (time.time() - last_motion_detected) <= MOTION_THRESHOLD:
-        if coordinator == codis_list_pos:
-            print("intruder alert")
-            intruder_alert()
+    if motion_flag:
+        if is_coordinator == 1:
+            if (time.time() - last_intruder_by_another) <= LAST_INTRUDER_THRESHOLD or codis_list_size == 1:
+                print("intruder alert")
+                intruder_alert()
         else:
             print("intruder detected")
             intruder_detected(coordinator)
     return
 
 def enable_camera(camera):
-    global camera_enabled
-    if camera_enabled == 0:
+    try:
+        _check_recording_stopped()
         camera.start_recording(
             # Throw away the video data, but make sure we're using H.264
             '/dev/null', format='h264',
             # Record motion data to our custom output object
             motion_output=MotionDetector(camera)
             )
-        camera_enabled = 1
+    except:
+        print("exception")
 
 def enable_pir():
     global pir_enabled

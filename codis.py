@@ -44,6 +44,8 @@ INTRUDER_DETECTED_THRESHOLD = 25
 MAX_NO_MOTION_CNT = 10
 TIMEOUT = 5.0
 COORDINATOR_PERIOD = 15.0
+MOTION_THRESHOLD = 3.0
+NO_MOTION_THRESHOLD = 5.0
 
 coordinator = 0
 codis_list = []
@@ -53,7 +55,9 @@ motion_cnt = 0
 no_motion_cnt = 0
 pir_enabled = 0
 camera_enabled = 0
-
+last_motion_detected = 0.0
+last_intruder_detected = 0.0
+last_intruder_by_another = 0.0
 is_alert = 0
 is_coordinator = 0
 
@@ -94,10 +98,9 @@ class MotionDetector(object):
 
             if motion_cnt == MOTION_DETECTED_THRESHOLD:
                 motion_cnt = 0
-                server_socket.sendto(MOTION_DETECTED_MSG, (UDP_IP, UDP_PORT))
+                last_motion_detected = time.time()
         else:
             if no_motion_cnt == MAX_NO_MOTION_CNT:
-                disable_pir()
                 motion_cnt = 0
             else:
                 no_motion_cnt = no_motion_cnt + 1
@@ -105,10 +108,11 @@ class MotionDetector(object):
         return len(s)
 
 def motion(pin):
-    if coordinator == codis_list_pos:
-        intruder_alert()
-    else:
-        intruder_detected(coordinator)
+    if (time.time() - last_motion_detected) <= MOTION_THRESHOLD:
+        if coordinator == codis_list_pos:
+            intruder_alert()
+        else:
+            intruder_detected(coordinator)
     return
 
 def enable_camera(camera):
@@ -193,7 +197,7 @@ def intruder_detected(pos):
 
 def election():
     successor_pos = codis_list_pos + 1
-    if codis_list_size == codis_list_pos:
+    if codis_list_size <= codis_list_pos:
         successor_pos = 0
     election_msg = bytes([ELECTION_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(election_msg, codis_list[successor_pos])
@@ -234,12 +238,11 @@ with picamera.PiCamera() as camera:
                     if codis_list_size > 1:
                         print("new coordinator")
                         election()
-
+                if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
+                    print("remove alert")
+                    remove_alert(camera)
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
-                if remote_cmd[MSG_INDEX_CMD] == SHUTDOWN_CAM_MSG:
-                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("shutdown")
-                elif remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
+                if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
                         if is_coordinator == 1:
@@ -252,9 +255,9 @@ with picamera.PiCamera() as camera:
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("intruder")
-                elif remote_cmd[MSG_INDEX_CMD] == PAUSE_CAM_MSG:
-                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("pause cam")
+                        last_intruder_by_another = time.time()
+                        if (is_alert == 0):
+                            set_alert(camera)
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
                     print("join")
                     codis_list.append(remote_addr)

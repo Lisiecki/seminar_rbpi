@@ -201,7 +201,7 @@ def intruder_detected(pos):
 
 def election():
     successor_pos = codis_list_pos + 1
-    if codis_list_size <= codis_list_pos:
+    if codis_list_size == codis_list_pos:
         successor_pos = 0
     print("pos ", codis_list_pos)
     print("successor ", codis_list[successor_pos])

@@ -228,7 +228,7 @@ with picamera.PiCamera() as camera:
                 if remote_cmd[MSG_INDEX_CMD] == JOIN_RESPONSE_MSG:
                     print("join response")
                     if codis_list_size == 0:
-                        for i in range(remote_cmd[MSG_INDEX_OTHER]):
+                        for i in range(remote_cmd[MSG_INDEX_OTHER] - 1):
                             codis_list.append(remote_addr)
                     codis_list.insert(remote_cmd[MSG_INDEX_POS], remote_addr)
                     codis_list_pos += 1

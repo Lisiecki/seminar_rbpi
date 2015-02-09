@@ -229,6 +229,7 @@ with picamera.PiCamera() as camera:
         if codis_list_size == 1:
             print("is coordinator")
             set_coordinator()
+            coordinator = codis_list_pos
             if camera_enabled == 0:
                 camera_enabled = 1
                 camera.start_recording(
@@ -256,6 +257,7 @@ with picamera.PiCamera() as camera:
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
+                        coordinator = remote_cmd[MSG_INDEX_POS]
                         if is_coordinator == 1:
                             remove_coordinator()
                             if camera_enabled == 1:

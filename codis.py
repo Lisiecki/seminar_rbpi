@@ -277,9 +277,11 @@ with picamera.PiCamera() as camera:
                         if (is_alert == 0):
                             set_alert(camera)
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    print("join ", remote_addr)
+                    print("join ")
                     codis_list.append(remote_addr)
                     codis_list_size += 1
+                    for i in codis_list:
+                        print("item ", i)
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
                     print("leave")
                     codis_list.remove(remote_addr)

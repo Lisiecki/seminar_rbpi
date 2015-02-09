@@ -53,7 +53,6 @@ coordinator = 0
 codis_list = []
 codis_list_size = 0
 codis_list_pos = 0
-motion_cnt = 0
 no_motion_cnt = 0
 camera_enabled = 0
 pir_enabled = 0
@@ -80,9 +79,7 @@ class MotionDetector(object):
 
     def write(self, s):
         global no_motion_cnt
-        global pir_enabled
         global server_socket
-        global motion_cnt
         global motion_flag
         # Load the motion data from the string to a numpy array
         data = np.fromstring(s, dtype=motion_dtype)
@@ -94,16 +91,11 @@ class MotionDetector(object):
             ).clip(0, 255).astype(np.uint8)
         # If there're more than 10 vectors with a magnitude greater
         # than 60, then say we've detected motion
-        if (data > 60).sum() > 10:         
-            motion_cnt += 1
+        if (data > 60).sum() > 10:
             no_motion_cnt = 0
-
-            if motion_cnt == MOTION_DETECTED_THRESHOLD:
-                motion_cnt = 0
-                motion_flag = True
+            motion_flag = True
         else:
             if no_motion_cnt == MAX_NO_MOTION_CNT:
-                motion_cnt = 0
                 motion_flag = False
             else:
                 no_motion_cnt = no_motion_cnt + 1

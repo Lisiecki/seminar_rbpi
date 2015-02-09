@@ -277,6 +277,7 @@ with picamera.PiCamera() as camera:
                         codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
                     print("join request")
+                    time.sleep(codis_list_pos * 0.5)
                     join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
                     print("status")

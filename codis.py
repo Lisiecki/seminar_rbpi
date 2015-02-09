@@ -137,28 +137,28 @@ def disable_pir():
     GPIO.remove_event_detect(PIR_GPIO)
     pir_enabled = 0
 
-def remove_alert():
+def remove_alert(camera):
     global is_alert
     is_alert = 0
     if is_coordinator == 0:
         disable_pir()
-        disable_camera()
+        disable_camera(camera)
 
-def remove_coordinator():
+def remove_coordinator(camera):
     global is_coordinator
     is_coordinator = 0
     if is_alert == 0:
         disable_pir()
-        disable_camera()
+        disable_camera(camera)
 
-def set_alert():
+def set_alert(camera):
     global is_alert
     is_alert = 1
     if is_coordinator == 0:
         enable_camera(camera)
         enable_pir()
 
-def set_coordinator():
+def set_coordinator(camera):
     global is_coordinator
     is_coordinator = 1
     coordinator_msg = bytes([COORDINATOR_MSG, codis_list_pos, codis_list_size])
@@ -224,7 +224,7 @@ with picamera.PiCamera() as camera:
         codis_list_size = codis_list_pos + 1
         if codis_list_size == 1:
             print("is coordinator")
-            set_coordinator()
+            set_coordinator(camera)
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
@@ -243,11 +243,11 @@ with picamera.PiCamera() as camera:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
                         if is_coordinator == 1:
-                            remove_coordinator()
+                            remove_coordinator(camera)
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("election")
-                        set_coordinator()
+                        set_coordinator(camera)
                         new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:

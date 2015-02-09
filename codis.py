@@ -249,16 +249,18 @@ with picamera.PiCamera() as camera:
                 if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
                     print("remove alert")
                     remove_alert()
-                    camera.stop_recording()
-                    camera_enabled = 0
+                    if camera_enabled == 1:
+                        camera.stop_recording()
+                        camera_enabled = 0
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
                         if is_coordinator == 1:
                             remove_coordinator()
-                            camera.stop_recording()
-                            camera_enabled = 0
+                            if camera_enabled == 1:
+                                camera.stop_recording()
+                                camera_enabled = 0
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("election")
@@ -308,12 +310,14 @@ with picamera.PiCamera() as camera:
     except KeyboardInterrupt:
         leave()
         disable_pir()
-        camera.stop_recording()
+        if camera_enabled == 1:
+            camera.stop_recording()
         server_socket.close()
         GPIO.cleanup()
 
     leave()
     disable_pir()
-    camera.stop_recording()
+    if camera_enabled == 1:
+        camera.stop_recording()
     server_socket.close()
     GPIO.cleanup()

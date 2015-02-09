@@ -203,6 +203,8 @@ def election():
     successor_pos = codis_list_pos + 1
     if codis_list_size <= codis_list_pos:
         successor_pos = 0
+    print("pos ", codis_list_pos)
+    print("successor ", codis_list[successor_pos])
     election_msg = bytes([ELECTION_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(election_msg, codis_list[successor_pos])
 

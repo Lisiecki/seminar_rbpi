@@ -119,6 +119,7 @@ def enable_camera(camera):
         )
 
 def enable_pir():
+    global pir_event_enabled
     pir_event_enabled = 1
     GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
     GPIO.add_event_callback(PIR_GPIO, motion)
@@ -127,28 +128,33 @@ def disable_camera(camera):
     camera.stop_recording()
 
 def disable_pir():
+    global pir_event_enabled
     GPIO.remove_event_detect(PIR_GPIO)
     pir_event_enabled = 0
 
 def remove_alert():
+    global is_alert
     is_alert = 0
     if is_coordinator == 0:
         disable_pir()
         disable_camera()
 
 def remove_coordinator():
+    global is_coordinator
     is_coordinator = 0
     if is_alert == 0:
         disable_pir()
         disable_camera()
 
 def set_alert():
+    global is_alert
     is_alert = 1
     if is_coordinator == 0:
         enable_camera(camera)
         enable_pir()
 
 def set_coordinator():
+    global is_coordinator
     is_coordinator = 1
     if is_alert == 0:
         enable_camera(camera)

@@ -215,9 +215,12 @@ with picamera.PiCamera() as camera:
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
-                if (is_coordinator == 1) and (codis_list_size > 1) and (time.time() >= new_election_time):
-                    print("new coordinator")
-                    election()
+                if (time.time() >= new_election_time):
+                    print("new period")
+                    new_election_time = time.time() + COORDINATOR_PERIOD
+                    if (is_coordinator == 1) and (codis_list_size > 1):
+                        print("new coordinator")
+                        election()
 
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 if remote_cmd[MSG_INDEX_CMD] == SHUTDOWN_CAM_MSG:

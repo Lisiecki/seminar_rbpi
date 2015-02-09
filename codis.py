@@ -145,13 +145,13 @@ def remove_coordinator():
 def set_alert():
     is_alert = 1
     if is_coordinator == 0:
-        enable_camera()
+        enable_camera(camera)
         enable_pir()
 
 def set_coordinator():
     is_coordinator = 1
     if is_alert == 0:
-        enable_camera()
+        enable_camera(camera)
         enable_pir()
 
 def join_response(addr):
@@ -254,12 +254,12 @@ with picamera.PiCamera() as camera:
     except KeyboardInterrupt:
         leave()
         disable_pir()
-        disable_camera()
+        disable_camera(camera)
         server_socket.close()
         GPIO.cleanup()
 
     leave()
     disable_pir()
-    disable_camera()
+    disable_camera(camera)
     server_socket.close()
     GPIO.cleanup()

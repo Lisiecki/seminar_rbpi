@@ -237,32 +237,40 @@ with picamera.PiCamera() as camera:
 
                 remote_cmd, remote_addr = server_socket.recvfrom(4)
                 if remote_cmd[MSG_INDEX_CMD] == SHUTDOWN_CAM_MSG:
-                    print("shutdown")
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("shutdown")
                 elif remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
-                    print("coordinator")
-                    if is_coordinator == 1:
-                        remove_coordinator()
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("coordinator")
+                        if is_coordinator == 1:
+                            remove_coordinator()
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
-                    print("election")
-                    set_coordinator()
-                    new_election_time = time.time() + COORDINATOR_PERIOD
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("election")
+                        set_coordinator()
+                        new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
-                    print("intruder")
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("intruder")
                 elif remote_cmd[MSG_INDEX_CMD] == PAUSE_CAM_MSG:
-                    print("pause cam")
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("pause cam")
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    print("join")
-                    codis_list.append(remote_addr)
-                    codis_list_size += 1
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("join")
+                        codis_list.append(remote_addr)
+                        codis_list_size += 1
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
-                    print("leave")
-                    codis_list.remove(remote_addr)
-                    codis_list_size -= 1
-                    if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
-                        codis_list_pos -= 1
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("leave")
+                        codis_list.remove(remote_addr)
+                        codis_list_size -= 1
+                        if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
+                            codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
-                    print("join request")
-                    join_response(remote_addr)
+                    if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                        print("join request")
+                        join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
                     print("status")
                     print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size)

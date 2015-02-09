@@ -120,18 +120,6 @@ def motion(pin):
             intruder_detected(coordinator)
     return
 
-def enable_camera(camera):
-    try:
-        _check_recording_stopped()
-        camera.start_recording(
-            # Throw away the video data, but make sure we're using H.264
-            '/dev/null', format='h264',
-            # Record motion data to our custom output object
-            motion_output=MotionDetector(camera)
-            )
-    except:
-        print("exception")
-
 def enable_pir():
     global pir_enabled
     if pir_enabled == 0:
@@ -139,46 +127,35 @@ def enable_pir():
         GPIO.add_event_detect(PIR_GPIO, GPIO.RISING)
         GPIO.add_event_callback(PIR_GPIO, motion)
 
-def disable_camera(camera):
-    try:
-        _check_camera_open()
-        camera.stop_recording()
-    except:
-        print("exception")
-
 def disable_pir():
     global pir_enabled
     GPIO.remove_event_detect(PIR_GPIO)
     pir_enabled = 0
 
-def remove_alert(camera):
+def remove_alert():
     global is_alert
     is_alert = 0
     if is_coordinator == 0:
         disable_pir()
-        disable_camera(camera)
 
-def remove_coordinator(camera):
+def remove_coordinator():
     global is_coordinator
     is_coordinator = 0
     if is_alert == 0:
         disable_pir()
-        disable_camera(camera)
 
-def set_alert(camera):
+def set_alert():
     global is_alert
     is_alert = 1
     if is_coordinator == 0:
-        enable_camera(camera)
         enable_pir()
 
-def set_coordinator(camera):
+def set_coordinator():
     global is_coordinator
     is_coordinator = 1
     coordinator_msg = bytes([COORDINATOR_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(coordinator_msg, (UDP_IP, UDP_PORT))
     if is_alert == 0:
-        enable_camera(camera)
         enable_pir()
 
 def join_response(addr):
@@ -250,7 +227,17 @@ with picamera.PiCamera() as camera:
         codis_list_size += 1
         if codis_list_size == 1:
             print("is coordinator")
-            set_coordinator(camera)
+            set_coordinator()
+            try:
+                _check_recording_stopped()
+                camera.start_recording(
+                    # Throw away the video data, but make sure we're using H.264
+                    '/dev/null', format='h264',
+                    # Record motion data to our custom output object
+                    motion_output=MotionDetector(camera)
+                    )
+            except:
+                print("exception")
         new_election_time = time.time() + COORDINATOR_PERIOD
         while 1:
             try:
@@ -262,24 +249,54 @@ with picamera.PiCamera() as camera:
                         election()
                 if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
                     print("remove alert")
-                    remove_alert(camera)
+                    remove_alert()
+                    try:
+                        _check_camera_open()
+                        camera.stop_recording()
+                    except:
+                        print("exception")
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("coordinator")
                         if is_coordinator == 1:
-                            remove_coordinator(camera)
+                            remove_coordinator()
+                            try:
+                                _check_camera_open()
+                                camera.stop_recording()
+                            except:
+                                print("exception")
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("election")
-                        set_coordinator(camera)
+                        set_coordinator()
+                        try:
+                            _check_recording_stopped()
+                            camera.start_recording(
+                                # Throw away the video data, but make sure we're using H.264
+                                '/dev/null', format='h264',
+                                # Record motion data to our custom output object
+                                motion_output=MotionDetector(camera)
+                                )
+                        except:
+                            print("exception")
                         new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
                         print("intruder")
                         last_intruder_by_another = time.time()
                         if (is_alert == 0):
-                            set_alert(camera)
+                            set_alert()
+                            try:
+                                _check_recording_stopped()
+                                camera.start_recording(
+                                    # Throw away the video data, but make sure we're using H.264
+                                    '/dev/null', format='h264',
+                                    # Record motion data to our custom output object
+                                    motion_output=MotionDetector(camera)
+                                    )
+                            except:
+                                print("exception")
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
                     print("join ")
                     codis_list.append(remote_addr)
@@ -304,12 +321,20 @@ with picamera.PiCamera() as camera:
     except KeyboardInterrupt:
         leave()
         disable_pir()
-        disable_camera(camera)
+        try:
+            _check_camera_open()
+            camera.stop_recording()
+        except:
+            print("exception")
         server_socket.close()
         GPIO.cleanup()
 
     leave()
     disable_pir()
-    disable_camera(camera)
+    try:
+        _check_camera_open()
+        camera.stop_recording()
+    except:
+        print("exception")
     server_socket.close()
     GPIO.cleanup()

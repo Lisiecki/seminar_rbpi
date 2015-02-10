@@ -34,7 +34,7 @@ public class AndroidUDPServer {
         DatagramPacket receiveDatagramPacket = new DatagramPacket(receiveData, receiveData.length);
 
         try {
-            serverDatagramSocket.setSoTimeout(500);
+            serverDatagramSocket.setSoTimeout(1000);
             serverDatagramSocket.receive(receiveDatagramPacket);
             return receiveData;
         } catch (SocketException e) {

@@ -218,6 +218,7 @@ with picamera.PiCamera() as camera:
                     join(remote_addr)
                     if codis_list_size == remote_cmd[MSG_INDEX_OTHER]:
                         print("join codis system")
+                        last_heartbeat_from_successor = time.time()
                         break
             except (socket.timeout):
                 break
@@ -266,7 +267,7 @@ with picamera.PiCamera() as camera:
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print(remote_cmd[0], " has become the new coordinator")
+                        print(remote_cmd, " has become the new coordinator")
                         coordinator = remote_cmd[MSG_INDEX_POS]
                         if is_coordinator == 1:
                             remove_coordinator()
@@ -274,7 +275,7 @@ with picamera.PiCamera() as camera:
                                 camera.stop_recording()
                                 camera_enabled = 0
                 elif remote_cmd[MSG_INDEX_CMD] == HEARTBEAT_MSG:
-                    print("received heartbeat message from successor ", remote_cmd[0])
+                    print("received heartbeat message from successor ", remote_cmd)
                     last_heartbeat_from_successor = time.time()
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
@@ -304,23 +305,23 @@ with picamera.PiCamera() as camera:
                                     motion_output=MotionDetector(camera)
                                     )
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    print(remote_addr[0], " has joined the codis system")
+                    print(remote_addr, " has joined the codis system")
                     codis_list.append(remote_addr)
                     codis_list_size += 1
                     if remote_cmd[MSG_INDEX_POS] == (codis_list_pos + 1):
                         last_heartbeat_from_successor = time.time()
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
-                    print(remote_addr[0], " has left the codis system")
+                    print(remote_addr, " has left the codis system")
                     codis_list.remove(remote_addr)
                     codis_list_size -= 1
                     if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
                         codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
-                    print("received join request from ", remote_addr[0])
+                    print("received join request from ", remote_addr)
                     time.sleep(codis_list_pos * 0.5)
                     join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
-                    print(remote_addr[0], " requested current status")
+                    print(remote_addr, " requested current status")
                     print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size, '\n', "coordinator: ", is_coordinator, '\n', "alert: ", is_alert)
             except (socket.timeout):
                 continue

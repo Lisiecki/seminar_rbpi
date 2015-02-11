@@ -109,7 +109,6 @@ class MotionDetector(object):
         return len(s)
 
 def motion(pin):
-    print("pir motion")
     if motion_flag:
         if is_coordinator == 1:
             for pi in codis_list:
@@ -117,10 +116,10 @@ def motion(pin):
                     intruder_msg = bytes([INTRUDER_MSG, codis_list_pos, codis_list_size])
                     server_socket.sendto(intruder_msg, pi)
             if motion_flag or codis_list_size == 1:
-                print("intruder alert")
+                print("send intruder message to all devices")
                 intruder_alert()
         else:
-            print("intruder detected")
+            print("send intruder message to coordinator")
             intruder_detected(coordinator)
     return
 
@@ -209,7 +208,7 @@ with picamera.PiCamera() as camera:
             try:
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == JOIN_RESPONSE_MSG:
-                    print("join response")
+                    print("received join response")
                     if codis_list_size == 0:
                         for i in range(remote_cmd[MSG_INDEX_OTHER] - 1):
                             codis_list.append(remote_addr)
@@ -218,17 +217,16 @@ with picamera.PiCamera() as camera:
                     codis_list_size += 1
                     join(remote_addr)
                     if codis_list_size == remote_cmd[MSG_INDEX_OTHER]:
-                        print("ready")
+                        print("join codis system")
                         break
             except (socket.timeout):
-                print("join timeout")
                 break
 
         codis_list_pos = codis_list_size
         codis_list.append(server_address)
         codis_list_size += 1
         if codis_list_size == 1:
-            print("is coordinator")
+            print("become first coordinator")
             set_coordinator()
             coordinator = codis_list_pos
             if camera_enabled == 0:
@@ -240,34 +238,35 @@ with picamera.PiCamera() as camera:
                     motion_output=MotionDetector(camera)
                     )
         new_election_time = time.time() + COORDINATOR_PERIOD
+        last_heartbeat = time.time()
         while 1:
             try:
                 if (is_coordinator == 1) and (time.time() >= new_election_time):
-                    print("new period")
                     new_election_time = time.time() + COORDINATOR_PERIOD
                     if codis_list_size > 1:
-                        print("new coordinator")
+                        print("send election message")
                         election()
                 if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
-                    print("remove alert")
+                    print("stop alert state")
                     remove_alert()
                     if camera_enabled == 1:
                         camera.stop_recording()
                         camera_enabled = 0
                 if (codis_list_size > 1) and (time.time() - last_heartbeat) <= HEARTBEAT_INTERVAL:
-                    print("send heartbeat")
+                    print("send heartbeat to predecessor")
                     successor_pos = codis_list_pos - 1
                     if successor_pos < 0:
                         successor_pos = codis_list_size - 1
                     heartbeat(successor_pos)
+                    last_heartbeat = time.time()
                     if (time.time() - last_heartbeat_from_successor) > HEARTBEAT_INTERVAL:
                         no_heartbeats += 0
                     if no_heartbeats == MAX_NO_HEARTBEATS:
-                        print("remove successor")
+                        print("remove successor from codis system")
                 remote_cmd, remote_addr = server_socket.recvfrom(5)
                 if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("coordinator")
+                        print(remote_cmd[0], " has become the new coordinator")
                         coordinator = remote_cmd[MSG_INDEX_POS]
                         if is_coordinator == 1:
                             remove_coordinator()
@@ -275,11 +274,11 @@ with picamera.PiCamera() as camera:
                                 camera.stop_recording()
                                 camera_enabled = 0
                 elif remote_cmd[MSG_INDEX_CMD] == HEARTBEAT_MSG:
-                    print("heartbeat")
+                    print("received heartbeat message from successor ", remote_cmd[0])
                     last_heartbeat_from_successor = time.time()
                 elif remote_cmd[MSG_INDEX_CMD] == ELECTION_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("election")
+                        print("received election message")
                         set_coordinator()
                         if camera_enabled == 0:
                             camera_enabled = 1
@@ -292,9 +291,9 @@ with picamera.PiCamera() as camera:
                         new_election_time = time.time() + COORDINATOR_PERIOD
                 elif remote_cmd[MSG_INDEX_CMD] == INTRUDER_MSG:
                     if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
-                        print("intruder")
                         last_intruder_by_another = time.time()
                         if (is_alert == 0):
+                            print("start alert state")
                             set_alert()
                             if camera_enabled == 0:
                                 camera_enabled = 1
@@ -305,24 +304,26 @@ with picamera.PiCamera() as camera:
                                     motion_output=MotionDetector(camera)
                                     )
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_MSG:
-                    print("join ")
+                    print(remote_addr[0], " has joined the codis system")
                     codis_list.append(remote_addr)
                     codis_list_size += 1
+                    if remote_cmd[MSG_INDEX_POS] == (codis_list_pos + 1):
+                        last_heartbeat_from_successor = time.time()
                 elif remote_cmd[MSG_INDEX_CMD] == LEAVE_MSG:
-                    print("leave")
+                    print(remote_addr[0], " has left the codis system")
                     codis_list.remove(remote_addr)
                     codis_list_size -= 1
                     if remote_cmd[MSG_INDEX_POS] < codis_list_pos:
                         codis_list_pos -= 1
                 elif remote_cmd[MSG_INDEX_CMD] == JOIN_REQUEST_MSG:
-                    print("join request")
+                    print("received join request from ", remote_addr[0])
                     time.sleep(codis_list_pos * 0.5)
                     join_response(remote_addr)
                 elif remote_cmd[MSG_INDEX_CMD] == STATUS_MSG:
-                    print("status")
+                    print(remote_addr[0], " requested current status")
                     print("codis pos: ", codis_list_pos, '\n', "codis size: ", codis_list_size, '\n', "coordinator: ", is_coordinator, '\n', "alert: ", is_alert)
             except (socket.timeout):
-                print("main timeout")
+                continue
     except KeyboardInterrupt:
         leave()
         disable_pir()

@@ -189,14 +189,32 @@ def election():
     successor_pos = codis_list_pos + 1
     if codis_list_size == successor_pos:
         successor_pos = 0
-    election_msg = bytes([ELECTION_MSG, codis_list_pos, codis_list_size])
-    server_socket.sendto(election_msg, codis_list[successor_pos])
+    while True:
+        election_msg = bytes([ELECTION_MSG, codis_list_pos, codis_list_size])
+        server_socket.sendto(election_msg, codis_list[successor_pos])
+        try:
+            remote_cmd, remote_addr = server_socket.recvfrom(5)
+            if remote_cmd[MSG_INDEX_CMD] == COORDINATOR_MSG:
+                if remote_cmd[MSG_INDEX_POS] != codis_list_pos:
+                    print(remote_cmd, " has become the new coordinator")
+                    coordinator = remote_cmd[MSG_INDEX_POS]
+                    break
+        except (socket.timeout):
+            no_heartbeats += 1
+            if no_heartbeats == MAX_NO_HEARTBEATS:
+                remove_successor(successor_pos)
+                codis_list.pop(remote_cmd[successor_pos])
+                codis_list_size -= 1
+                if successor_pos < codis_list_pos:
+                    codis_list_pos -= 1
+                no_heartbeats = 0
+                successor_pos -= 1
 
 def heartbeat(pos):
     heartbeat_msg = bytes([HEARTBEAT_MSG, codis_list_pos, codis_list_size])
     server_socket.sendto(heartbeat_msg, codis_list[pos])
 
-def remove(pos):
+def remove_successor(pos):
     remove_msg = bytes([HEARTBEAT_MSG, codis_list_pos, pos])
     server_socket.sendto(remove_msg, (UDP_IP, UDP_PORT))
 
@@ -251,6 +269,10 @@ with picamera.PiCamera() as camera:
                     if codis_list_size > 1:
                         print("send election message")
                         election()
+                        remove_coordinator()
+                        if camera_enabled == 1:
+                            camera.stop_recording()
+                            camera_enabled = 0
                 if (is_alert == 1) and (time.time() - last_intruder_detected) >= NO_MOTION_THRESHOLD and (time.time() - last_intruder_by_another) >= NO_MOTION_THRESHOLD:
                     print("stop alert state")
                     remove_alert()

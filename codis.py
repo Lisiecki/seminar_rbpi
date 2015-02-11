@@ -32,7 +32,6 @@ JOIN_REQUEST_MSG = 0x6
 STATUS_MSG = 0x7
 ELECTION_MSG = 0x8
 COORDINATOR_MSG = 0x9
-MSG_INTRUDER = 0xa
 HEARTBEAT_MSG = 0xb
 
 UDP_IP = "<broadcast>"
@@ -253,7 +252,7 @@ with picamera.PiCamera() as camera:
                     if camera_enabled == 1:
                         camera.stop_recording()
                         camera_enabled = 0
-                if (codis_list_size > 1) and (time.time() - last_heartbeat) <= HEARTBEAT_INTERVAL:
+                if (codis_list_size > 1) and (time.time() - last_heartbeat) > HEARTBEAT_INTERVAL:
                     print("send heartbeat to predecessor")
                     successor_pos = codis_list_pos - 1
                     if successor_pos < 0:
